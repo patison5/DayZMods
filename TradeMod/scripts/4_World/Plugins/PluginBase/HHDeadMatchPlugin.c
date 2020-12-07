@@ -11,6 +11,8 @@ class HHDeadMatchPlugin extends PluginBase
 
     private int timeOutCounter = timeOut;
 
+    private ref array<ref PlayerStatisticInfo> _players = new array<ref PlayerStatisticInfo>;
+
     void HHDeadMatchPlugin () {
 
     	Print("HHDeadMatchPlugin был проинициализирован");
@@ -21,12 +23,12 @@ class HHDeadMatchPlugin extends PluginBase
 
 
     void endRound () {
-    	Print(TOP_PREFIX + "Раунд закончился");
-
     	if (GetGame().IsServer()) {
+            Print(TOP_PREFIX + "Раунд закончился");
+
 	    	delayTimeout = new ref Timer();
 
-    		// SendMessageToAll("Раунд закончился, выберите карту");
+            summurizePlayersStatistic();
     		showPlayerEndedGUI();
     		delayTimeout.Run(timeOut, this, "startRound", new Param1<string>(" новый раунд начался"), false);
     		changeTimer();
@@ -36,10 +38,29 @@ class HHDeadMatchPlugin extends PluginBase
 
     void summurizePlayersStatistic () {
     	// собираем всю информацию по игрокам
+        Print("Начинаем собирать статисику по каждому игроку");
+
+        TStringArray fileNamesList = this.getPlayersList();
+        
+        for ( int i = 0; i < fileNamesList.Count(); ++i ) {
+            string fileName = fileNamesList.Get(i);
+
+            Print(TOP_PREFIX + "Было найдено : " + fileName);
+
+            if (!FileExist(S_ROOTFOLDER + fileName + ".json")) {
+                continue;
+            } else {
+
+                PlayerStatisticInfo _plData = new PlayerStatisticInfo();
+                JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + fileName + ".json", _plData);
+
+                _players.Insert(_plData);
+            }   
+        }
     }
 
     void getBestTenPlayers () {
-    	// сортируем и берем 10 лучших игроков
+    	// сортируем и берем 10 лучших игроков 
     }
 
     void resetPlayersStatistic () {
@@ -119,6 +140,37 @@ class HHDeadMatchPlugin extends PluginBase
 		} else {
 			timeOutCounter = 15;
 		}
+    }
+
+
+    //========================================
+    // getPlayersList
+    //========================================  
+    TStringArray getPlayersList()
+    {
+        if ( !FileExist( S_PLAYERS ) )
+            MakeDirectory( S_PLAYERS );
+
+        string  file_name;
+        int     file_attr;
+        int     flags;
+        TStringArray list = new TStringArray;
+        
+        string path_find_pattern = S_PLAYERS + "/*.json";
+        FindFileHandle file_handler = FindFile(path_find_pattern, file_name, file_attr, flags);
+        
+        bool found = true;
+        while ( found )
+        {
+            int pos = file_name.IndexOf(".");
+            
+            if ( pos > -1 )
+                list.Insert( file_name.Substring(0, pos) );
+            
+            found = FindNextFile(file_handler, file_name, file_attr);
+        }
+
+        return list;
     }
 
 
