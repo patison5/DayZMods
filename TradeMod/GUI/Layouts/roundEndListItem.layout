@@ -1,0 +1,112 @@
+FrameWidgetClass rootFrame {
+ size 600 40
+ halign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ {
+  PanelWidgetClass bg {
+   ignorepointer 1
+   color 0 0 0 0.8627
+   size 1 40
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   style rover_sim_colorable
+   {
+    PanelWidgetClass numbg {
+     ignorepointer 1
+     color 0.302 0.1137 0.1137 1
+     size 40 40
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style rover_sim_colorable
+     {
+      TextWidgetClass num {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       text "1"
+       font "gui/fonts/MetronLight"
+       text_proportion 0.5
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+    TextWidgetClass pname {
+     ignorepointer 1
+     position 60 0
+     size 255 40
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "PLAYERNAME"
+     font "gui/fonts/MetronLight"
+     text_proportion 0.5
+     "text valign" center
+    }
+    TextWidgetClass distance {
+     ignorepointer 1
+     size 95 40
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "123"
+     font "gui/fonts/MetronLight"
+     text_proportion 0.5
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass deaths {
+     ignorepointer 1
+     position 95 0
+     size 95 40
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "123"
+     font "gui/fonts/MetronLight"
+     text_proportion 0.5
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass kills {
+     ignorepointer 1
+     position 190 0
+     size 95 40
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "123"
+     font "gui/fonts/MetronLight"
+     text_proportion 0.5
+     "text halign" center
+     "text valign" center
+    }
+   }
+  }
+ }
+}

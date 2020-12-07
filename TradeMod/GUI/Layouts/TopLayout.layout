@@ -1,0 +1,291 @@
+FrameWidgetClass rootFrame {
+ color 0 0 0 0.3922
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0 0 0 0.7059
+   position 20 20
+   size 300 400
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 0
+   style rover_sim_colorable
+   {
+    ImageWidgetClass ImageWidget0 {
+     visible 0
+     ignorepointer 1
+     color 1 0 0 0.1569
+     size 1 200
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     imageTexture "{E6B3EF816E067499}gui/textures/inventory_bgvignette.edds"
+     mode blend
+     "src alpha" 1
+     "no wrap" 1
+     stretch 1
+    }
+    GridSpacerWidgetClass GridSpacerWidget0 {
+     ignorepointer 1
+     size 300 240
+     halign center_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     Padding 15
+     Margin 15
+     Columns 1
+     {
+      PanelWidgetClass PanelWidget1 {
+       ignorepointer 1
+       color 0 0 0 0.7059
+       size 1 0.5
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style rover_sim_colorable
+       {
+        TextWidgetClass TextWidget0 {
+         ignorepointer 1
+         size 1 0.5
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "PLAYER KILLED"
+         font "gui/fonts/etelkatextpro"
+         "text offset" 30 5
+         text_proportion 0.7
+         "text valign" center
+        }
+        TextWidgetClass playerKills {
+         ignorepointer 1
+         size 1 0.5
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "123"
+         font "gui/fonts/etelkatextpro"
+         "text offset" 30 -5
+         text_proportion 0.8
+         "text valign" center
+        }
+        PanelWidgetClass RedLinePWiget {
+         ignorepointer 1
+         color 1 0.1176 0.1176 1
+         size 3 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       color 0 0 0 0.7059
+       position 0.033 0.042
+       size 48 48
+       hexactpos 0
+       vexactpos 0
+       hexactsize 1
+       vexactsize 1
+       style rover_sim_colorable
+       {
+        PanelWidgetClass PanelWidget6 {
+         ignorepointer 1
+         color 1 0.1176 0.1176 1
+         size 3 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        TextWidgetClass TextWidget4 {
+         ignorepointer 1
+         size 1 0.5
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "DEATH"
+         font "gui/fonts/etelkatextpro"
+         "text offset" 30 5
+         text_proportion 0.7
+         "text valign" center
+        }
+        TextWidgetClass playerDeath {
+         ignorepointer 1
+         size 1 0.5
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "9999"
+         "text offset" 30 -5
+         text_proportion 0.8
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       color 0 0 0 0.7059
+       position 10 10
+       size 48 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style rover_sim_colorable
+       {
+        PanelWidgetClass PanelWidget4 {
+         ignorepointer 1
+         color 0.7843 0.1176 0.1176 1
+         size 3 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        TextWidgetClass TextWidget6 {
+         ignorepointer 1
+         size 1 0.5
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "MAX RANGE"
+         font "gui/fonts/etelkatextpro"
+         "text offset" 30 5
+         text_proportion 0.7
+         "text valign" center
+        }
+        TextWidgetClass rangeDistance {
+         ignorepointer 1
+         size 1 0.5
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "0.0"
+         "text offset" 30 -5
+         text_proportion 0.8
+         "text valign" center
+        }
+       }
+      }
+     }
+    }
+    TextWidgetClass NickName {
+     ignorepointer 1
+     position 0 41
+     size 1 90
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "TheRocky"
+     font "gui/fonts/etelkatextpro"
+     text_proportion 0.6
+     "text halign" center
+     "text valign" center
+    }
+   }
+  }
+  RichTextWidgetClass RichTextWidget0 {
+   visible 0
+   ignorepointer 1
+   size 200 600
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text ""\
+   "
+   wrap 1
+   "condense whitespace" 1
+  }
+  PanelWidgetClass PanelWidget5 {
+   visible 0
+   ignorepointer 1
+   color 0.4275 0.6235 0.2353 1
+   size 200 50
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style rover_sim_colorable
+   {
+    ButtonWidgetClass ButtonWidget0 {
+     color 0.3765 0.502 0.251 1
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style EmptyHighlight
+     "no focus" 1
+     text_proportion 0.4
+     font "gui/fonts/etelkatextpro"
+     {
+      TextWidgetClass TextWidget3 {
+       ignorepointer 1
+       size 1 20
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "PRESS ME"
+       font "gui/fonts/etelkatextpro"
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+   }
+  }
+ }
+}

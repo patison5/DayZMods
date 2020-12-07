@@ -1,0 +1,527 @@
+FrameWidgetClass rootFrame {
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ {
+  FrameWidgetClass center {
+   ignorepointer 1
+   position 0 -80
+   size 920 800
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    FrameWidgetClass c_top {
+     ignorepointer 1
+     size 1 230
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     {
+      TextWidgetClass title {
+       ignorepointer 1
+       size 1 110
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "MATCH ENDED"
+       font "gui/fonts/etelkatextpro"
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass title2 {
+       ignorepointer 1
+       position 0 120
+       size 1 38
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "NEXT ROUND"
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass timer {
+       ignorepointer 1
+       size 1 65
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "17"
+       font "gui/fonts/MetronLight"
+       "exact text" 0
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+    FrameWidgetClass c_bottom {
+     ignorepointer 1
+     position 0 0
+     size 600 478
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      PanelWidgetClass header_panel {
+       ignorepointer 1
+       color 0 0 0 0.8627
+       size 1 40
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style rover_sim_colorable
+       {
+        TextWidgetClass num {
+         ignorepointer 1
+         size 40 40
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "N"
+         font "gui/fonts/MetronLight"
+         "text offset" 1 0
+         text_proportion 0.5
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass pname {
+         ignorepointer 1
+         position 60 0
+         size 255 40
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "PLAYERNAME"
+         font "gui/fonts/MetronLight"
+         text_proportion 0.5
+         "text valign" center
+        }
+        TextWidgetClass distance {
+         ignorepointer 1
+         size 95 40
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass distanceImg {
+           ignorepointer 1
+           size 22 22
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{D8264FB211B885E4}MyMods/TradeMod/GUI/images/distance.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+          }
+         }
+        }
+        TextWidgetClass deaths {
+         ignorepointer 1
+         position 95 0
+         size 95 40
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass deathsImg {
+           ignorepointer 1
+           size 22 22
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{DB34A7F5CF558102}MyMods/TradeMod/GUI/images/deaths.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+          }
+         }
+        }
+        TextWidgetClass kills {
+         ignorepointer 1
+         position 190 0
+         size 95 40
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass killsImg {
+           ignorepointer 1
+           size 20 22
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{0F2BB3B42DB53B1B}MyMods/TradeMod/GUI/images/kils.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+          }
+         }
+        }
+        WrapSpacerWidgetClass TopContainer {
+         ignorepointer 1
+         position 0 40
+         size 1 48
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         Margin 0
+        }
+       }
+      }
+     }
+    }
+    FrameWidgetClass map1 {
+     ignorepointer 1
+     size 240 130
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      ImageWidgetClass img {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{03823DCAFAF2BDC2}MyMods/TradeMod/GUI/images/pic.edds"
+       "src alpha" 1
+       "no wrap" 1
+       stretch 1
+       {
+        PanelWidgetClass bgmap1 {
+         ignorepointer 1
+         color 0 0 0 0.4314
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m1l1 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 1 8
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m1l2 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 8 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m1l3 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 1 8
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m1l4 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 8 1
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+       }
+      }
+      RichTextWidgetClass map1title {
+       ignorepointer 1
+       size 200 60
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "SERERO-ZAPADNIY<br/>AERODROM"
+       "text halign" center
+       "text valign" center
+       wrap 1
+      }
+     }
+    }
+    FrameWidgetClass map2 {
+     ignorepointer 1
+     position 0 175
+     size 240 130
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      ImageWidgetClass img2 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{03823DCAFAF2BDC2}MyMods/TradeMod/GUI/images/pic.edds"
+       "src alpha" 1
+       "no wrap" 1
+       stretch 1
+       {
+        PanelWidgetClass bgmap2 {
+         ignorepointer 1
+         color 0 0 0 0.4314
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m2l1 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 1 8
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m2l2 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 8 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m2l3 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 1 8
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m2l4 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 8 1
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+       }
+      }
+      RichTextWidgetClass map2title {
+       ignorepointer 1
+       position 0 0
+       size 200 60
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "SERERO-ZAPADNIY<br/>AERODROM"
+       "text halign" center
+       "text valign" center
+       wrap 1
+      }
+     }
+    }
+    FrameWidgetClass map3 {
+     ignorepointer 1
+     position 0 346
+     size 240 130
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      ImageWidgetClass img4 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{03823DCAFAF2BDC2}MyMods/TradeMod/GUI/images/pic.edds"
+       "src alpha" 1
+       "no wrap" 1
+       stretch 1
+       {
+        PanelWidgetClass bgmap4 {
+         ignorepointer 1
+         color 0 0 0 0.4314
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m4l1 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 1 8
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m4l2 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 8 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m4l3 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 1 8
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass m4l4 {
+         ignorepointer 1
+         color 0.302 0.1137 0.1137 1
+         size 8 1
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 0
+         style rover_sim_colorable
+        }
+       }
+      }
+      RichTextWidgetClass map4title {
+       ignorepointer 1
+       size 200 60
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "SERERO-ZAPADNIY<br/>AERODROM"
+       "text halign" center
+       "text valign" center
+       wrap 1
+      }
+     }
+    }
+   }
+  }
+ }
+}
