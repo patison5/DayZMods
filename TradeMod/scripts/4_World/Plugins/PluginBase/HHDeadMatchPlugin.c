@@ -65,6 +65,27 @@ class HHDeadMatchPlugin extends PluginBase
 
     void resetPlayersStatistic () {
     	// сбрасываем статистику
+        TStringArray fileNamesList = this.getPlayersList();
+        
+        for ( int i = 0; i < fileNamesList.Count(); ++i ) {
+            string fileName = fileNamesList.Get(i);
+
+            if (!FileExist(S_ROOTFOLDER + fileName + ".json")) {
+                continue;
+            } else {    
+                //а лучше вообще файл удалять, но там вроде такой хуйни нельзя провернуть...
+
+                PlayerStatisticInfo _plData = new JsonSaveFile();
+
+                JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + steamId + ".json", _plData);
+
+                _plData.kills = 0;
+                _plData.deadth = 0;
+                _plData.maxRangeKill = 0;
+
+                JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + fileName + ".json", _plData);
+            }   
+        }
     }
 
     void startRound (string msg) {
