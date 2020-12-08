@@ -14,8 +14,9 @@ class HHDeadMatchPlugin extends PluginBase
     private ref array<ref PlayerStatisticInfo> _players = new array<ref PlayerStatisticInfo>;
 
     void HHDeadMatchPlugin () {
-
     	Print("HHDeadMatchPlugin был проинициализирован");
+
+        // delete that function
 
     	roundTimer	= new ref Timer();
         roundTimer.Run(roundTime, this, "endRound", NULL, true);
@@ -29,62 +30,68 @@ class HHDeadMatchPlugin extends PluginBase
 	    	delayTimeout = new ref Timer();
 
             summurizePlayersStatistic();
+            getBestTenPlayers();
     		showPlayerEndedGUI();
+
     		delayTimeout.Run(timeOut, this, "startRound", new Param1<string>(" новый раунд начался"), false);
-    		changeTimer();
+    		changeTimer(); //обратный отсчет на клиенте
 	    }
     }
-
 
     void summurizePlayersStatistic () {
     	// собираем всю информацию по игрокам
         Print("Начинаем собирать статисику по каждому игроку");
 
         TStringArray fileNamesList = this.getPlayersList();
+        _players = new array<ref PlayerStatisticInfo>;
         
-        for ( int i = 0; i < fileNamesList.Count(); ++i ) {
-            string fileName = fileNamesList.Get(i);
+        for ( int k = 0; k < fileNamesList.Count(); ++k ) {
+            string fileName = fileNamesList.Get(k);
 
-            Print(TOP_PREFIX + "Было найдено : " + fileName);
-
-            if (!FileExist(S_ROOTFOLDER + fileName + ".json")) {
+            if (!FileExist(S_PLAYERS + fileName + ".json")) {
                 continue;
             } else {
-
                 PlayerStatisticInfo _plData = new PlayerStatisticInfo();
-                JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + fileName + ".json", _plData);
+                JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_PLAYERS + fileName + ".json", _plData);
 
                 _players.Insert(_plData);
+                Print("НАШЕЛ ОЧЕРЕДНОЙ ЭЛЕМЕНТ " + k.ToString());
             }   
         }
     }
 
     void getBestTenPlayers () {
     	// сортируем и берем 10 лучших игроков 
+
+        for (int i = 0; i < _players.Count(); i++) {
+            bool flag = true;
+
+            for (int j = 0; j < _players.Count() - (i + 1); j++) { 
+                if (_players.Get(j).kills < _players.Get(j + 1).kills) {
+                    flag = false;
+
+                    // auto tmp = _players.Get(j);
+                    // _players.Set(j, _players.Get(j + 1));
+                    // _players.Set(j + 1, tmp);
+
+                    _players.SwapItems(j, j + 1);
+                }
+            }
+
+            if (flag)
+                break;
+        }
     }
+
+  
 
     void resetPlayersStatistic () {
     	// сбрасываем статистику
         TStringArray fileNamesList = this.getPlayersList();
-        
+
         for ( int i = 0; i < fileNamesList.Count(); ++i ) {
             string fileName = fileNamesList.Get(i);
-
-            if (!FileExist(S_ROOTFOLDER + fileName + ".json")) {
-                continue;
-            } else {    
-                //а лучше вообще файл удалять, но там вроде такой хуйни нельзя провернуть...
-
-                PlayerStatisticInfo _plData = new JsonSaveFile();
-
-                JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + steamId + ".json", _plData);
-
-                _plData.kills = 0;
-                _plData.deadth = 0;
-                _plData.maxRangeKill = 0;
-
-                JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + fileName + ".json", _plData);
-            }   
+            if (FileExist(S_PLAYERS + fileName + ".json")) DeleteFile(S_PLAYERS + fileName + ".json");
         }
     }
 
@@ -92,19 +99,28 @@ class HHDeadMatchPlugin extends PluginBase
     	// SendMessageToAll(msg);
     	closePlayerEndedGUI();
    		killAllPlayers();
+        // resetPlayersStatistic();
     }
 
 
 
 
     void showPlayerEndedGUI () {
+        Print("ОТПРАВЛЯЮ РПС НА КЛИЕНТЫ");
+
     	// отображаем игроку статистику топа и рисуем варианты выбора карты
     	ref array<Man> players = new array<Man>;
     	GetGame().GetPlayers( players );
     	foreach( auto player : players  )
         {
             if (player.GetIdentity()) {
-				auto param4 = new Param1<string>("PIDOR");
+				// auto param4 = new Param1<string>("PIDOR");
+                auto param4 = new Param1<ref array<ref PlayerStatisticInfo>>(_players);
+
+                Print("ОТПРАВЛЯЮ РПС : " + _players.Get(0).playerName);
+
+                if (_players) Print(TOP_PREFIX + _players.Count() + "шт");
+
 				GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_SHOW_END_SCREEN, param4, true, player.GetIdentity());
 			}
         }

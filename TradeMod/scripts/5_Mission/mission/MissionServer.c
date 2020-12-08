@@ -78,18 +78,26 @@ modded class MissionServer extends MissionBase
 
 		PluginPlayersTop m_PlStat = PluginPlayersTop.Cast(GetPlugin(PluginPlayersTop));
 
-		ref PlayerStatisticInfo _plData;
-
-		string steamId = player.GetIdentity().GetPlainId();
-		JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + steamId + ".json", _plData);
-
-		SendMessage("Player " + player.GetIdentity().GetName() + " ("+ steamId + ")" + "connected to the server!");
-		Print("Player " + player.GetIdentity().GetName() + " ("+ steamId + ")" + "connected to the server!");
-
 		if (player.GetIdentity()) {
+			ref PlayerStatisticInfo _plData;
+			string steamId = player.GetIdentity().GetPlainId();
+
+			if (FileExist(S_PLAYERS) && FileExist(S_PLAYERS + steamId + ".json")) {
+				JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_PLAYERS + steamId + ".json", _plData);
+
+				Print("Player " + player.GetIdentity().GetName() + " ("+ steamId + ")" + " connected to the server!");
+			} else { 
+				_plData = new PlayerStatisticInfo(); 
+				_plData.setSteamId(player.GetIdentity().GetName());
+				_plData.setPlayerName(player.GetIdentity().GetPlainId());
+				JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_PLAYERS + steamId + ".json", _plData);
+			}
+			
 			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.maxRangeKill.ToString());
 			GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_TOP, param4, true, player.GetIdentity());
+
 		}
+
 
 		super.InvokeOnConnect(player, identity);
 	}

@@ -11,7 +11,7 @@ modded class PluginManager {
 
 		if (GetGame().IsClient() && GetGame().IsMultiplayer()) {
 			RegisterPlugin( "PluginTopNotification", true, false);
-			// RegisterPlugin( "HHDeadMatchClientPlugin", true, false);
+			RegisterPlugin( "HHDeadMatchClientPlugin", true, false);
 			// RegisterPlugin ("HHUpdateTop", true, false);
 		}
 

@@ -7,10 +7,6 @@ modded class MissionBase {
                 case UI_TOP_LAYOUT:
                     menu = new UIHudTop;
                     break;
-
-                case UI_END_TOP:
-                    menu = new HHDeadMatchClientPlugin;
-                    break;
             }
 
             if (menu) {

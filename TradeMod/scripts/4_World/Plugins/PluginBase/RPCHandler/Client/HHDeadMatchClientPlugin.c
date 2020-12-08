@@ -1,4 +1,4 @@
-class HHDeadMatchClientPlugin extends ScriptedWidgetEventHandler
+class HHDeadMatchClientPlugin extends PluginBase
 {
 	Widget								layoutRoot;
 	TextWidget               			mainTitle, subTitle, timerWidget, tableTitle;
@@ -18,54 +18,45 @@ class HHDeadMatchClientPlugin extends ScriptedWidgetEventHandler
 
        	parent = WrapSpacerWidget.Cast( layoutRoot.FindAnyWidget("TopContainer") );
 
-       	if (!parent) { 
-       		Print(TOP_PREFIX+" родителя нет и я хуй знает почему...");
-       		return;
-       	} else {
-       		Print(TOP_PREFIX + "РОДИТЕЛЬ ЕСТЬ, ПЫТАЕМСЯ ДОБАВИТЬ В НЕГО ЭЛЕМЕНТЫ")
-       	}
+  //      	if (!parent) { 
+  //      		Print(TOP_PREFIX+" родителя нет и я хуй знает почему...");
+  //      		return;
+  //      	} else {
+  //      		Print(TOP_PREFIX + "РОДИТЕЛЬ ЕСТЬ, ПЫТАЕМСЯ ДОБАВИТЬ В НЕГО ЭЛЕМЕНТЫ")
+  //      	}
 
-       	Widget element = GetGame().GetWorkspace().CreateWidgets("MyMods/TradeMod/GUI/Layouts/roundEndListItem.layout", parent);
+  //      	Widget element = GetGame().GetWorkspace().CreateWidgets("MyMods/TradeMod/GUI/Layouts/roundEndListItem.layout", parent);
 
-       	if (!element) {
-       		Print(TOP_PREFIX + " element нет и я хуй знает почему...");
-       		return;
-       	}
+  //      	if (!element) {
+  //      		Print(TOP_PREFIX + " element нет и я хуй знает почему...");
+  //      		return;
+  //      	}
 
-       	TextWidget num	   	   = TextWidget.Cast( element.FindAnyWidget( "num" ) );
-       	TextWidget pname	   = TextWidget.Cast( element.FindAnyWidget( "pname" ) );
-       	TextWidget kills	   = TextWidget.Cast( element.FindAnyWidget( "kills" ) );
-       	TextWidget deaths	   = TextWidget.Cast( element.FindAnyWidget( "deaths" ) );
-       	TextWidget distance	   = TextWidget.Cast( element.FindAnyWidget( "distance" ) );
+  //      	TextWidget num	   	   = TextWidget.Cast( element.FindAnyWidget( "num" ) );
+  //      	TextWidget pname	   = TextWidget.Cast( element.FindAnyWidget( "pname" ) );
+  //      	TextWidget kills	   = TextWidget.Cast( element.FindAnyWidget( "kills" ) );
+  //      	TextWidget deaths	   = TextWidget.Cast( element.FindAnyWidget( "deaths" ) );
+  //      	TextWidget distance	   = TextWidget.Cast( element.FindAnyWidget( "distance" ) );
 
-       	num.SetText("1");
-		pname.SetText("[(V)] Russki Camper");
-		kills.SetText("123");
-		deaths.SetText("32");
-		distance.SetText("934m");
+  //      	num.SetText("1");
+		// pname.SetText("[(V)] Russki Camper");
+		// kills.SetText("123");
+		// deaths.SetText("32");
+		// distance.SetText("934m");
 
 
-		if (!num || !pname || !kills || !deaths || !distance) {
-			Print(TOP_PREFIX + " мелких элементов нихуя нет и я хуй знает почему...");
-       		return;
-		}
+		// if (!num || !pname || !kills || !deaths || !distance) {
+		// 	Print(TOP_PREFIX + " мелких элементов нихуя нет и я хуй знает почему...");
+  //      		return;
+		// }
 
-		element.Update();
-		parent.Update();
+
+		// element.Update();
+		this.setDefaults();
+		
+		// parent.Update();
 		layoutRoot.Update();
-
-
-		parent.Show(true);
-		element.Show(true);
-		num.Show(true);
-		pname.Show(true);
-		kills.Show(true);
-		deaths.Show(true);
-		distance.Show(true);
-
-      	this.setDefaults();
-
-      	// layoutRoot.Show(false);
+      	layoutRoot.Show(false);
 
   //     	if (GetGame().IsServer() && GetGame().IsMultiplayer()) return;
 		// GetDayZGame().Event_OnRPC.Insert(ClientRPCHandler);
@@ -97,13 +88,18 @@ class HHDeadMatchClientPlugin extends ScriptedWidgetEventHandler
  		UnlockControls();
 	}
 
-	void showMainScreen () {
+	void showMainScreen (ref array<ref PlayerStatisticInfo> _players) {
+
+		if (!_players) { Print("1. NO FUCKING PLAYERS"); return; }
+		if (_players) Print("1. " + TOP_PREFIX + _players.Count() + "шт");
+
+		updateTopElements(_players);
 		layoutRoot.Show(true);
 		LockControls();
 	}
 
 	private void createTopElements() {
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 10; i++) {
 
 			Widget element = GetGame().GetWorkspace().CreateWidgets("MyMods/TradeMod/GUI/Layouts/roundEndListItem.layout", parent);
 
@@ -113,13 +109,55 @@ class HHDeadMatchClientPlugin extends ScriptedWidgetEventHandler
 	       	TextWidget deaths	   = TextWidget.Cast( element.FindAnyWidget( "deaths" ) );
 	       	TextWidget distance	   = TextWidget.Cast( element.FindAnyWidget( "distance" ) );
 
-	       	num.SetText(i.ToString());
-			pname.SetText("[(V)] Russki Camper");
-			kills.SetText("123");
-			deaths.SetText("32");
-			distance.SetText("934m");
+	       	element.SetName("element_" + i);
+	       	num.SetName("num_" + i);
+			pname.SetName("pname_" + i);
+			kills.SetName("kills_" + i);
+			deaths.SetName("deaths_" + i);
+			distance.SetName("distance_" + i);
 
-			Print("createTopElements закончила работу : " + i.ToString());
+	       	num.SetText((i + 1).ToString());
+			pname.SetText("");
+			kills.SetText("");
+			deaths.SetText("");
+			distance.SetText("");
+		}
+	}
+
+
+	private void updateTopElements(ref array<ref PlayerStatisticInfo> _players) {
+		for (int i = 0; i < 10; i++) {
+
+			if (!_players) { Print("2. NO FUCKING PLAYERS"); return; }
+			if (_players) Print("2. " + TOP_PREFIX + _players.Count() + "шт");
+
+
+			Widget element = Widget.Cast( layoutRoot.FindAnyWidget( "element_" + i) );
+
+	       	TextWidget num	   	   = TextWidget.Cast( element.FindAnyWidget( "num_" + i) );
+	       	TextWidget pname	   = TextWidget.Cast( element.FindAnyWidget( "pname_" + i) );
+	       	TextWidget kills	   = TextWidget.Cast( element.FindAnyWidget( "kills_" + i) );
+	       	TextWidget deaths	   = TextWidget.Cast( element.FindAnyWidget( "deaths_" + i) );
+	       	TextWidget distance	   = TextWidget.Cast( element.FindAnyWidget( "distance_" + i) );
+
+	       	num.SetText((i + 1).ToString());
+
+	       	if (i < _players.Count()) {
+	       		// Print(_players.Get(i).playerName);
+	       		// Print(_players.ToString());
+
+		       	pname.SetText(_players.Get(i).playerName);
+				kills.SetText(_players.Get(i).kills.ToString());
+				deaths.SetText(_players.Get(i).deadth.ToString());
+				distance.SetText(_players.Get(i).maxRangeKill.ToString());
+	       	} else {
+		       	pname.SetText("");
+				kills.SetText("");
+				deaths.SetText("");
+				distance.SetText("");
+	       	}
+
+	       	element.Show(true);
 		}
 	}
 
@@ -150,10 +188,11 @@ class HHDeadMatchClientPlugin extends ScriptedWidgetEventHandler
 
 		switch (rpc_type) {
 			case HHRPCEnum.RPC_CLIENT_SHOW_END_SCREEN: { 
-				showMainScreen();
-
-				Param1<string> args;
+				Param1<ref array<ref PlayerStatisticInfo>> args;
 				if (!ctx.Read(args)) return;
+
+				showMainScreen(args.param1);
+
 				break;
 			}
 
@@ -166,8 +205,6 @@ class HHDeadMatchClientPlugin extends ScriptedWidgetEventHandler
 			}
 
 			case HHRPCEnum.RPC_CLIENT_UPDATE_MAIN_SCREEN_TIMER: { 
-				showMainScreen();
-
 				Param1<string> args3;
 				if (!ctx.Read(args3)) return;
 

@@ -35,27 +35,26 @@ class PluginPlayersTop extends PluginBase
 
 	void readPlayerData (PlayerBase player) {
 		string steamId = player.GetIdentity().GetPlainId();
+		if (!FileExist(S_PLAYERS)) MakeDirectory(S_PLAYERS)
 
 		// check file existance and get setup options
-		if (!FileExist(S_ROOTFOLDER + steamId + ".json")) {
+		if (!FileExist(S_PLAYERS + steamId + ".json")) {
 			string name = GetAnnouncePlayerPrefix(player.GetIdentity());
 
 			_plData = new PlayerStatisticInfo();
 			_plData.setSteamId(steamId);
 			_plData.setPlayerName(name);
 
-			JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_ROOTFOLDER + steamId + ".json", _plData);	
+			JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_PLAYERS + steamId + ".json", _plData);	
 		} else {
-			JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_ROOTFOLDER + steamId + ".json", _plData);
+			JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_PLAYERS + steamId + ".json", _plData);
 		}	
 	}
 
 
 	void updatePlayerData (PlayerBase player) {
-		// Print(TOP_PREFIX + "updating players data");
-
 		string steamId = player.GetIdentity().GetPlainId();
-		JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_ROOTFOLDER + steamId + ".json", _plData);
+		JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_PLAYERS + steamId + ".json", _plData);
 
 		if (player.GetIdentity()) {
 			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.maxRangeKill.ToString());

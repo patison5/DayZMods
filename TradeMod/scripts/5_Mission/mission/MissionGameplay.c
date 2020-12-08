@@ -15,7 +15,6 @@
 modded class MissionGameplay 
 {
     private ref UIHudTop myHudTop;
-    // private ref HHDeadMatchClientPlugin
 
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);
