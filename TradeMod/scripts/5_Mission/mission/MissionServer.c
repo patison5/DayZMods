@@ -88,8 +88,8 @@ modded class MissionServer extends MissionBase
 				Print("Player " + player.GetIdentity().GetName() + " ("+ steamId + ")" + " connected to the server!");
 			} else { 
 				_plData = new PlayerStatisticInfo(); 
-				_plData.setSteamId(player.GetIdentity().GetName());
-				_plData.setPlayerName(player.GetIdentity().GetPlainId());
+				_plData.setSteamId(player.GetIdentity().GetPlainId());
+				_plData.setPlayerName(player.GetIdentity().GetName());
 				JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_PLAYERS + steamId + ".json", _plData);
 			}
 			
