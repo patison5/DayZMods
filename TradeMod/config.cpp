@@ -4,7 +4,13 @@ class CfgPatches
 {
 	class TradeMod
 	{
-		requiredAddons[] = {};
+		author = "Lulex.py";
+		name = "HHDeadMatch";
+		url = "";
+		units[] = {};
+		weapons[] = {};
+		requiredAddons[] = {"DZ_Data","DZ_Sounds_Effects"};
+		requiredVersion = 0.1;
 	};
 };
 class CfgMods
@@ -34,3 +40,30 @@ class CfgMods
 		};
 	};
 };
+
+
+
+class CfgSoundShaders
+{
+	class steamMessage_SoundShader
+	{
+		samples[] = {{"\MyMods\TradeMod\sounds\steamMessage",1}};
+
+		
+		volume = 1;
+	};
+	
+};
+class CfgSoundSets
+{
+	class steamMessage_SoundSet
+	{
+		soundShaders[] = {"steamMessage_SoundShader"};
+		volumeFactor = 1;
+		frequencyFactor = 1;
+		spatial = 1;
+	};
+	
+};
+
+

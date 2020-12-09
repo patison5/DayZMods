@@ -10,6 +10,8 @@ class PluginPlayersTop extends PluginBase
 
 	private float distance;
 
+	ref private PluginAdminNotification sindicatNotify;
+
 	void hello (string str)
 	{
 		Print("Hello from " + str);
@@ -22,16 +24,17 @@ class PluginPlayersTop extends PluginBase
 			Print("Init: PluginPlayersTop");
 
 			_plData = new PlayerStatisticInfo();
+			sindicatNotify = new PluginAdminNotification();
 		}
 	}
 	
-	void ~PluginPlayersTop()
-	{
-		if (GetGame().IsMultiplayer())
-		{
-			Print("~PluginPlayersTop Closed");
-		}
-	}
+	// void ~PluginPlayersTop()
+	// {
+	// 	if (GetGame().IsMultiplayer())
+	// 	{
+	// 		Print("~PluginPlayersTop Closed");
+	// 	}
+	// }
 
 	void readPlayerData (PlayerBase player) {
 		string steamId = player.GetIdentity().GetPlainId();
@@ -60,6 +63,8 @@ class PluginPlayersTop extends PluginBase
 			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.maxRangeKill.ToString());
 			GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_TOP, param4, true, player.GetIdentity());
 		}
+		
+		sindicatNotify.checkSendingPossibility(player, _plData.killstreak);
 	}
 
 	protected string GetAnnouncePlayerPrefix(PlayerIdentity identity)  // player name prefix for announcements

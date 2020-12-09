@@ -38,6 +38,13 @@ modded class PlayerBase
 		SendMessage(message);
     }
 
+    void removeItem(EntityAI entity)
+    {
+        if (entity.GetHierarchyRootPlayer() == null) {
+            GetGame().ObjectDelete(entity);
+        }
+    }
+
     override void EEKilled(Object killer)
 	{
 		Print("PlayerBase.c EEKilled()");
@@ -45,6 +52,16 @@ modded class PlayerBase
 		if (m_playerTop) {
 			m_playerTop.PlayerKilled(PlayerBase.Cast(this), killer);
 		}
+
+		// Remove entity in hands
+        EntityAI inHandsItem = this.GetHumanInventory().GetEntityInHands();
+
+        if (inHandsItem != null) {
+            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(removeItem, 6500, false, inHandsItem);
+        }
+
+        // Remove body
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().ObjectDelete, 6000, false, this);
 		
 		super.EEKilled(killer);
 	}

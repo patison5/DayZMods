@@ -23,6 +23,7 @@ class PlayerStatisticInfo
 	string playerName = "";
 	int kills = 0;
 	int deadth = 0;
+	int killstreak = 0;
 	float maxRangeKill = 0;
 
 	void PlayerStatisticInfo() {}

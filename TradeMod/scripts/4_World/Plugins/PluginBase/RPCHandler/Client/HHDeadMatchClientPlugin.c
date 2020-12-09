@@ -1,10 +1,15 @@
 class HHDeadMatchClientPlugin extends PluginBase
 {
-	Widget								layoutRoot;
-	TextWidget               			mainTitle, subTitle, timerWidget, tableTitle;
+	Widget								layoutRoot, notification;
+	TextWidget               			mainTitle, subTitle, timerWidget, tableTitle, notifMessage;
 	
 	ref WrapSpacerWidget 				parent;
 	ref array<Widget>					m_SectionEntries = new array<Widget>;
+
+    private ref Timer                   adminNotficationTimer;
+
+
+    const string SOUND_NOTIFICATION = "steamMessage_SoundSet";
 
 	void HHDeadMatchClientPlugin () {
 		layoutRoot = GetGame().GetWorkspace().CreateWidgets( "MyMods/TradeMod/GUI/Layouts/roundEndScreen.layout", null ); //Create custom widget / .layout
@@ -20,6 +25,14 @@ class HHDeadMatchClientPlugin extends PluginBase
 		
 		layoutRoot.Update();
       	layoutRoot.Show(false);
+
+
+
+      	notification = GetGame().GetWorkspace().CreateWidgets( "MyMods/TradeMod/GUI/Layouts/SindicatMessage.layout", null );
+       	notifMessage = TextWidget.Cast( notification.FindAnyWidget(  "message"  ) );
+       	notifMessage.SetText("НУ ЭТО БАН!");
+      	notification.Show(false);
+
 
 		Print("Инициализация прошла успешно блять");
 
@@ -134,6 +147,10 @@ class HHDeadMatchClientPlugin extends PluginBase
         GetGame().GetUIManager().ShowUICursor( false );
     }
 
+    private void closeAdminMessage () {
+		notification.Show(false);
+    }
+
 
 
 	void ClientRPCHandler(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
@@ -166,6 +183,37 @@ class HHDeadMatchClientPlugin extends PluginBase
 				if (!ctx.Read(args3)) return;
 
 				timerWidget.SetText(args3.param1);
+				break;
+			}
+
+			case HHRPCEnum.RPC_SHOW_ADMIN_FUN_MESSAGE: { 
+
+				PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+
+				Param1<string> args4;
+				if (!ctx.Read(args4)) return;
+
+				adminNotficationTimer	= new ref Timer();
+				notification.Show(true);
+        		adminNotficationTimer.Run(10, this, "closeAdminMessage", NULL, true);
+        		notifMessage.SetText(args4.param1);
+
+				// //Now we can play the proper sound
+				// EffectSound effectSound = NULL;
+
+				// effectSound = SEffectManager.CreateSound( SOUND_NOTIFICATION, player.GetPosition() );
+		
+				// if (effectSound != NULL)
+				// {
+				// 	effectSound.SoundPlay();
+				// } else {
+				// 	Print("NO FUCKING SOUND FOUND!!!!!!!!!!!!!!!!");
+				// }
+
+				EffectSound sound =	SEffectManager.PlaySound( SOUND_NOTIFICATION, player.GetPosition() );
+				// sound.SetParent(player);
+				sound.SetSoundAutodestroy( true );
+
 				break;
 			}
 		}

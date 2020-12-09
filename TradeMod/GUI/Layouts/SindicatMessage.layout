@@ -1,0 +1,39 @@
+FrameWidgetClass rootFrame {
+ color 0.1176 0.1176 0.1176 1
+ position 0 0
+ size 280 90
+ halign right_ref
+ valign bottom_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ {
+  ImageWidgetClass bg {
+   visible 1
+   inheritalpha 0
+   ignorepointer 1
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   imageTexture "{CD8A351F16EE7113}MyMods/TradeMod/GUI/images/sindigcat.edds"
+   Mask ""
+  }
+  TextWidgetClass message {
+   ignorepointer 1
+   position 85 55
+   size 180 20
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Normal
+   text "IT'S A BAN, BRO!"
+   font "gui/fonts/etelkatextpro"
+   text_proportion 0.8
+   "text valign" center
+  }
+ }
+}

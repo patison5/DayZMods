@@ -7,7 +7,7 @@ class HHDeadMatchPlugin extends PluginBase
 
     bool isEnded = false;
     private int timeOut = 15;
-    private int roundTime = 60;
+    private int roundTime = 180;
 
     private int timeOutCounter = timeOut;
 
@@ -99,15 +99,13 @@ class HHDeadMatchPlugin extends PluginBase
     	// SendMessageToAll(msg);
     	closePlayerEndedGUI();
    		killAllPlayers();
-        // resetPlayersStatistic();
+        resetPlayersStatistic();
     }
 
 
 
 
     void showPlayerEndedGUI () {
-        Print("ОТПРАВЛЯЮ РПС НА КЛИЕНТЫ");
-
     	// отображаем игроку статистику топа и рисуем варианты выбора карты
     	ref array<Man> players = new array<Man>;
     	GetGame().GetPlayers( players );
@@ -116,9 +114,6 @@ class HHDeadMatchPlugin extends PluginBase
             if (player.GetIdentity()) {
 				// auto param4 = new Param1<string>("PIDOR");
                 auto param4 = new Param1<ref array<ref PlayerStatisticInfo>>(_players);
-
-                Print("ОТПРАВЛЯЮ РПС : " + _players.Get(0).playerName);
-
                 if (_players) Print(TOP_PREFIX + _players.Count() + "шт");
 
 				GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_SHOW_END_SCREEN, param4, true, player.GetIdentity());
