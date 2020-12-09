@@ -104,6 +104,7 @@ class PluginPlayersTop extends PluginBase
 		if (player.GetIdentity()) {
 			readPlayerData(player);
 			_plData.deadth = _plData.deadth + 1;
+			_plData.killstreak = 0;
 			updatePlayerData(player); //IWASDEAD
 		}
 
@@ -122,6 +123,7 @@ class PluginPlayersTop extends PluginBase
 
 					readPlayerData(m_Source);
 					_plData.kills = _plData.kills + 1;
+					_plData.killstreak = _plData.killstreak + 1;
 
 					if (!source.IsMeleeWeapon()) {
 						distance = Math.Round(vector.Distance(player.GetPosition(), m_Source.GetPosition()));
@@ -139,6 +141,7 @@ class PluginPlayersTop extends PluginBase
 					//that player killed someone with hands
 					readPlayerData(m_Source);
 					_plData.kills = _plData.kills + 1;
+					_plData.killstreak = _plData.killstreak + 1;
 					updatePlayerData(m_Source); //IAMAKILLER
 				}
 			}

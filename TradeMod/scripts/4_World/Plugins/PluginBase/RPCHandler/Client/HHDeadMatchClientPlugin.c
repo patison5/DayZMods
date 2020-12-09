@@ -6,8 +6,6 @@ class HHDeadMatchClientPlugin extends PluginBase
 	ref WrapSpacerWidget 				parent;
 	ref array<Widget>					m_SectionEntries = new array<Widget>;
 
-	bool _isOpen = false;
-
 	void HHDeadMatchClientPlugin () {
 		layoutRoot = GetGame().GetWorkspace().CreateWidgets( "MyMods/TradeMod/GUI/Layouts/roundEndScreen.layout", null ); //Create custom widget / .layout
 
@@ -18,48 +16,10 @@ class HHDeadMatchClientPlugin extends PluginBase
 
        	parent = WrapSpacerWidget.Cast( layoutRoot.FindAnyWidget("TopContainer") );
 
-  //      	if (!parent) { 
-  //      		Print(TOP_PREFIX+" родителя нет и я хуй знает почему...");
-  //      		return;
-  //      	} else {
-  //      		Print(TOP_PREFIX + "РОДИТЕЛЬ ЕСТЬ, ПЫТАЕМСЯ ДОБАВИТЬ В НЕГО ЭЛЕМЕНТЫ")
-  //      	}
-
-  //      	Widget element = GetGame().GetWorkspace().CreateWidgets("MyMods/TradeMod/GUI/Layouts/roundEndListItem.layout", parent);
-
-  //      	if (!element) {
-  //      		Print(TOP_PREFIX + " element нет и я хуй знает почему...");
-  //      		return;
-  //      	}
-
-  //      	TextWidget num	   	   = TextWidget.Cast( element.FindAnyWidget( "num" ) );
-  //      	TextWidget pname	   = TextWidget.Cast( element.FindAnyWidget( "pname" ) );
-  //      	TextWidget kills	   = TextWidget.Cast( element.FindAnyWidget( "kills" ) );
-  //      	TextWidget deaths	   = TextWidget.Cast( element.FindAnyWidget( "deaths" ) );
-  //      	TextWidget distance	   = TextWidget.Cast( element.FindAnyWidget( "distance" ) );
-
-  //      	num.SetText("1");
-		// pname.SetText("[(V)] Russki Camper");
-		// kills.SetText("123");
-		// deaths.SetText("32");
-		// distance.SetText("934m");
-
-
-		// if (!num || !pname || !kills || !deaths || !distance) {
-		// 	Print(TOP_PREFIX + " мелких элементов нихуя нет и я хуй знает почему...");
-  //      		return;
-		// }
-
-
-		// element.Update();
 		this.setDefaults();
 		
-		// parent.Update();
 		layoutRoot.Update();
       	layoutRoot.Show(false);
-
-  //     	if (GetGame().IsServer() && GetGame().IsMultiplayer()) return;
-		// GetDayZGame().Event_OnRPC.Insert(ClientRPCHandler);
 
 		Print("Инициализация прошла успешно блять");
 
@@ -143,9 +103,6 @@ class HHDeadMatchClientPlugin extends PluginBase
 	       	num.SetText((i + 1).ToString());
 
 	       	if (i < _players.Count()) {
-	       		// Print(_players.Get(i).playerName);
-	       		// Print(_players.ToString());
-
 		       	pname.SetText(_players.Get(i).playerName);
 				kills.SetText(_players.Get(i).kills.ToString());
 				deaths.SetText(_players.Get(i).deadth.ToString());
