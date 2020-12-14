@@ -7,6 +7,7 @@ modded class PluginManager {
 			RegisterPlugin(	"PluginPlayersTop", false, true);
 			RegisterPlugin( "HHDeadMatchPlugin", false, true);
 			RegisterPlugin( "PluginAdminNotification", false, true);
+			RegisterPlugin( "PluginSpawnSelection", false, true);
 		}
 
 

@@ -26,8 +26,6 @@ class HHDeadMatchClientPlugin extends PluginBase
 		layoutRoot.Update();
       	layoutRoot.Show(false);
 
-
-
       	notification = GetGame().GetWorkspace().CreateWidgets( "MyMods/TradeMod/GUI/Layouts/SindicatMessage.layout", null );
        	notifMessage = TextWidget.Cast( notification.FindAnyWidget(  "message"  ) );
        	notifMessage.SetText("НУ ЭТО БАН!");
@@ -119,7 +117,7 @@ class HHDeadMatchClientPlugin extends PluginBase
 		       	pname.SetText(_players.Get(i).playerName);
 				kills.SetText(_players.Get(i).kills.ToString());
 				deaths.SetText(_players.Get(i).deadth.ToString());
-				distance.SetText(_players.Get(i).maxRangeKill.ToString());
+				distance.SetText(_players.Get(i).maxRangeKill.ToString() + "m");
 	       	} else {
 		       	pname.SetText("");
 				kills.SetText("");

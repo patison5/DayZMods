@@ -2,6 +2,10 @@ modded class PlayerBase
 {
 
 	ref PluginPlayersTop m_playerTop;
+	// ref HHWeaponDeletion hh_weaponDeletion;
+	ref array<EntityAI> entities;
+
+	ref array <string> spawnPoings = new array<string>();
 
 
 	void Init () {
@@ -12,7 +16,7 @@ modded class PlayerBase
     override void OnPlayerLoaded()
 	{
 		super.OnPlayerLoaded();			
-		GetHumanInventory().CreateInInventory("RGD5Grenade");
+		// GetHumanInventory().CreateInInventory("RGD5Grenade");
 	}
 
 	void SendMessage(string message)
@@ -33,16 +37,14 @@ modded class PlayerBase
     override void OnJumpStart () {
     	super.OnJumpStart();
 
+
+    	JsonFileLoader<ref array <string>>.JsonLoadFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
+    	spawnPoings.Insert(this.GetPosition().ToString());
+    	JsonFileLoader<ref array <string>>.JsonSaveFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
+
     	string message = "Привет, " + GetAnnouncePlayerPrefix(this.GetIdentity()) + " (" + this.GetIdentity().GetPlainId() + ")";
 
-		SendMessage(message);
-    }
-
-    void removeItem(EntityAI entity)
-    {
-        if (entity.GetHierarchyRootPlayer() == null) {
-            GetGame().ObjectDelete(entity);
-        }
+		SendMessage(this.GetPosition().ToString());
     }
 
     override void EEKilled(Object killer)
@@ -54,14 +56,21 @@ modded class PlayerBase
 		}
 
 		// Remove entity in hands
-        EntityAI inHandsItem = this.GetHumanInventory().GetEntityInHands();
+        // EntityAI inHandsItem = this.GetHumanInventory().GetEntityInHands();
 
-        if (inHandsItem != null) {
-            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(removeItem, 6500, false, inHandsItem);
-        }
+        // if (inHandsItem != null) {
+        //     // GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(removeItem, 1500, false, inHandsItem);
+        //     // Print("В руках есть оружие, ща удалим чувак");
+        // } else {
+        // 	Print(TOP_PREFIX + "NO WEAPON IN HANDS");
+        // }
+
+        // hh_weaponDeletion = GetWeaponDeletion();
+        // entities = hh_weaponDeletion.GetEntities();
+        // hh_weaponDeletion.checkAndRemove();
 
         // Remove body
-        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().ObjectDelete, 6000, false, this);
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().ObjectDelete, 10000, false, this);
 		
 		super.EEKilled(killer);
 	}

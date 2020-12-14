@@ -18,7 +18,5 @@ class PluginAdminNotification extends PluginBase
 				}
 			}
 		}
-
-
 	}
 }

@@ -25,6 +25,7 @@ modded class EmoteManager
 				}
 			}
 		}
+		
 		//melee weapon suicide
 		else if (m_Player.GetItemInHands() && m_Player.GetItemInHands().ConfigIsExisting("suicideAnim"))
 		{

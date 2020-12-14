@@ -38,7 +38,7 @@ class PluginPlayersTop extends PluginBase
 
 	void readPlayerData (PlayerBase player) {
 		string steamId = player.GetIdentity().GetPlainId();
-		if (!FileExist(S_PLAYERS)) MakeDirectory(S_PLAYERS)
+		if (!FileExist(S_PLAYERS)) MakeDirectory(S_PLAYERS);
 
 		// check file existance and get setup options
 		if (!FileExist(S_PLAYERS + steamId + ".json")) {

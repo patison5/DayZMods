@@ -7,11 +7,13 @@ class HHDeadMatchPlugin extends PluginBase
 
     bool isEnded = false;
     private int timeOut = 15;
-    private int roundTime = 180;
+    private int roundTime = 600;
 
     private int timeOutCounter = timeOut;
 
     private ref array<ref PlayerStatisticInfo> _players = new array<ref PlayerStatisticInfo>;
+
+    // private ref map<string, int> mapVote = new map<string, int>();
 
     void HHDeadMatchPlugin () {
     	Print("HHDeadMatchPlugin был проинициализирован");
@@ -40,8 +42,6 @@ class HHDeadMatchPlugin extends PluginBase
 
     void summurizePlayersStatistic () {
     	// собираем всю информацию по игрокам
-        Print("Начинаем собирать статисику по каждому игроку");
-
         TStringArray fileNamesList = this.getPlayersList();
         _players = new array<ref PlayerStatisticInfo>;
         
@@ -55,7 +55,6 @@ class HHDeadMatchPlugin extends PluginBase
                 JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_PLAYERS + fileName + ".json", _plData);
 
                 _players.Insert(_plData);
-                Print("НАШЕЛ ОЧЕРЕДНОЙ ЭЛЕМЕНТ " + k.ToString());
             }   
         }
     }
