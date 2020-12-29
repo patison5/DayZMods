@@ -3,9 +3,8 @@ class CustomMission: MissionServer
 
 	ref PluginSpawnSelection spawnPlugin;
 
-
 	void CustomMission () {
-		spawnPlugin = PluginSpawnSelection.Cast(GetPlugin(PluginSpawnSelection));
+		spawnPlugin = GetSpawnPlugin();
 	}
 
 

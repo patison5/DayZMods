@@ -7,11 +7,13 @@ class HHDeadMatchPlugin extends PluginBase
 
     bool isEnded = false;
     private int timeOut = 15;
-    private int roundTime = 600;
+    private int roundTime = 100;
 
     private int timeOutCounter = timeOut;
 
     private ref array<ref PlayerStatisticInfo> _players = new array<ref PlayerStatisticInfo>;
+
+    ref PluginSpawnSelection spawnPlugin;
 
     // private ref map<string, int> mapVote = new map<string, int>();
 
@@ -22,6 +24,9 @@ class HHDeadMatchPlugin extends PluginBase
 
     	roundTimer	= new ref Timer();
         roundTimer.Run(roundTime, this, "endRound", NULL, true);
+
+
+        spawnPlugin = GetSpawnPlugin();
     }
 
 
@@ -96,15 +101,54 @@ class HHDeadMatchPlugin extends PluginBase
 
     void startRound (string msg) {
     	// SendMessageToAll(msg);
+
+        // ref array<Man> players = new array<Man>;
+        // GetGame().GetPlayers( players );
+        // foreach( auto player : players  )
+        // {
+        //     if (player.GetIdentity()) {
+        //         GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_CURRENT_MAP, NULL, true, player.GetIdentity());
+        //         Print("отправляю данные с выбором карты");
+        //     }
+        // }
+
+        spawnPlugin = GetSpawnPlugin();
+        spawnPlugin.selectCurrentMap();
+
+        // if (spawnPlugin)
+        // else Print("spawnPlugin БЛЯТЬ НУ ПОЧЕМУ ЕГО НЕТ?")
+
     	closePlayerEndedGUI();
    		killAllPlayers();
         resetPlayersStatistic();
+        resetDay();
+    }
+
+
+    void resetDay () {
+        int year, month, day, hour, minute;
+        int reset_month = 9, reset_day = 12, reset_hour = 9, reset_minute = 0;
+        GetGame().GetWorld().GetDate(year, month, day, hour, minute);
+        GetGame().GetWorld().SetDate(year, reset_month, reset_day, reset_hour, reset_minute);
     }
 
 
 
-
     void showPlayerEndedGUI () {
+
+        // UIHudTop myHudTop = UIHudTop.Cast(GetGame().GetUIManager().FindMenu(UI_TOP_LAYOUT));
+        // // myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
+        // if (myHudTop) {
+        //     if (!myHudTop.IsMenuOpen()) {
+        //         Print("ахуеть не встать! оно включается!")
+        //         myHudTop.SetMenuOpen(true);
+        //         myHudTop.hideMainScreen();
+        //     }
+        // } else {
+        //     Print("myHudTop : ДОЛЖЕН БЫЛ БЫТЬ СУКА ВКЛЮЧЕН, НО БЛЯТЬ Я ЕБАЛ ТОГО В РОТ");
+        // }
+
+
     	// отображаем игроку статистику топа и рисуем варианты выбора карты
     	ref array<Man> players = new array<Man>;
     	GetGame().GetPlayers( players );

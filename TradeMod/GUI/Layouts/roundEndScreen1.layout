@@ -208,7 +208,7 @@ FrameWidgetClass rootFrame {
       }
       WrapSpacerWidgetClass TopContainer {
        ignorepointer 1
-       position 0 40
+       position 0 42
        size 1 48
        halign center_ref
        hexactpos 1
@@ -217,11 +217,16 @@ FrameWidgetClass rootFrame {
        vexactsize 1
        Margin 0
        "Size To Content V" 1
+
+       {
+       
+       }
+
       }
      }
     }
     FrameWidgetClass map1 {
-     ignorepointer 1
+     ignorepointer 0
      size 240 130
      halign right_ref
      valign bottom_ref
@@ -318,23 +323,10 @@ FrameWidgetClass rootFrame {
        "text valign" center
        wrap 1
       }
-      ButtonWidgetClass btnMap1 {
-       color 0 0 0 0.5882
-       position 0 0
-       size 1 1
-       halign center_ref
-       valign center_ref
-       hexactpos 1
-       vexactpos 1
-       hexactsize 0
-       vexactsize 0
-       "no focus" 1
-       switch normal
-      }
      }
     }
     FrameWidgetClass map2 {
-     ignorepointer 1
+     ignorepointer 0
      position 0 175
      size 240 130
      halign right_ref
@@ -433,21 +425,10 @@ FrameWidgetClass rootFrame {
        "text valign" center
        wrap 1
       }
-      ButtonWidgetClass btnMap2 {
-       color 0 0 0 0.5882
-       position 0 0
-       size 1 1
-       hexactpos 1
-       vexactpos 1
-       hexactsize 0
-       vexactsize 0
-       "no focus" 1
-       switch normal
-      }
      }
     }
     FrameWidgetClass map3 {
-     ignorepointer 1
+     ignorepointer 0
      position 0 346
      size 240 130
      halign right_ref
@@ -540,21 +521,10 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       text "Zeleno"
+       text "SERERO-ZAPADNIY<br/>AERODROM"
        "text halign" center
        "text valign" center
        wrap 1
-      }
-      ButtonWidgetClass btnMap3 {
-       color 0 0 0 1
-       position 0 0
-       size 1 1
-       hexactpos 1
-       vexactpos 1
-       hexactsize 0
-       vexactsize 0
-       "no focus" 1
-       switch normal
       }
      }
     }

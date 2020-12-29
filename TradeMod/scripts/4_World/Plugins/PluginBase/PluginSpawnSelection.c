@@ -2,6 +2,8 @@ class PluginSpawnSelection extends PluginBase
 {
 	ref map<string, ref array<vector>> spawnDots = new map<string, ref array<vector>>();
 
+	private ref map<string, int> mapVotes = new map<string, int>();
+	
 	void PluginSpawnSelection () {		
 
 		array<vector> places1 = new array<vector>();
@@ -42,8 +44,16 @@ class PluginSpawnSelection extends PluginBase
     	places3.Insert(Vector(4597.382813, 339.015686, 10491.06054));
     	places3.Insert(Vector(4664.059570, 339.691406, 10495.69335));
 		spawnDots["csAero"] = places3;
-		
+
 		JsonFileLoader<ref map<string, ref array<vector>>>.JsonSaveFile(S_ROOTFOLDER + "spawnDots.json",  spawnDots);			
+
+
+		if (GetGame().IsServer()) {
+			GetDayZGame().Event_OnRPC.Insert(ServerRPCHandler);
+			Print("PluginSpawnSelection был проинициализирован");
+		}
+
+		resetMapVotes();
 	}
 
 	vector getPosition() {
@@ -85,4 +95,70 @@ class PluginSpawnSelection extends PluginBase
 		return newPos;
 	}
 
+
+	void resetMapVotes () {
+		mapVotes["Zeleno"] 	= 0;
+		mapVotes["vybor"] 	= 0;
+		mapVotes["csAero"] 	= 0;
+	}
+
+	void selectCurrentMap() {
+		Print("Выбираем следующую карту!");
+
+		string currentMap = "";
+		int max = -1;
+
+		foreach(string key, int el: mapVotes) {
+			Print("mapa[" + key + "] = " + el);
+
+			if (max < el) currentMap = key;
+		}
+
+		if (currentMap != "")
+			spawnLocation = currentMap;
+
+		resetMapVotes();
+	}
+
+	void ServerRPCHandler(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+
+        if (GetGame().IsClient()) {
+            delete this;
+            return;
+        }
+
+        switch (rpc_type) {
+            case HHRPCEnum.RPC_SELECT_MAP_1: { 
+                mapVotes["Zeleno"] 	= mapVotes["Zeleno"] + 1;
+                Print("Выбрали Zeleno + 1");
+                break;            
+            }
+
+            case HHRPCEnum.RPC_SELECT_MAP_2: { 
+                mapVotes["vybor"] 	= mapVotes["vybor"] + 1;
+                Print("Выбрали vybor + 1");
+                break;            
+            }
+
+            case HHRPCEnum.RPC_SELECT_MAP_3: { 
+				mapVotes["csAero"] 	= mapVotes["csAero"] + 1;
+                Print("Выбрали csAero + 1");
+                break;            
+            }
+        }
+    }
+
+
 }
+
+
+ref PluginSpawnSelection spawnPlugin;
+
+ref PluginSpawnSelection GetSpawnPlugin() {
+	if (!spawnPlugin)
+		spawnPlugin = PluginSpawnSelection.Cast(GetPlugin(PluginSpawnSelection));	
+
+	Print("КТО-ТО ЗАПРОСИЛ spawnPlugin");
+	return spawnPlugin;
+}
+

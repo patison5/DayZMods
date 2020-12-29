@@ -5,6 +5,9 @@ class PluginTopNotification extends PluginBase
 
 	void PluginTopNotification()
 	{			
+
+		Print("PluginTopNotification  был создан!");
+
 		layoutRoot = GetGame().GetWorkspace().CreateWidgets( "MyMods/TradeMod/GUI/Layouts/hud.layout" ); //Create custom widget / .layout
 
 		// NickName	   = TextWidget.Cast( layoutRoot.FindAnyWidget( "NickName" ) );

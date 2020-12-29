@@ -16,37 +16,152 @@ modded class MissionGameplay
 {
     private ref UIHudTop myHudTop;
 
+    // override void MissionGameplay () {
+    //     super.MissionGameplay();
+
+    //     Print("MissionGameplay конструктор был вызван");
+    // }
+
+    // override void ~MissionGameplay() {
+    //     super.~MissionGameplay();
+
+    //     Print("~MissionGameplay деструктор был вызван");
+    // }
+
+
+    override void OnInit()
+    {
+        super.OnInit();
+
+        Print("MissionGameplay onInit был вызван!");
+
+
+
+        // if (!myHudTop) {
+        //     myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
+
+        //     // if ((!myHudTop.IsMenuOpen()) && (GetGame().GetUIManager().GetMenu() == NULL)) {
+        //     //     //Show Menu
+        //     //     GetGame().GetUIManager().ShowScriptedMenu(myHudTop, NULL);
+        //     //     myHudTop.SetMenuOpen(false);
+        //     // }
+
+        //     // myHudTop.SetMenuOpen(true);
+        //     // GetGame().GetUIManager().HideScriptedMenu(myHudTop);
+        // }
+
+    }
+
+    override void OnMissionStart()
+    {
+        Print("OnMissionStart был вызван!");
+
+        super.OnMissionStart();
+
+        if (!myHudTop)
+            myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
+
+        myHudTop.hideMainScreen();
+        GetGame().GetUIManager().HideScriptedMenu(myHudTop);
+    }
+    override void OnMissionFinish()
+    {
+       
+        myHudTop.Close();
+        myHudTop = NULL;
+
+        super.OnMissionFinish();
+    }
+
     override void OnUpdate(float timeslice) {
+
+        // Man player = GetGame().GetPlayer();
+
+        // if (player && player.IsAlive()) {
+        //     if (GetGame().GetUIManager().GetMenu() == NULL && myHudTop == null) {
+        //         myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
+
+        //         Print("Инициализируем худтоп ебана рот");
+
+        //         if (!myHudTop.IsMenuOpen()) {
+        //             Print("Прячем эту ебалу");
+        //             myHudTop.SetMenuOpen(false);
+        //             myHudTop.hideMainScreen();
+        //             GetGame().GetUIManager().HideScriptedMenu(myHudTop);
+        //         }
+        //     }
+        // } else {
+        //     Print("Player пока что мерв, не можем проинициализировать...");
+        // }
+
         super.OnUpdate(timeslice);
 
-        
-        
-        Input input = GetGame().GetInput();
-        if (input.LocalPress("UAUIBack", false)) 
-        {
-            if (myHudTop != NULL && GetGame().GetUIManager().GetMenu() == myHudTop) {
-                myHudTop.SetMenuOpen(false);
-                GetGame().GetUIManager().HideScriptedMenu(myHudTop);
-            }
-        }
 
-        if ( input.LocalPress("UAOpenCustomMenu", false) ) 
-        {
-            if ( myHudTop ) {
-                if (myHudTop.IsMenuOpen()) {
-                    //Hide Menu
-                    myHudTop.SetMenuOpen(false);
-                    GetGame().GetUIManager().HideScriptedMenu(myHudTop);
-                } else if (GetGame().GetUIManager().GetMenu() == NULL) {
-                    //Show Menu
-                    GetGame().GetUIManager().ShowScriptedMenu(myHudTop, NULL);
-                    myHudTop.SetMenuOpen(true);
-                }
-            } else if (GetGame().GetUIManager().GetMenu() == NULL && myHudTop == null) {
-                //Create Menu
-                myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
-                myHudTop.SetMenuOpen(true);
-            }
+        // if ( myHudTop ) {
+        //     if (myHudTop.IsMenuOpen()) {
+               
+        //     } else if (GetGame().GetUIManager().GetMenu() == NULL) {
+        //         //Show Menu
+        //         GetGame().GetUIManager().ShowScriptedMenu(myHudTop, NULL);
+        //         // myHudTop.SetMenuOpen(true);
+        //     }
+        // } else if (GetGame().GetUIManager().GetMenu() == NULL && myHudTop == null) {
+        //     //Create Menu
+        //     myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
+        //     // myHudTop.SetMenuOpen(true);
+        // }
+
+
+
+
+
+        
+        // Input input = GetGame().GetInput();/
+        // if (input.LocalPress("UAUIBack", false)) 
+        // {
+        //     if (myHudTop != NULL && GetGame().GetUIManager().GetMenu() == myHudTop) {
+        //         myHudTop.SetMenuOpen(false);
+        //         GetGame().GetUIManager().HideScriptedMenu(myHudTop);
+        //     }
+        // }
+
+        // if ( input.LocalPress("UAOpenCustomMenu", false) ) 
+        // {
+        //     if ( myHudTop ) {
+        //         if (myHudTop.IsMenuOpen()) {
+        //             //Hide Menu
+        //             myHudTop.SetMenuOpen(false);
+        //             GetGame().GetUIManager().HideScriptedMenu(myHudTop);
+        //         } else if (GetGame().GetUIManager().GetMenu() == NULL) {
+        //             //Show Menu
+        //             GetGame().GetUIManager().ShowScriptedMenu(myHudTop, NULL);
+        //             myHudTop.SetMenuOpen(true);
+        //         }
+        //     } else if (GetGame().GetUIManager().GetMenu() == NULL && myHudTop == null) {
+        //         //Create Menu
+        //         myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
+        //         myHudTop.SetMenuOpen(true);
+        //     }
+        // }
+
+
+    }
+
+    override void OnKeyPress(int key) {
+        super.OnKeyPress(key);
+        
+        if (key == KeyCode.KC_ESCAPE) {
+
+            myHudTop.SetMenuOpen(false);
+
+            // if (GetUIManager().FindMenu(UI_TOP_LAYOUT)) {
+            //     GetUIManager().CloseMenu(UI_TOP_LAYOUT);
+            // }
+           
+            // if (myHudTop) {
+            //     myHudTop.Close();
+            //     myHudTop = NULL;            
+            // }           
         }
     }
 };
