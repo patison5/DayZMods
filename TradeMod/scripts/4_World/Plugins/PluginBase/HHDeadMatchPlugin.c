@@ -7,7 +7,7 @@ class HHDeadMatchPlugin extends PluginBase
 
     bool isEnded = false;
     private int timeOut = 15;
-    private int roundTime = 100;
+    private int roundTime = 1520;
 
     private int timeOutCounter = timeOut;
 

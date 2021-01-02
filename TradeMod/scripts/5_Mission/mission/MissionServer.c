@@ -74,38 +74,49 @@ modded class MissionServer extends MissionBase
 		EntityAI itemClothing;
 		EntityAI itemEnt;
 		EntityAI weapon;
+		EntityAI helmet;
+		EntityAI vest;
 		ItemBase itemBs;
 		float rand;
 
 		player.RemoveAllItems();
 
+		JsonFileLoader<ref SetupPlayerOptions>.JsonLoadFile(S_ROOTFOLDER + "SetupPlayerOptions.json", SPOptions );
 		PlayerSet playerSet = SPOptions.PlayerSetups.GetRandomElement();
 
-		// создание одежды
+		// создание шлема и его обвесов
+		helmet = player.GetInventory().CreateInInventory(playerSet.Helmet);
+		for (int j = 0; j < playerSet.HelmetAttachments.Count(); j++) {
+			helmet.GetInventory().CreateAttachment(playerSet.HelmetAttachments[j]);
+		}
+
+		vest = player.GetInventory().CreateInInventory(playerSet.Vest);
+		for (int m = 0; m < playerSet.VestAttachments.Count(); m++) {
+			vest.GetInventory().CreateAttachment(playerSet.VestAttachments[m]);
+		}
+
+			// создание одежды
 		for (int i = 0; i < playerSet.Clothes.Count(); i++) {
 			player.GetInventory().CreateInInventory(playerSet.Clothes[i]);
 		}
 
 
-		// создание оружия и его обвесов
-		weapon = player.GetHumanInventory().CreateInHands(playerSet.Weapon);
-		player.SetQuickBarEntityShortcut(weapon, 0);
-
-		// hh_weaponDeletion = GetWeaponDeletion();
-		// hh_weaponDeletion.addEntity(itemEnt);
+		// // создание оружия и его обвесов
+		// weapon = player.GetHumanInventory().CreateInHands(playerSet.Weapon);
+		// player.SetQuickBarEntityShortcut(weapon, 0);
 
 
-		for (int j = 0; j < playerSet.WeaponAttachments.Count(); j++) {
-			weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[j]);
-		}
+		// for (int z = 0; z < playerSet.WeaponAttachments.Count(); z++) {
+		// 	weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[z]);
+		// }
 
 		itemClothing = player.FindAttachmentBySlotName( "Body" );
 
 		// создание внутренней экипировки
 		if ( itemClothing )
 		{
-			itemEnt = itemClothing.GetInventory().CreateInInventory( "Rag" );
-			if (Class.CastTo( itemBs, itemEnt )) itemBs.SetQuantity( 6 );
+			// itemEnt = itemClothing.GetInventory().CreateInInventory( "Rag" );
+			// if (Class.CastTo( itemBs, itemEnt )) itemBs.SetQuantity( 6 );
 			
 			for (int k = 0; k < playerSet.Equipment.Count(); k++) {
 				player.GetInventory().CreateInInventory(playerSet.Equipment[k]);
@@ -113,7 +124,76 @@ modded class MissionServer extends MissionBase
 		}
 
 		// ReloadWeapon( EntityAI weapon, EntityAI magazine )
-		player.QuickReloadWeapon(weapon);
+		// player.QuickReloadWeapon(weapon);
+
+
+
+
+
+
+		// создание оружия и его обвесов
+		weapon = player.GetHumanInventory().CreateInHands(playerSet.Weapon);
+		player.SetQuickBarEntityShortcut(weapon, 0);
+
+
+		for (int z = 0; z < playerSet.WeaponAttachments.Count(); z++) {
+			weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[z]);
+		}
+
+
+
+		Weapon_Base wp = Weapon_Base.Cast(weapon);
+		string magazine_type = playerSet.MagType;
+
+		int stateId = -1;
+
+		if ( wp.IsInherited( SKS_Base ) )
+		{
+			return;
+		} else if ( wp.IsInherited( BoltActionRifle_InnerMagazine_Base ) )
+		{
+			return;
+		} else if ( wp.IsInherited( DoubleBarrel_Base ) )
+		{
+			return;
+		} else if ( wp.IsInherited( Pistol_Base ) )
+		{
+			stateId = PistolStableStateID.CLO_DIS_BU0_MA1;
+		} else if ( wp.IsInherited( CZ527_Base ) )
+		{
+			stateId = CZ527StableStateID.CZ527_CLO_BU0_MA1;
+		} else if ( wp.IsInherited( Repeater_Base ) )
+		{
+			return;
+		} else if ( wp.IsInherited( RifleBoltFree_Base ) )
+		{
+			stateId = RBFStableStateID.RBF_CLO_BU0_MA1;
+		} else if ( wp.IsInherited( RifleBoltLock_Base ) )
+		{
+			stateId = RBLStableStateID.RBL_OPN_BU0_MA1;
+		} else if ( wp.IsInherited( Mp133Shotgun_Base ) )
+		{
+			return;
+		}
+
+		InventoryLocation il = new InventoryLocation;
+		il.SetAttachment( wp, NULL, InventorySlots.MAGAZINE );
+
+		// using any of the inventory sync for existing spawning magazines also works
+		// e.g. GameInventory.LocationSyncMoveEntity
+
+		EntityAI mag = SpawnEntity( magazine_type, il, ECE_IN_INVENTORY, RF_DEFAULT );
+		GetGame().RemoteObjectDelete( mag );
+		GetGame().RemoteObjectDelete( wp );
+
+		pushToChamberFromAttachedMagazine( wp, wp.GetCurrentMuzzle() );
+
+		ScriptReadWriteContext ctx = new ScriptReadWriteContext;
+		ctx.GetWriteContext().Write( stateId );
+		wp.LoadCurrentFSMState( ctx.GetReadContext(), GetGame().SaveVersion() );
+
+		GetGame().RemoteObjectCreate( wp );
+		GetGame().RemoteObjectCreate( mag );
 	}
 
 	override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)

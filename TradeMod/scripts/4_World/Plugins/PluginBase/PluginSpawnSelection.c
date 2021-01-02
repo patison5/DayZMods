@@ -111,11 +111,16 @@ class PluginSpawnSelection extends PluginBase
 		foreach(string key, int el: mapVotes) {
 			Print("mapa[" + key + "] = " + el);
 
-			if (max < el) currentMap = key;
+			if (max < el) {
+				currentMap = key;
+				max = el;
+			}
 		}
 
 		if (currentMap != "")
 			spawnLocation = currentMap;
+
+		Print(currentMap);
 
 		resetMapVotes();
 	}
@@ -130,19 +135,16 @@ class PluginSpawnSelection extends PluginBase
         switch (rpc_type) {
             case HHRPCEnum.RPC_SELECT_MAP_1: { 
                 mapVotes["Zeleno"] 	= mapVotes["Zeleno"] + 1;
-                Print("Выбрали Zeleno + 1");
                 break;            
             }
 
             case HHRPCEnum.RPC_SELECT_MAP_2: { 
                 mapVotes["vybor"] 	= mapVotes["vybor"] + 1;
-                Print("Выбрали vybor + 1");
                 break;            
             }
 
             case HHRPCEnum.RPC_SELECT_MAP_3: { 
 				mapVotes["csAero"] 	= mapVotes["csAero"] + 1;
-                Print("Выбрали csAero + 1");
                 break;            
             }
         }
@@ -158,7 +160,6 @@ ref PluginSpawnSelection GetSpawnPlugin() {
 	if (!spawnPlugin)
 		spawnPlugin = PluginSpawnSelection.Cast(GetPlugin(PluginSpawnSelection));	
 
-	Print("КТО-ТО ЗАПРОСИЛ spawnPlugin");
 	return spawnPlugin;
 }
 

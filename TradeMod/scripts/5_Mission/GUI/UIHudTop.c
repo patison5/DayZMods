@@ -3,13 +3,12 @@ class UIHudTop extends UIScriptedMenu
     Widget                              notification;
     TextWidget                          mainTitle, subTitle, timerWidget, tableTitle, notifMessage;
 
-    ButtonWidget                        btnMap1, btnMap2, btnMap3;
+    ButtonWidget                        btnMap1, btnMap2, btnMap3, selectedBtn;
     
     ref WrapSpacerWidget                parent;
     ref array<Widget>                   m_SectionEntries = new array<Widget>;
 
     private ref Timer                   adminNotficationTimer;
-
 
     const string SOUND_NOTIFICATION = "steamMessage_SoundSet";
 
@@ -258,15 +257,24 @@ class UIHudTop extends UIScriptedMenu
 
         switch (w) {
             case btnMap1:
-                GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_1, NULL, true, player.GetIdentity());
+                if (selectedBtn != btnMap1) {
+                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_1, NULL, true, player.GetIdentity());
+                    selectedBtn = btnMap1;
+                }
                 break;
 
              case btnMap2:
-                GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_2, NULL, true, player.GetIdentity());
+                if (selectedBtn != btnMap1) {
+                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_2, NULL, true, player.GetIdentity());
+                    selectedBtn = btnMap1;
+                }
                 break;
 
              case btnMap3:
-                GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_3, NULL, true, player.GetIdentity());
+                if (selectedBtn != btnMap1) {
+                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_3, NULL, true, player.GetIdentity());
+                    selectedBtn = btnMap1;
+                }
                 break;
         }
 

@@ -64,6 +64,7 @@ modded class MissionGameplay
         myHudTop.hideMainScreen();
         GetGame().GetUIManager().HideScriptedMenu(myHudTop);
     }
+    
     override void OnMissionFinish()
     {
        
