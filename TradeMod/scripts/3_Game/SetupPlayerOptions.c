@@ -4,14 +4,85 @@ class SetupPlayerOptions
 	
 	void InitPlayerSetups() {
 
+		PlayerSet set1 = new PlayerSet(
+			// одежда
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+
+			// оружие, тип магазина и обвесы
+			"HH_AR15Beowulf_Tan",
+			"HH_Mag_AR15Beowulf_10Rnd",
+			{"M680Optic"},
+
+			// второе оружие, тип магазина и обвесы
+			"",
+			"",
+			{""},
+
+
+			// Шлем и обвесы
+			"HH_K63_Helmet_Green", 
+			{},
+
+			// Броник и обвесы
+			"HH_PlateCarrierVest_black",
+			{"HH_PlateCarrierHolster_black", "HH_PlateCarrierPounches_black"},
+
+			// Содержимое карманов
+			{
+				"HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd",
+				"PainKillerTablets", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka", 
+				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
+				"Battery9V", "Battery9V",
+				"RGD5Grenade", "M67Grenade"
+			});
+
+
+		PlayerSet set2 = new PlayerSet(
+			// одежда
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"},  
+
+			// оружие, тип магазина и обвесы
+			"HH_FalMod",
+			"",
+			{"M680Optic"},
+
+			// Второе оружие, тип магазина и обвесы
+			"",
+			"",
+			{""},
+
+			// Шлем и обвесы
+			"HH_K63_Helmet_Black", 
+			{},
+
+			// Броник и обвесы
+			"HH_PlateCarrierVest_black",
+			{"HH_PlateCarrierHolster_black", "HH_PlateCarrierPounches_black"},
+
+			// Содержимое карманов
+			{
+				"HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd", "HH_Mag_AR15Beowulf_10Rnd",
+				"PainKillerTablets", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka", 
+				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
+				"Battery9V", "Battery9V",
+				"RGD5Grenade", "M67Grenade"
+			});
+
+
 		PlayerSet set4 = new PlayerSet(
 			// одежда
 			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
 
-			// оружие и обвесы
+			// оружие, тип магазина и обвесы
 			"HH_DVL10",
 			"HH_Mag_DVL10_10Rnd",
 			{"HH_LongRangeOptics_x24_Black"},
+
+			// второе оружие, тип магазина и обвесы
+			"HH_DVL10",
+			"HH_Mag_DVL10_10Rnd",
+			{"HH_LongRangeOptics_x24_Black"},
+
 
 			// Шлем и обвесы
 			"HH_K63_Helmet_Black", 
@@ -42,10 +113,17 @@ class SetupPlayerOptions
 			// одежда
 			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
 
-			// оружие и обвесы
+			// оружие, тип магазина и обвесы
 			"HH_PKP",
 			"HH_Mag_PKM_250Rnd",
 			{"KobraOptic"},
+
+			// второе оружие, тип магазина и обвесы
+			"",
+			"",
+			{},
+
+
 
 			// Шлем и обвесы
 			"HH_K63_Helmet_Black", 
@@ -76,7 +154,12 @@ class SetupPlayerOptions
 			// одежда
 			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
 
-			// оружие и обвесы
+			// оружие, тип магазина и обвесы
+			"HH_PKM",
+			"HH_Mag_PKM_250Rnd",
+			{"KobraOptic"},
+
+			// Второе оружие, тип магазина и обвесы
 			"HH_PKM",
 			"HH_Mag_PKM_250Rnd",
 			{"KobraOptic"},
@@ -105,7 +188,12 @@ class SetupPlayerOptions
 			// одежда
 			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
 
-			// оружие и обвесы
+			// оружие, тип магазина и обвесы
+			"HH_ASVAL",
+			"HH_Mag_ASVAL_VSS_30Rnd_Spar",
+			{"HH_OKP7Optic"},
+
+			// Второе оружие, тип магазина и обвесы
 			"HH_ASVAL",
 			"HH_Mag_ASVAL_VSS_30Rnd_Spar",
 			{"HH_OKP7Optic"},
@@ -134,7 +222,12 @@ class SetupPlayerOptions
 			// одежда
 			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
 
-			// оружие и обвесы
+			// оружие, тип магазина и обвесы
+			"HH_PKP",
+			"HH_Mag_PKM_250Rnd",
+			{"HH_OKP7Optic"},
+
+			// Второе оружие, тип магазина и обвесы
 			"HH_PKP",
 			"HH_Mag_PKM_250Rnd",
 			{"HH_OKP7Optic"},
@@ -164,8 +257,9 @@ class SetupPlayerOptions
 			});
 
 
-		// this.PlayerSetups.Insert(set1);
-		// this.PlayerSetups.Insert(set2);
+
+		this.PlayerSetups.Insert(set1);
+		this.PlayerSetups.Insert(set2);
 		// this.PlayerSetups.Insert(set3);
 		this.PlayerSetups.Insert(set4);
 		this.PlayerSetups.Insert(set5);
@@ -178,21 +272,22 @@ class SetupPlayerOptions
 class PlayerSet
 {
 	string Weapon;
+	string Weapon2;
 	string Helmet;
 	string Vest;
 	string MagType;
+	string MagType2;
 
 	ref array<string> Clothes				= new array<string>;
 	ref array<string> Equipment 			= new array<string>;
 
 	ref array<string> WeaponAttachments 	= new array<string>;
+	ref array<string> WeaponAttachments2 	= new array<string>;
 	ref array<string> HelmetAttachments		= new array<string>;
 	ref array<string> VestAttachments 		= new array<string>;
 
-	void PlayerSet(ref array<string> cl, string wp, string magType, ref array<string> wpatt, string hel, ref array<string> helAtt, string vest, ref array<string> vestAtt, ref array<string> eq) {
+	void PlayerSet(ref array<string> cl, string wp, string magType, ref array<string> wpatt, string wp2, string magType2, ref array<string> wpatt2, string hel, ref array<string> helAtt, string vest, ref array<string> vestAtt, ref array<string> eq) {
 		this.Clothes = cl;
-		this.Weapon = wp;
-		this.WeaponAttachments = wpatt;
 		this.Equipment = eq;
 
 		this.Helmet = hel;
@@ -200,7 +295,13 @@ class PlayerSet
 		this.Vest = vest;
 		this.VestAttachments = vestAtt;
 
+		this.Weapon = wp;
+		this.WeaponAttachments = wpatt;
 		this.MagType = magType;
+
+		this.Weapon2 = wp2;
+		this.WeaponAttachments2 = wpatt2;
+		this.MagType2 = magType2;
 	}
 }
 
