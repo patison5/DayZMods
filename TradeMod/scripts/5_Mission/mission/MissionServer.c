@@ -1,6 +1,7 @@
 modded class MissionServer extends MissionBase
 {
-	
+	protected PluginDeveloper m_Developer;
+
 	static const string PREFIX = "[MY_MISSION_SERVER]: ";
 
 	ref SetupPlayerOptions SPOptions;
@@ -30,6 +31,8 @@ modded class MissionServer extends MissionBase
 			}
 			JsonFileLoader<ref SetupPlayerOptions>.JsonSaveFile(S_ROOTFOLDER + "SetupPlayerOptions.json",  SPOptions);			
 		}
+
+		m_Developer	= PluginDeveloper.Cast( GetPlugin(PluginDeveloper) );
 	}
 
 	// override void OnInit() {
@@ -129,71 +132,190 @@ modded class MissionServer extends MissionBase
 
 
 
-
+		// if (!m_Developer)
+		// 	m_Developer = PluginDeveloper.Cast( GetPlugin(PluginDeveloper) );
 
 		// создание оружия и его обвесов
 		weapon = player.GetHumanInventory().CreateInHands(playerSet.Weapon);
 		player.SetQuickBarEntityShortcut(weapon, 0);
 
+		EntityAI mag = SpawnEntityInInventory(player, playerSet.MagType, -1, 1);
+
+		if (mag) 
+			Print("Заспавнил магазин ептить : " + playerSet.MagType);
+		else
+			Print("не получилось заспавнить..." + playerSet.MagType);
 
 		for (int z = 0; z < playerSet.WeaponAttachments.Count(); z++) {
 			weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[z]);
 		}
+	}
 
 
 
-		Weapon_Base wp = Weapon_Base.Cast(weapon);
-		string magazine_type = playerSet.MagType;
+	EntityAI SpawnEntityInInventory (PlayerBase player, string item_name, float health, float quantity)
+	{
+		if( player )
+		{
+			if ( GetGame().IsServer() )
+			// {		
+			// 	InventoryLocation il = new InventoryLocation;
+			// 	if (player.GetInventory().FindFirstFreeLocationForNewEntity(item_name, FindInventoryLocationType.ANY, il))
+			// 	{
+			// 		Weapon_Base wpn = Weapon_Base.Cast(il.GetParent());
+			// 		bool is_mag = il.GetSlot() == InventorySlots.MAGAZINE || il.GetSlot() == InventorySlots.MAGAZINE2 || il.GetSlot() == InventorySlots.MAGAZINE3;
+			// 		if (wpn && is_mag)
+			// 		{
+			// 			vector pos = player.GetPosition();
+			// 			EntityAI eai_gnd = spwnEntityGrn(player, item_name, health, quantity, pos);
+			// 			Magazine mag_gnd = Magazine.Cast(eai_gnd);
 
-		int stateId = -1;
+			// 			Print("пытаюсь добавить магазин в оружие");
 
-		if ( wp.IsInherited( SKS_Base ) )
-		{
-			return;
-		} else if ( wp.IsInherited( BoltActionRifle_InnerMagazine_Base ) )
-		{
-			return;
-		} else if ( wp.IsInherited( DoubleBarrel_Base ) )
-		{
-			return;
-		} else if ( wp.IsInherited( Pistol_Base ) )
-		{
-			stateId = PistolStableStateID.CLO_DIS_BU0_MA1;
-		} else if ( wp.IsInherited( CZ527_Base ) )
-		{
-			stateId = CZ527StableStateID.CZ527_CLO_BU0_MA1;
-		} else if ( wp.IsInherited( Repeater_Base ) )
-		{
-			return;
-		} else if ( wp.IsInherited( RifleBoltFree_Base ) )
-		{
-			stateId = RBFStableStateID.RBF_CLO_BU0_MA1;
-		} else if ( wp.IsInherited( RifleBoltLock_Base ) )
-		{
-			stateId = RBLStableStateID.RBL_OPN_BU0_MA1;
-		} else if ( wp.IsInherited( Mp133Shotgun_Base ) )
-		{
-			return;
+			// 			if (mag_gnd && player.GetWeaponManager().CanAttachMagazine(wpn, mag_gnd))
+			// 			{
+			// 				player.GetWeaponManager().AttachMagazine(mag_gnd);
+			// 				Print("Вроде как добавил магазин в оружие");
+			// 			}
+
+			// 			return eai_gnd;
+			// 		}
+			// 		else
+			// 		{
+			// 			Print("ВТОРАЯ ВЕТКА магазин в оружие");
+
+			// 			EntityAI eai = GetGame().SpawnEntity(item_name, il, ECE_IN_INVENTORY, RF_DEFAULT);
+			// 			if ( eai && eai.IsInherited(ItemBase) )
+			// 			{
+			// 				health = eai.GetMaxHealth();
+			// 				ItemBase i = ItemBase.Cast( eai );
+			// 				SetupSpawnedItem(i, health, quantity);
+			// 				Print("ну вроде как спавним");
+			// 			}
+			// 			return eai;
+			// 		}
+			// 	}
+			// 	return NULL;
+			// }
+
+
+
+			// полураб
+			// {
+			// 	EntityAI itemInHands = player.GetHumanInventory().GetEntityInHands();
+
+			// 	InventoryLocation il = new InventoryLocation;
+			// 	itemInHands.GetInventory().GetCurrentInventoryLocation(il);
+
+			// 	vector pos = player.GetPosition();
+			// 	EntityAI eai_gnd = spwnEntityGrn(player, item_name, health, quantity, pos);
+			// 	Magazine mag_gnd = Magazine.Cast(eai_gnd);
+			// 	Weapon_Base wpn = Weapon_Base.Cast(itemInHands);
+
+			// 	Print("пытаюсь добавить магазин в оружие");
+
+			// 	if (mag_gnd && player.GetWeaponManager().CanAttachMagazine(wpn, mag_gnd))
+			// 	{
+			// 		player.GetWeaponManager().AttachMagazine(mag_gnd);
+			// 		Print("Вроде как добавил магазин в оружие");
+			// 	}
+
+			// 	return eai_gnd;
+			// }
+
+			{
+				string magazine_type = item_name;
+
+				EntityAI itemInHands = player.GetHumanInventory().GetEntityInHands();
+
+				InventoryLocation il = new InventoryLocation;
+				itemInHands.GetInventory().GetCurrentInventoryLocation(il);
+
+				Weapon_Base wpn = Weapon_Base.Cast(itemInHands);
+
+
+				int stateId = -1;
+
+				if ( wpn.IsInherited( SKS_Base ) )
+				{
+					return NULL;
+				} else if ( wpn.IsInherited( BoltActionRifle_InnerMagazine_Base ) )
+				{
+					return NULL;
+				} else if ( wpn.IsInherited( DoubleBarrel_Base ) )
+				{
+					return NULL;
+				} else if ( wpn.IsInherited( Pistol_Base ) )
+				{
+					stateId = PistolStableStateID.CLO_DIS_BU0_MA1;
+				} else if ( wpn.IsInherited( CZ527_Base ) )
+				{
+					stateId = CZ527StableStateID.CZ527_CLO_BU0_MA1;
+				} else if ( wpn.IsInherited( Repeater_Base ) )
+				{
+					return NULL;
+				} else if ( wpn.IsInherited( RifleBoltFree_Base ) )
+				{
+					stateId = RBFStableStateID.RBF_CLO_BU0_MA1;
+				} else if ( wpn.IsInherited( RifleBoltLock_Base ) )
+				{
+					stateId = RBLStableStateID.RBL_OPN_BU0_MA1;
+				} else if ( wpn.IsInherited( Mp133Shotgun_Base ) )
+				{
+					return NULL;
+				}
+
+				il.SetAttachment( wpn, NULL, InventorySlots.MAGAZINE );
+
+				// using any of the inventory sync for existing spawning magazines also works
+				// e.g. GameInventory.LocationSyncMoveEntity
+
+				EntityAI mag = SpawnEntity( magazine_type, il, ECE_IN_INVENTORY, RF_DEFAULT );
+				GetGame().RemoteObjectDelete( mag );
+				GetGame().RemoteObjectDelete( wpn );
+
+				pushToChamberFromAttachedMagazine( wpn, wpn.GetCurrentMuzzle() );
+
+				ScriptReadWriteContext ctx = new ScriptReadWriteContext;
+				ctx.GetWriteContext().Write( stateId );
+				wpn.LoadCurrentFSMState( ctx.GetReadContext(), GetGame().SaveVersion() );
+
+				GetGame().RemoteObjectCreate( wpn );
+				GetGame().RemoteObjectCreate( mag );
+			}
+		}
+		return NULL;
+	}
+
+	EntityAI spwnEntityGrn (PlayerBase player, string item_name, float health, float quantity, vector pos)
+	{
+		if ( GetGame().IsServer() )
+		{		
+			EntityAI entity = player.SpawnEntityOnGroundPos(item_name, pos);
+			if (entity) {
+				health = entity.GetMaxHealth();
+				SetupSpawnedEntity(entity, health, quantity);
+			}
+
+			return entity;
 		}
 
-		InventoryLocation il = new InventoryLocation;
-		il.SetAttachment( wp, NULL, InventorySlots.MAGAZINE );
+		return NULL;
+	}
 
-		// using any of the inventory sync for existing spawning magazines also works
-		// e.g. GameInventory.LocationSyncMoveEntity
+	void SetupSpawnedEntity (EntityAI entity, float health, float quantity, bool special = false)
+	{
 
-		EntityAI mag = SpawnEntity( magazine_type, il, ECE_IN_INVENTORY, RF_DEFAULT );
-		GetGame().RemoteObjectDelete( mag );
-		GetGame().RemoteObjectDelete( wp );
-
-		pushToChamberFromAttachedMagazine( wp, wp.GetCurrentMuzzle() );
-
-		ScriptReadWriteContext ctx = new ScriptReadWriteContext;
-		ctx.GetWriteContext().Write( stateId );
-		wp.LoadCurrentFSMState( ctx.GetReadContext(), GetGame().SaveVersion() );
-
-		GetGame().RemoteObjectCreate( wp );
-		GetGame().RemoteObjectCreate( mag );
+		if ( entity.IsInherited( PlayerBase ) ) 
+		{
+			PlayerBase plr = PlayerBase.Cast( entity );
+			plr.OnSpawnedFromConsole();
+		}
+		else if ( entity.IsInherited(ItemBase) )
+		{
+			ItemBase item = ItemBase.Cast( entity );
+			SetupSpawnedItem(item, health, quantity);
+		}
 	}
 
 	override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)

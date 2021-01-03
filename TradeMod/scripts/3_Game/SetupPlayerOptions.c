@@ -64,7 +64,7 @@ class SetupPlayerOptions
 			// Содержимое карманов
 			{
 				"HH_Mag_PKM_250Rnd", "HH_Mag_PKM_250Rnd", "HH_Mag_PKP_100Rnd",
-				"Ammo_762x54_Tracer", "Ammo_762x54_Tracer", "Ammo_762x54_Tracer", "Ammo_762x54_Tracer",
+				"Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer",
 				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
 				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HuntingOptic",
 				"Battery9V", "Battery9V",
@@ -91,11 +91,12 @@ class SetupPlayerOptions
 
 			// Содержимое карманов
 			{
-				"HH_Mag_PKM_250Rnd", "HH_Mag_PKM_250Rnd", "HH_Mag_PKP_100Rnd",
-				"Ammo_762x54_Tracer", "Ammo_762x54_Tracer", "Ammo_762x54_Tracer", "Ammo_762x54_Tracer",
-				"PainKillerTablets", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka", 
+				"HH_Mag_PKM_250Rnd", "HH_Mag_PKM_250Rnd",
+				"Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer",
+				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
 				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
-				"Battery9V", "Battery9V"
+				"PainKillerTablets", "Battery9V", "Battery9V", "Vodka",
+				"RGD5Grenade", "M67Grenade"
 			});
 
 
@@ -123,7 +124,8 @@ class SetupPlayerOptions
 				"Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP",
 				"PainKillerTablets", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka", 
 				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
-				"Battery9V", "Battery9V"
+				"Battery9V", "Battery9V",
+				"RGD5Grenade", "M67Grenade"
 			});
 
 
@@ -154,10 +156,11 @@ class SetupPlayerOptions
 			// Содержимое карманов
 			{
 				"HH_Mag_PKM_250Rnd", "HH_Mag_PKM_250Rnd", "HH_Mag_PKP_100Rnd",
-				"Ammo_762x54_Tracer", "Ammo_762x54_Tracer", "Ammo_762x54_Tracer", "Ammo_762x54_Tracer",
-				"PainKillerTablets", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka", 
+				"Vodka", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
+				"Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer",  "Ammo_762x54Tracer",  "Ammo_762x54Tracer",
 				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
-				"Battery9V", "Battery9V"
+				"Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer",  "Ammo_762x54Tracer",  "Ammo_762x54Tracer",
+				"Battery9V", "Battery9V", "PainKillerTablets",
 			});
 
 

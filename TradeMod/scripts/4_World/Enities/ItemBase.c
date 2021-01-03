@@ -15,9 +15,9 @@ modded class ItemBase
 
 		if (GetGame().IsServer()) {
 			if ((old_owner == null) && (new_owner == null)) {
-				GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.removeItem, 1000, false, this);
+				GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.removeItem, 15000, false, this);
 			} else if (new_owner == null) {
-				GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.removeItem, 10000, false, this);
+				GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.removeItem, 20000, false, this);
 			}
 		}
 	}
