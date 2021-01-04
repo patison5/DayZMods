@@ -84,7 +84,15 @@ modded class MissionServer extends MissionBase
 
 		player.RemoveAllItems();
 
-		JsonFileLoader<ref SetupPlayerOptions>.JsonLoadFile(S_ROOTFOLDER + "SetupPlayerOptions.json", SPOptions );
+		// check file existance and get setup options
+		if (!FileExist(S_ROOTFOLDER + "SetupPlayerOptions.json")) {
+			SPOptions = new SetupPlayerOptions();
+			SPOptions.InitPlayerSetups();
+			JsonFileLoader<ref SetupPlayerOptions>.JsonSaveFile(S_ROOTFOLDER + "SetupPlayerOptions.json",  SPOptions);	
+		} else {
+			JsonFileLoader<ref SetupPlayerOptions>.JsonLoadFile(S_ROOTFOLDER + "SetupPlayerOptions.json", SPOptions );	
+		}		
+
 		PlayerSet playerSet = SPOptions.PlayerSetups.GetRandomElement();
 
 		// создание шлема и его обвесов
@@ -116,69 +124,88 @@ modded class MissionServer extends MissionBase
 			}
 		}
 
-		// ReloadWeapon( EntityAI weapon, EntityAI magazine )
-		// player.QuickReloadWeapon(weapon);
-
-
-
-
-		// if (!m_Developer)
-		// 	m_Developer = PluginDeveloper.Cast( GetPlugin(PluginDeveloper) );
-
 		// создание оружия и его обвесов
 		weapon = player.GetHumanInventory().CreateInHands(playerSet.Weapon);
-
-		SpawnEntityInInventory(player, playerSet.MagType, -1, 1);
+		SpawnEntityInInventory(player, weapon, playerSet.MagType, -1, 1);
 
 		for (int z = 0; z < playerSet.WeaponAttachments.Count(); z++) {
-			weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[z]);
+			itemEnt = weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[z]);
+
+			switch (playerSet.WeaponAttachments2[q]) {
+				case "KobraOptic":
+				case "M680Optic":
+				case "M4_T3NRDSOptic":
+				case "HH_OKP7Optic":
+				case "FN45_MRDSOptic":
+					itemEnt.GetInventory().CreateAttachment("Battery9V");
+					break;
+			}
 		}
 		player.SetQuickBarEntityShortcut(weapon, 0);
+
+		if (playerSet.Weapon2 != "") {
+			// создание оружия и его обвесов
+			weapon = player.GetHumanInventory().CreateInInventory(playerSet.Weapon2);
+
+			SpawnEntityInInventory(player, weapon, playerSet.MagType2, -1, 1);
+
+			for (int q = 0; q < playerSet.WeaponAttachments2.Count(); q++) {
+				itemEnt = weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments2[q]);
+
+				switch (playerSet.WeaponAttachments2[q]) {
+					case "KobraOptic":
+					case "M680Optic":
+					case "M4_T3NRDSOptic":
+					case "HH_OKP7Optic":
+					case "FN45_MRDSOptic":
+						itemEnt.GetInventory().CreateAttachment("Battery9V");
+						break;
+				}
+			}
+
+			player.SetQuickBarEntityShortcut(weapon, 1);
+		}
 	}
 
 
 
-	SpawnEntityInInventory (PlayerBase player, string item_name, float health, float quantity)
+	void SpawnEntityInInventory (PlayerBase player, EntityAI wpEAI, string item_name, float health, float quantity)
 	{
 		if( player )
 		{
 			if ( GetGame().IsServer() )
-
-			// полураб
-			// {
-			// 	EntityAI itemInHands = player.GetHumanInventory().GetEntityInHands();
-
-			// 	InventoryLocation il = new InventoryLocation;
-			// 	itemInHands.GetInventory().GetCurrentInventoryLocation(il);
-
-			// 	vector pos = player.GetPosition();
-			// 	EntityAI eai_gnd = spwnEntityGrn(player, item_name, health, quantity, pos);
-			// 	Magazine mag_gnd = Magazine.Cast(eai_gnd);
-			// 	Weapon_Base wpn = Weapon_Base.Cast(itemInHands);
-
-			// 	Print("пытаюсь добавить магазин в оружие");
-
-			// 	if (mag_gnd && player.GetWeaponManager().CanAttachMagazine(wpn, mag_gnd))
-			// 	{
-			// 		player.GetWeaponManager().AttachMagazine(mag_gnd);
-			// 		Print("Вроде как добавил магазин в оружие");
-			// 	}
-
-			// 	return eai_gnd;
-			// }
-
 			{
 				if ( item_name == "" ) return;
 
 				string magazine_type = item_name;
 
-				EntityAI itemInHands = player.GetHumanInventory().GetEntityInHands();
+				EntityAI weaponEAI = wpEAI;
+				Weapon_Base wpn;
+				InventoryLocation il = new InventoryLocation;;
+				EntityAI mag;
 
-				InventoryLocation il = new InventoryLocation;
-				itemInHands.GetInventory().GetCurrentInventoryLocation(il);
+				// if (inHands) {
+					// weaponEAI = player.GetHumanInventory().GetEntityInHands();
+					// il = 
+					
+				weaponEAI.GetInventory().GetCurrentInventoryLocation(il);
+				wpn = Weapon_Base.Cast(weaponEAI);
 
-				Weapon_Base wpn = Weapon_Base.Cast(itemInHands);
+				il.SetAttachment( wpn, NULL, InventorySlots.MAGAZINE );
+				mag = SpawnEntity( magazine_type, il, ECE_IN_INVENTORY, RF_DEFAULT );
 
+				// } else {
+				// 	il = new InventoryLocation;
+				// 	wpn = Weapon_Base.Cast(GetGame().CreateObject( sWeapon , "0 0 0" ));
+
+				// 	il.SetAttachment( wpn, NULL, InventorySlots.MAGAZINE );
+				// 	mag = SpawnEntity( magazine_type, il, ECE_IN_INVENTORY, RF_DEFAULT );
+
+				// 	player.GetInventory().AddEntityToInventory(wpn);
+				// }
+
+
+				
 
 				int stateId = -1;
 
@@ -192,9 +219,8 @@ modded class MissionServer extends MissionBase
 				else if ( wpn.IsInherited( RifleBoltFree_Base ) )					stateId = RBFStableStateID.RBF_CLO_BU0_MA1;
 				else if ( wpn.IsInherited( RifleBoltLock_Base ) )					stateId = RBLStableStateID.RBL_OPN_BU0_MA1;
 
-				il.SetAttachment( wpn, NULL, InventorySlots.MAGAZINE );
+				if ( !mag ) return;
 
-				EntityAI mag = SpawnEntity( magazine_type, il, ECE_IN_INVENTORY, RF_DEFAULT );
 				GetGame().RemoteObjectDelete( mag );
 				GetGame().RemoteObjectDelete( wpn );
 
@@ -209,37 +235,6 @@ modded class MissionServer extends MissionBase
 			}
 		}
 	}
-
-	// EntityAI spwnEntityGrn (PlayerBase player, string item_name, float health, float quantity, vector pos)
-	// {
-	// 	if ( GetGame().IsServer() )
-	// 	{		
-	// 		EntityAI entity = player.SpawnEntityOnGroundPos(item_name, pos);
-	// 		if (entity) {
-	// 			health = entity.GetMaxHealth();
-	// 			SetupSpawnedEntity(entity, health, quantity);
-	// 		}
-
-	// 		return entity;
-	// 	}
-
-	// 	return NULL;
-	// }
-
-	// void SetupSpawnedEntity (EntityAI entity, float health, float quantity, bool special = false)
-	// {
-
-	// 	if ( entity.IsInherited( PlayerBase ) ) 
-	// 	{
-	// 		PlayerBase plr = PlayerBase.Cast( entity );
-	// 		plr.OnSpawnedFromConsole();
-	// 	}
-	// 	else if ( entity.IsInherited(ItemBase) )
-	// 	{
-	// 		ItemBase item = ItemBase.Cast( entity );
-	// 		SetupSpawnedItem(item, health, quantity);
-	// 	}
-	// }
 
 	override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)
 	{	
