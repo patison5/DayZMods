@@ -82,6 +82,8 @@ modded class MissionServer extends MissionBase
 		ItemBase itemBs;
 		float rand;
 
+		// IngameHud hud = GetHud();
+
 		player.RemoveAllItems();
 
 		// check file existance and get setup options
@@ -97,19 +99,17 @@ modded class MissionServer extends MissionBase
 
 		// создание шлема и его обвесов
 		helmet = player.GetInventory().CreateInInventory(playerSet.Helmet);
-		for (int j = 0; j < playerSet.HelmetAttachments.Count(); j++) {
+		for (int j = 0; j < playerSet.HelmetAttachments.Count(); j++)
 			helmet.GetInventory().CreateAttachment(playerSet.HelmetAttachments[j]);
-		}
 
+		// оздание броника и его обвесов
 		vest = player.GetInventory().CreateInInventory(playerSet.Vest);
-		for (int m = 0; m < playerSet.VestAttachments.Count(); m++) {
+		for (int m = 0; m < playerSet.VestAttachments.Count(); m++)
 			vest.GetInventory().CreateAttachment(playerSet.VestAttachments[m]);
-		}
 
-			// создание одежды
-		for (int i = 0; i < playerSet.Clothes.Count(); i++) {
+		// создание одежды
+		for (int i = 0; i < playerSet.Clothes.Count(); i++)
 			player.GetInventory().CreateInInventory(playerSet.Clothes[i]);
-		}
 
 		itemClothing = player.FindAttachmentBySlotName( "Body" );
 
@@ -131,7 +131,7 @@ modded class MissionServer extends MissionBase
 		for (int z = 0; z < playerSet.WeaponAttachments.Count(); z++) {
 			itemEnt = weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[z]);
 
-			switch (playerSet.WeaponAttachments2[q]) {
+			switch (playerSet.WeaponAttachments[z]) {
 				case "KobraOptic":
 				case "M680Optic":
 				case "M4_T3NRDSOptic":
@@ -143,10 +143,18 @@ modded class MissionServer extends MissionBase
 		}
 		player.SetQuickBarEntityShortcut(weapon, 0);
 
+		// player.GetDayZPlayerInventory().PostWeaponEvent( new WeaponEventAttachMagazine(player) );
+
+		// EntityAI cloned = CloneItem(weapon, false);
+		// if (cloned) Print("WHAT THE FUCK : Cloned");
+		// else Print("WHAT THE FUCK : some problems clonning");
+
+		// if (cloned) player.PredictiveTakeEntityToInventory( FindInventoryLocationType.ANY, InventoryItem.Cast( cloned ) );
+		// if (cloned) player.GetInventory().AddEntityToInventory(cloned);
+
 		if (playerSet.Weapon2 != "") {
 			// создание оружия и его обвесов
 			weapon = player.GetHumanInventory().CreateInInventory(playerSet.Weapon2);
-
 			SpawnEntityInInventory(player, weapon, playerSet.MagType2, -1, 1);
 
 			for (int q = 0; q < playerSet.WeaponAttachments2.Count(); q++) {
@@ -165,6 +173,8 @@ modded class MissionServer extends MissionBase
 
 			player.SetQuickBarEntityShortcut(weapon, 1);
 		}
+
+		sendMessageToCurrentPlayer(player, "НЕ ЗАБУДЬ ПОДАТЬ ПАТРОН В ПАТРОННИК, СУКА!");
 	}
 
 
@@ -204,9 +214,6 @@ modded class MissionServer extends MissionBase
 				// 	player.GetInventory().AddEntityToInventory(wpn);
 				// }
 
-
-				
-
 				int stateId = -1;
 
 				if 		( wpn.IsInherited( SKS_Base ) ) 							return;
@@ -221,10 +228,10 @@ modded class MissionServer extends MissionBase
 
 				if ( !mag ) return;
 
-				GetGame().RemoteObjectDelete( mag );
-				GetGame().RemoteObjectDelete( wpn );
+				// GetGame().RemoteObjectDelete( mag );
+				// GetGame().RemoteObjectDelete( wpn ); 
 
-				pushToChamberFromAttachedMagazine( wpn, wpn.GetCurrentMuzzle() );
+				// pushToChamberFromAttachedMagazine( wpn, wpn.GetCurrentMuzzle() );
 
 				ScriptReadWriteContext ctx = new ScriptReadWriteContext;
 				ctx.GetWriteContext().Write( stateId );
@@ -236,6 +243,69 @@ modded class MissionServer extends MissionBase
 		}
 	}
 
+	EntityAI CloneItem(EntityAI src, bool recursively = false, InventoryLocation location = null)
+    {
+        int idx;
+ 
+        EntityAI dst = null;
+        Print("CLONED : " + location.GetType());
+        Print(location);
+        Print(src.GetType());
+
+        // switch (location.GetType())
+        // {
+        //     case InventoryLocationType.GROUND:
+        //         dst = GameInventory.LocationCreateEntity(location, src.GetType(), ECE_PLACE_ON_SURFACE, RF_DEFAULT);
+        //         break;
+        //     case InventoryLocationType.ATTACHMENT:
+        //         dst = GameInventory.LocationCreateEntity(location, src.GetType(), ECE_IN_INVENTORY, RF_DEFAULT);
+        //         break;
+        //     case InventoryLocationType.CARGO:
+        //         dst = GameInventory.LocationCreateEntity(location, src.GetType(), ECE_IN_INVENTORY, RF_DEFAULT);
+        //         break;
+        //     case InventoryLocationType.HANDS:
+        //         dst = GameInventory.LocationCreateEntity(location, src.GetType(), ECE_IN_INVENTORY, RF_DEFAULT);
+        //         break;
+        //     case InventoryLocationType.PROXYCARGO:
+        //         dst = GameInventory.LocationCreateEntity(location, src.GetType(), ECE_IN_INVENTORY, RF_DEFAULT);
+        //         break;
+        // }
+
+        if (!location) Print("no location");
+
+        dst = GameInventory.LocationCreateEntity(location, src.GetType(), ECE_IN_INVENTORY, RF_DEFAULT);
+
+ 		Print("CLONED : " + location.GetType());
+        ScriptReadWriteContext ctx = new ScriptReadWriteContext;
+        src.OnStoreSave(ctx.GetWriteContext());
+        dst.OnStoreLoad(ctx.GetReadContext(), int.MAX);
+ 
+        if (recursively)
+        {
+            EntityAI cSrc = null;
+            InventoryLocation cLocation = null;
+            for (idx = 0; idx < src.GetInventory().AttachmentCount(); idx++)
+            {
+                cSrc = src.GetInventory().GetAttachmentFromIndex(idx);
+                src.GetInventory().GetCurrentInventoryLocation(cLocation);
+                cLocation.SetParent(dst);
+                CloneItem(cSrc, recursively, cLocation);
+            }
+            for (idx = 0; idx < src.GetInventory().GetCargo().GetItemCount(); idx++)
+            {
+                cSrc = src.GetInventory().GetCargo().GetItem(idx);
+                src.GetInventory().GetCurrentInventoryLocation(cLocation);
+                cLocation.SetParent(dst);
+                CloneItem(cSrc, recursively, cLocation);
+            }
+        }
+ 
+        dst.AfterStoreLoad();
+        dst.EEOnAfterLoad();
+ 
+        return dst;
+    };
+
 	override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)
 	{	
 		Print("InvokeOnConnect:" + this.ToString());
@@ -246,7 +316,7 @@ modded class MissionServer extends MissionBase
 			ref PlayerStatisticInfo _plData;
 			string steamId = player.GetIdentity().GetPlainId();
 
-			SendMessage(player.GetIdentity().GetName() + " присоединился на сервер!")
+			SendMessageToAll(player.GetIdentity().GetName() + " присоединился на сервер!")
 
 			if (FileExist(S_PLAYERS) && FileExist(S_PLAYERS + steamId + ".json")) {
 				JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_PLAYERS + steamId + ".json", _plData);
@@ -268,7 +338,7 @@ modded class MissionServer extends MissionBase
 	}
 
 
-	void SendMessage(string message)
+	void SendMessageToAll(string message)
     {
         if (GetGame().IsServer())
         {
@@ -281,4 +351,13 @@ modded class MissionServer extends MissionBase
             }
         }
     }
+
+    void sendMessageToCurrentPlayer (PlayerBase player, string message) {
+    	Param1<string> m_MessageParam = new Param1<string>(TOP_PREFIX + message);
+	    GetGame().RPCSingleParam(player, ERPCs.RPC_USER_ACTION_MESSAGE, m_MessageParam, true, player.GetIdentity());
+    }
+
+    // ref array<ref CorpseData> getDeadPlayers () {
+    // 	return m_DeadPlayersArray;
+    // }
 }

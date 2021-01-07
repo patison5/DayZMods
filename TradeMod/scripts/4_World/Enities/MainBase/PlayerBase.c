@@ -13,11 +13,17 @@ modded class PlayerBase
 		super.Init();
 	}
 
-    override void OnPlayerLoaded()
-	{
-		super.OnPlayerLoaded();			
-		// GetHumanInventory().CreateInInventory("RGD5Grenade");
-	}
+ //    override void OnPlayerLoaded()
+	// {
+	// 	super.OnPlayerLoaded();
+		
+	// 	// Weapon_Base wpn = Weapon_Base.Cast(GetItemInHands());
+	// 	// int mi = wpn.GetCurrentMuzzle();
+	// 	// Magazine mag = wpn.GetMagazine(mi);
+	// 	// GetWeaponManager().LoadBullet( mag );
+	// 	// GetWeaponManager().RefreshAnimationState();
+	// }
+
 
 	void SendMessage(string message)
     {
@@ -33,14 +39,14 @@ modded class PlayerBase
         }
     }
 
-
     override void OnJumpStart () {
     	super.OnJumpStart();
-
+    	Print("Jump");
+		Print(GetInstanceType().ToString());
 
     	JsonFileLoader<ref array <string>>.JsonLoadFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
     	spawnPoings.Insert(this.GetPosition().ToString());
-    	JsonFileLoader<ref array <string>>.JsonSaveFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
+    	//JsonFileLoader<ref array <string>>.JsonSaveFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
 
     	string message = "Привет, " + GetAnnouncePlayerPrefix(this.GetIdentity()) + " (" + this.GetIdentity().GetPlainId() + ")";
 

@@ -6,8 +6,8 @@ class HHDeadMatchPlugin extends PluginBase
     private ref Timer                   showDelayTimeout;
 
     bool isEnded = false;
-    private int timeOut = 15;
-    private int roundTime = 1520;
+    private int timeOut = 30;
+    private int roundTime = 3000;
 
     private int timeOutCounter = timeOut;
 
@@ -136,6 +136,13 @@ class HHDeadMatchPlugin extends PluginBase
 
     void showPlayerEndedGUI () {
 
+
+        Print("Хочу показать экран смерти ебаны рот");
+
+        // ref array<ref CorpseData> ppp = GetGame().GetMission().getDeadPlayers();
+
+        // m_DeadPlayersArray
+
         // UIHudTop myHudTop = UIHudTop.Cast(GetGame().GetUIManager().FindMenu(UI_TOP_LAYOUT));
         // // myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
         // if (myHudTop) {
@@ -154,7 +161,11 @@ class HHDeadMatchPlugin extends PluginBase
     	GetGame().GetPlayers( players );
     	foreach( auto player : players  )
         {
+            Print("Дебажим!!!! идем по игрокам");
+
             if (player.GetIdentity()) {
+
+                Print("дебажим" + player.GetIdentity());
 				// auto param4 = new Param1<string>("PIDOR");
                 auto param4 = new Param1<ref array<ref PlayerStatisticInfo>>(_players);
                 if (_players) Print(TOP_PREFIX + _players.Count() + "шт");
@@ -213,7 +224,7 @@ class HHDeadMatchPlugin extends PluginBase
 	    	showDelayTimeout = new ref Timer();
 			showDelayTimeout.Run(1, this, "changeTimer", NULL, false);
 		} else {
-			timeOutCounter = 15;
+			timeOutCounter = timeOut;
 		}
     }
 

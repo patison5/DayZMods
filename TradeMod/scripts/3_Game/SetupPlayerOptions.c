@@ -26,7 +26,7 @@ class SetupPlayerOptions
 
 			// Броник и обвесы
 			"HH_PlateCarrierVest_black",
-			{"HH_PlateCarrierHolster_black", "HH_PlateCarrierPounches_black"},
+			{"HH_PlateCarrierHolster_back", "HH_PlateCarrierPouches_black"},
 
 			// Содержимое карманов
 			{
@@ -58,7 +58,7 @@ class SetupPlayerOptions
 
 			// Броник и обвесы
 			"HH_PlateCarrierVest_black",
-			{"HH_PlateCarrierHolster_black", "HH_PlateCarrierPounches_black"},
+			{"HH_PlateCarrierHolster_back", "HH_PlateCarrierPouches_black"},
 
 			// Содержимое карманов
 			{
@@ -90,7 +90,7 @@ class SetupPlayerOptions
 
 			// Броник и обвесы
 			"HH_PlateCarrierVest_black",
-			{"HH_PlateCarrierHolster_black", "HH_PlateCarrierPounches_black"},
+			{"HH_PlateCarrierHolster_back", "HH_PlateCarrierPouches_black"},
 
 			// Содержимое карманов
 			{
@@ -112,9 +112,9 @@ class SetupPlayerOptions
 			{"HH_LongRangeOptics_x24_Black"},
 
 			// второе оружие, тип магазина и обвесы
-			"HH_DVL10",
-			"HH_Mag_DVL10_10Rnd",
-			{"HH_LongRangeOptics_x24_Black"},
+			"",
+			"",
+			{""},
 
 
 			// Шлем и обвесы
@@ -228,12 +228,12 @@ class SetupPlayerOptions
 			// оружие, тип магазина и обвесы
 			"HH_ASVAL",
 			"HH_Mag_ASVAL_VSS_30Rnd_Spar",
-			{"HH_OKP7Optic"},
+			{"KobraOptic"},
 
 			// Второе оружие, тип магазина и обвесы
-			"HH_ASVAL",
-			"HH_Mag_ASVAL_VSS_30Rnd_Spar",
-			{"HH_OKP7Optic"},
+			"",
+			"",
+			{""},
 
 			// Шлем и обвесы
 			"HH_K63_Helmet_Green", 
@@ -261,12 +261,12 @@ class SetupPlayerOptions
 			// оружие, тип магазина и обвесы
 			"HH_PKP",
 			"HH_Mag_PKM_250Rnd",
-			{"HH_OKP7Optic"},
+			{"KobraOptic"},
 
 			// Второе оружие, тип магазина и обвесы
-			"HH_PKP",
-			"HH_Mag_PKM_250Rnd",
-			{"HH_OKP7Optic"},
+			"",
+			"",
+			{""},
 
 			// Шлем и обвесы
 			"HH_Maska1sch_Green", 
@@ -352,8 +352,8 @@ class SetupPlayerOptions
 			// Броник и обвесы
 			"HH_PlateCarrierVest_black",
 			{
-				"HH_PlateCarrierHolster_black",
-                "HH_PlateCarrierPounches_black"
+				"HH_PlateCarrierHolster_back",
+                "HH_PlateCarrierPouches_black"
 			},
 
 			// Содержимое карманов
@@ -393,8 +393,8 @@ class SetupPlayerOptions
 			// Броник и обвесы
 			"HH_PlateCarrierVest_black",
 			{
-				"HH_PlateCarrierHolster_black",
-                "HH_PlateCarrierPounches_black"
+				"HH_PlateCarrierHolster_back",
+                "HH_PlateCarrierPouches_black"
 			},
 
 			// Содержимое карманов
@@ -428,8 +428,8 @@ class SetupPlayerOptions
 			// Броник и обвесы
 			"HH_PlateCarrierVest_black",
 			{
-				"HH_PlateCarrierHolster_black",
-                "HH_PlateCarrierPounches_black"
+				"HH_PlateCarrierHolster_back",
+                "HH_PlateCarrierPouches_black"
 			},
 
 			// Содержимое карманов
@@ -463,8 +463,8 @@ class SetupPlayerOptions
 			// Броник и обвесы
 			"HH_PlateCarrierVest_black",
 			{
-				"HH_PlateCarrierHolster_black",
-                "HH_PlateCarrierPounches_black"
+				"HH_PlateCarrierHolster_back",
+                "HH_PlateCarrierPouches_black"
 			},
 
 			// Содержимое карманов
@@ -554,7 +554,7 @@ class SetupPlayerOptions
 			// Содержимое карманов
 			{
 				"HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd",
-				"Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP",  "Ammo_9x39AP",  "Ammo_9x39AP",
+				"Ammo_556x45", "Ammo_556x45", "Ammo_556x45", "Ammo_556x45",  "Ammo_556x45",  "Ammo_556x45",
 				"HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd"
 				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
 				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HuntingOptic",

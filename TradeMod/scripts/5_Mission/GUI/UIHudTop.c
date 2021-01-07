@@ -4,6 +4,8 @@ class UIHudTop extends UIScriptedMenu
     TextWidget                          mainTitle, subTitle, timerWidget, tableTitle, notifMessage;
 
     ButtonWidget                        btnMap1, btnMap2, btnMap3, selectedBtn;
+
+    RichTextWidget                      mapTitle1, mapTitle2, mapTitle3;
     
     ref WrapSpacerWidget                parent;
     ref array<Widget>                   m_SectionEntries = new array<Widget>;
@@ -30,6 +32,10 @@ class UIHudTop extends UIScriptedMenu
             subTitle       = TextWidget.Cast( layoutRoot.FindAnyWidget(  "title2" ) );
             timerWidget    = TextWidget.Cast( layoutRoot.FindAnyWidget(  "timer"  ) );
             tableTitle     = TextWidget.Cast( layoutRoot.FindAnyWidget(  "pname"  ) );
+
+            mapTitle1     = TextWidget.Cast( layoutRoot.FindAnyWidget(  "map4title"  ) );
+            mapTitle2     = TextWidget.Cast( layoutRoot.FindAnyWidget(  "map2title"  ) );
+            mapTitle3     = TextWidget.Cast( layoutRoot.FindAnyWidget(  "map1title"  ) );
 
             parent = WrapSpacerWidget.Cast( layoutRoot.FindAnyWidget("TopContainer") );
 
@@ -81,6 +87,10 @@ class UIHudTop extends UIScriptedMenu
         timerWidget.SetText("15");
         tableTitle.SetText("Ник игрока");
 
+        mapTitle1.SetText("Северо-западный аэропорт");
+        mapTitle2.SetText("Выбор");
+        mapTitle3.SetText("Зелено");
+
         createTopElements();
     }
 
@@ -89,8 +99,8 @@ class UIHudTop extends UIScriptedMenu
         UnlockControlsModded();
     }
 
-    void showMainScreen (ref array<ref PlayerStatisticInfo> _players) {
-        updateTopElements(_players);
+    void showMainScreen () {
+
         layoutRoot.Show(true);
         LockControlsModded();
     }
@@ -183,6 +193,7 @@ class UIHudTop extends UIScriptedMenu
 
 
     void ClientRPCHandler(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 
         if (GetGame().IsServer() && GetGame().IsMultiplayer()) {
             delete this;
@@ -193,7 +204,21 @@ class UIHudTop extends UIScriptedMenu
             case HHRPCEnum.RPC_CLIENT_SHOW_END_SCREEN: { 
                 Param1<ref array<ref PlayerStatisticInfo>> args;
                 if (!ctx.Read(args)) return;
-                showMainScreen(args.param1);
+
+                if (!player)
+                    player = PlayerBase.Cast(GetGame().GetPlayer());
+
+                if (player.IsAlive()) {
+                    Print("player is alive");
+                } else {
+                    Print("Player is not alive");
+                }
+
+                // DeadScreen ShowDeadScreen player.ShowDeadScreen
+
+                player.CloseInventoryMenu();
+                updateTopElements(args.param1);
+                showMainScreen();
 
                 break;
             }
@@ -211,12 +236,17 @@ class UIHudTop extends UIScriptedMenu
                 if (!ctx.Read(args3)) return;
 
                 timerWidget.SetText(args3.param1);
+
+
+                showMainScreen();
+
                 break;
             }
 
             case HHRPCEnum.RPC_SHOW_ADMIN_FUN_MESSAGE: { 
 
-                PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+                if (!player)
+                    player = PlayerBase.Cast(GetGame().GetPlayer());
 
                 Param1<string> args4;
                 if (!ctx.Read(args4)) return;
