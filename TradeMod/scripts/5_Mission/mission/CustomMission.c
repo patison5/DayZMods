@@ -27,6 +27,11 @@ class CustomMission: MissionServer
 		
 		GetGame().SelectPlayer(identity, m_player);
 
+		m_player.SetHealth("","Health", 100);
+		m_player.SetHealth("","Blood", 5000);
+		m_player.GetStatEnergy().Add(m_player.GetStatEnergy().GetMax());
+		m_player.GetStatWater().Add(m_player.GetStatWater().GetMax());
+
 		return m_player;
 	}
 };

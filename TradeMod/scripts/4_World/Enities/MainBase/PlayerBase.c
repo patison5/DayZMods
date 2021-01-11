@@ -13,16 +13,18 @@ modded class PlayerBase
 		super.Init();
 	}
 
- //    override void OnPlayerLoaded()
-	// {
-	// 	super.OnPlayerLoaded();
-		
-	// 	// Weapon_Base wpn = Weapon_Base.Cast(GetItemInHands());
-	// 	// int mi = wpn.GetCurrentMuzzle();
-	// 	// Magazine mag = wpn.GetMagazine(mi);
-	// 	// GetWeaponManager().LoadBullet( mag );
-	// 	// GetWeaponManager().RefreshAnimationState();
-	// }
+    override void OnPlayerLoaded()
+	{
+		super.OnPlayerLoaded();
+		//зачатки вызова анимации при создании магазина
+		// Weapon_Base wpn = Weapon_Base.Cast(GetItemInHands());
+		// int mi = wpn.GetCurrentMuzzle();
+		// Magazine mag = wpn.GetMagazine(mi);
+		// GetWeaponManager().LoadBullet( mag );
+		// GetWeaponManager().RefreshAnimationState();
+
+		this.QuickReloadWeapon(this.GetHumanInventory().GetEntityInHands());
+	}
 
 
 	void SendMessage(string message)
@@ -41,7 +43,6 @@ modded class PlayerBase
 
     override void OnJumpStart () {
     	super.OnJumpStart();
-    	Print("Jump");
 		Print(GetInstanceType().ToString());
 
     	JsonFileLoader<ref array <string>>.JsonLoadFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);

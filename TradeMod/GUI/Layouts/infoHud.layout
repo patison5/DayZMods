@@ -1,0 +1,185 @@
+FrameWidgetClass hh_DMHud {
+ clipchildren 0
+ position 0 0
+ size 0.9 0.9
+ halign center_ref
+ valign center_ref
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass hh_panel {
+   visible 1
+   clipchildren 0
+   inheritalpha 0
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   {
+    FrameWidgetClass NotifiersPanel {
+     visible 1
+     clipchildren 1
+     position 0 0
+     size 260 81
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     fixaspect fixwidth
+     priority 100
+     {
+      PanelWidgetClass killstrike {
+       clipchildren 0
+       inheritalpha 0
+       position 96 0
+       size 39 81
+       halign right_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       fixaspect fixwidth
+       style blank
+       {
+        TextWidgetClass killstrikeText {
+         ignorepointer 1
+         position 0 27
+         size 22 17
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "11"
+         "text halign" center
+         "text valign" center
+        }
+        ImageWidgetClass ImageWidget0 {
+         ignorepointer 1
+         color 0.8627 0.8627 0.8627 1
+         size 46 30
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         scaled 0
+         draggable 0
+         imageTexture "{B357675F1C3A3E75}MyMods/TradeMod/GUI/images/killstrike.edds"
+         mode blend
+         "src alpha" 1
+         "no wrap" 0
+        }
+       }
+      }
+      PanelWidgetClass death {
+       clipchildren 1
+       inheritalpha 0
+       position 145 0
+       size 35 81
+       halign right_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       fixaspect fixwidth
+       style blank
+       {
+        TextWidgetClass deathText {
+         ignorepointer 1
+         position 0 27
+         size 22 17
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "32"
+         "text halign" center
+         "text valign" center
+        }
+        ImageWidgetClass ImageWidget1 {
+         ignorepointer 1
+         color 0.8627 0.8627 0.8627 1
+         size 31 31
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         scaled 0
+         imageTexture "{DB34A7F5CF558102}MyMods/TradeMod/GUI/images/deaths.edds"
+         mode blend
+         "src alpha" 1
+         "no wrap" 0
+        }
+       }
+      }
+      PanelWidgetClass kills {
+       clipchildren 1
+       inheritalpha 0
+       position 182 0
+       size 35 81
+       halign right_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       fixaspect fixwidth
+       style blank
+       {
+        TextWidgetClass killsText {
+         ignorepointer 1
+         position 0 27
+         size 22 17
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Normal
+         text "12"
+         font "gui/fonts/etelkatextpro16"
+         "text color" 0.8627 0.8627 0.8627 1
+         text_proportion 0.8
+         "text halign" center
+         "text valign" center
+        }
+        ImageWidgetClass ImageWidget2 {
+         ignorepointer 1
+         color 0.8627 0.8627 0.8627 1
+         size 26 32
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         scaled 0
+         imageTexture "{0F2BB3B42DB53B1B}MyMods/TradeMod/GUI/images/kils.edds"
+         mode blend
+         "src alpha" 1
+         "no wrap" 0
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

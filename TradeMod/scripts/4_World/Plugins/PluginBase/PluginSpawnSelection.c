@@ -2,9 +2,11 @@ class PluginSpawnSelection extends PluginBase
 {
 	ref map<string, ref array<vector>> spawnDots = new map<string, ref array<vector>>();
 
-	private ref map<string, int> mapVotes = new map<string, int>();
+	ref map<string, ref array<string>> spawnVotingData = new map<string, ref array<string>>();
 	
 	void PluginSpawnSelection () {		
+
+		Print("создаю PluginSpawnSelection");
 
 		array<vector> places1 = new array<vector>();
 		places1.Insert(Vector(2516.596680, 193.394867, 5140.407715));
@@ -47,6 +49,10 @@ class PluginSpawnSelection extends PluginBase
 
 		JsonFileLoader<ref map<string, ref array<vector>>>.JsonSaveFile(S_ROOTFOLDER + "spawnDots.json",  spawnDots);			
 
+
+		spawnVotingData["Zeleno"] = new array<string>();
+		spawnVotingData["vybor"]  = new array<string>();
+		spawnVotingData["csAero"] = new array<string>();
 
 		if (GetGame().IsServer()) {
 			GetDayZGame().Event_OnRPC.Insert(ServerRPCHandler);
@@ -97,9 +103,9 @@ class PluginSpawnSelection extends PluginBase
 
 
 	void resetMapVotes () {
-		mapVotes["Zeleno"] 	= 0;
-		mapVotes["vybor"] 	= 0;
-		mapVotes["csAero"] 	= 0;
+		spawnVotingData["Zeleno"].Clear();
+		spawnVotingData["vybor"].Clear();
+		spawnVotingData["csAero"].Clear();
 	}
 
 	void selectCurrentMap() {
@@ -108,14 +114,16 @@ class PluginSpawnSelection extends PluginBase
 		string currentMap = "";
 		int max = -1;
 
-		foreach(string key, int el: mapVotes) {
-			Print("mapa[" + key + "] = " + el);
+		foreach(string key, ref array<string> votes: spawnVotingData) {
+			Print("mapa[" + key + "] = " + votes.Count());
 
-			if (max < el) {
+			if (max < votes.Count()) {
 				currentMap = key;
-				max = el;
+				max = votes.Count();
 			}
 		}
+
+
 
 		if (currentMap != "")
 			spawnLocation = currentMap;
@@ -125,7 +133,49 @@ class PluginSpawnSelection extends PluginBase
 		resetMapVotes();
 	}
 
+	void updateVoteData (string selectedMap, string steamid) {
+		// Print("ОБНОВЛЯЕМ ДАТУ ГОЛОСОВАНИЯ!");
+		// Print("steamid : " + steamid);
+		// Print("selectedMap : " + selectedMap);
+
+		foreach (string mapName, ref array<string> votes: spawnVotingData) {
+			// insert
+			if (mapName == selectedMap) {
+				votes.Insert(steamid);
+				continue;
+			}
+
+			// remove
+			for (int i = 0; i < votes.Count(); i++) {
+				if (steamid == votes[i])
+					votes.Remove(i);
+			}
+		}
+	}
+
+	ref map<string, int> getVoteData () {
+		// Print("Считаем кол-во голосов");
+
+		ref map<string, int> voteData = new map<string, int>();
+
+		voteData["Zeleno"] = 0;
+		voteData["vybor"] = 0;
+		voteData["csAero"] = 0;
+
+		foreach (string mapName, ref array<string> votes: spawnVotingData) {
+			// Print("[" + mapName + "] : " + votes.Count());
+			voteData[mapName] = votes.Count();
+		}
+
+		return voteData;
+	}
+
 	void ServerRPCHandler(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+
+		Param1<string> arg;
+        if (!ctx.Read(arg)) return;
+
+        string steamid = arg.param1;
 
         if (GetGame().IsClient()) {
             delete this;
@@ -134,21 +184,23 @@ class PluginSpawnSelection extends PluginBase
 
         switch (rpc_type) {
             case HHRPCEnum.RPC_SELECT_MAP_1: { 
-                mapVotes["Zeleno"] 	= mapVotes["Zeleno"] + 1;
+                updateVoteData("Zeleno", steamid);
                 break;            
             }
 
             case HHRPCEnum.RPC_SELECT_MAP_2: { 
-                mapVotes["vybor"] 	= mapVotes["vybor"] + 1;
+                updateVoteData("vybor", steamid);
                 break;            
             }
 
             case HHRPCEnum.RPC_SELECT_MAP_3: { 
-				mapVotes["csAero"] 	= mapVotes["csAero"] + 1;
+                updateVoteData("csAero", steamid);
                 break;            
             }
         }
     }
+
+
 
 
 }

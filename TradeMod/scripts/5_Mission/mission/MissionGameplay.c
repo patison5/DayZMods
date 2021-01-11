@@ -16,40 +16,23 @@ modded class MissionGameplay
 {
     private ref UIHudTop myHudTop;
 
-    // override void MissionGameplay () {
-    //     super.MissionGameplay();
 
-    //     Print("MissionGameplay конструктор был вызван");
-    // }
-
-    // override void ~MissionGameplay() {
-    //     super.~MissionGameplay();
-
-    //     Print("~MissionGameplay деструктор был вызван");
-    // }
-
+    Widget Thirsty;
+    Widget Hungry;
+    Widget Temperature;
 
     override void OnInit()
     {
         super.OnInit();
 
-        Print("MissionGameplay onInit был вызван!");
+        Thirsty = Widget.Cast(m_HudRootWidget.FindAnyWidget("Thirsty"));
+        Thirsty.Show(false);
 
+        Hungry = Widget.Cast(m_HudRootWidget.FindAnyWidget("Hungry"));
+        Hungry.Show(false);
 
-
-        // if (!myHudTop) {
-        //     myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
-
-        //     // if ((!myHudTop.IsMenuOpen()) && (GetGame().GetUIManager().GetMenu() == NULL)) {
-        //     //     //Show Menu
-        //     //     GetGame().GetUIManager().ShowScriptedMenu(myHudTop, NULL);
-        //     //     myHudTop.SetMenuOpen(false);
-        //     // }
-
-        //     // myHudTop.SetMenuOpen(true);
-        //     // GetGame().GetUIManager().HideScriptedMenu(myHudTop);
-        // }
-
+        Temperature = Widget.Cast(m_HudRootWidget.FindAnyWidget("Temperature"));
+        Temperature.Show(false);
     }
 
     override void OnMissionStart()

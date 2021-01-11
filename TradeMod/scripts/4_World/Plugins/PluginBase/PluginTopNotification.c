@@ -1,19 +1,15 @@
 class PluginTopNotification extends PluginBase
 {
 	Widget								layoutRoot;
-	TextWidget               			NickName, playerKills, playerDeath, rangeDistance;
+	TextWidget               			NickName, playerKills, playerDeath, killstrike;
 
 	void PluginTopNotification()
-	{			
-
-		Print("PluginTopNotification  был создан!");
-
+	{
 		layoutRoot = GetGame().GetWorkspace().CreateWidgets( "MyMods/TradeMod/GUI/Layouts/hud.layout" ); //Create custom widget / .layout
 
-		// NickName	   = TextWidget.Cast( layoutRoot.FindAnyWidget( "NickName" ) );
-       	playerKills	   = TextWidget.Cast( layoutRoot.FindAnyWidget( "kills_value" ) );
-       	playerDeath	   = TextWidget.Cast( layoutRoot.FindAnyWidget( "deaths_value" ) );
-       	rangeDistance  = TextWidget.Cast( layoutRoot.FindAnyWidget( "distance_value" ) );
+       	playerKills	   = TextWidget.Cast( layoutRoot.FindAnyWidget( "killsText" ) );
+       	playerDeath	   = TextWidget.Cast( layoutRoot.FindAnyWidget( "deathText" ) );
+       	killstrike     = TextWidget.Cast( layoutRoot.FindAnyWidget( "distance_value" ) );
 
       	this.setDefaults();
 
@@ -27,10 +23,9 @@ class PluginTopNotification extends PluginBase
 
 
 	void setDefaults() {
-		// NickName.SetText("");
 		playerKills.SetText("0");
         playerDeath.SetText("0");
-        rangeDistance.SetText("0");
+        killstrike.SetText("0");
 	}
 
 
@@ -50,11 +45,10 @@ class PluginTopNotification extends PluginBase
 				// NickName.SetText(args.param1);
 				playerKills.SetText(args.param2);
 		        playerDeath.SetText(args.param3);
-		        rangeDistance.SetText(args.param4 + "m");
+		        killstrike.SetText(args.param4);
 
 				break;
 			}
-
 		}
 	}
 

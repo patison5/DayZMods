@@ -347,6 +347,21 @@ FrameWidgetClass rootFrame {
          "no focus" 1
          switch normal
         }
+        TextWidgetClass map1Count {
+         ignorepointer 1
+         position 15 8
+         size 70 25
+         halign right_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "0"
+         text_proportion 0.8
+         "text halign" right
+         "text valign" center
+        }
        }
       }
       FrameWidgetClass map2 {
@@ -463,6 +478,21 @@ FrameWidgetClass rootFrame {
          "no focus" 1
          switch normal
         }
+        TextWidgetClass map2Count {
+         ignorepointer 1
+         position 15 8
+         size 70 25
+         halign right_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "0"
+         text_proportion 0.8
+         "text halign" right
+         "text valign" center
+        }
        }
       }
       FrameWidgetClass map3 {
@@ -577,6 +607,21 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          "no focus" 1
          switch normal
+        }
+        TextWidgetClass map3Count {
+         ignorepointer 1
+         position 15 8
+         size 70 25
+         halign right_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "0"
+         text_proportion 0.8
+         "text halign" right
+         "text valign" center
         }
        }
       }

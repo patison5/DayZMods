@@ -198,9 +198,9 @@ class SetupPlayerOptions
 			{"KobraOptic"},
 
 			// Второе оружие, тип магазина и обвесы
-			"HH_PKM",
-			"HH_Mag_PKM_250Rnd",
-			{"KobraOptic", "HH_PBS4_Suppressor"},
+			"",
+			"",
+			{},
 
 			// Шлем и обвесы
 			"HH_K63_Helmet_Green", 

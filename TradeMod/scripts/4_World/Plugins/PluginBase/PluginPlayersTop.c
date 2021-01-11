@@ -11,12 +11,7 @@ class PluginPlayersTop extends PluginBase
 	private float distance;
 
 	ref private PluginAdminNotification sindicatNotify;
-
-	void hello (string str)
-	{
-		Print("Hello from " + str);
-	}
-
+	
 	void PluginPlayersTop()
 	{
 		if (GetGame().IsMultiplayer())
@@ -27,14 +22,6 @@ class PluginPlayersTop extends PluginBase
 			sindicatNotify = new PluginAdminNotification();
 		}
 	}
-	
-	// void ~PluginPlayersTop()
-	// {
-	// 	if (GetGame().IsMultiplayer())
-	// 	{
-	// 		Print("~PluginPlayersTop Closed");
-	// 	}
-	// }
 
 	void readPlayerData (PlayerBase player) {
 		string steamId = player.GetIdentity().GetPlainId();
@@ -60,7 +47,7 @@ class PluginPlayersTop extends PluginBase
 		JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_PLAYERS + steamId + ".json", _plData);
 
 		if (player.GetIdentity()) {
-			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.maxRangeKill.ToString());
+			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.killstreak.ToString());
 			GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_TOP, param4, true, player.GetIdentity());
 		}
 		
@@ -95,6 +82,10 @@ class PluginPlayersTop extends PluginBase
             return str;
         }
     }
+
+    void checkKillstrike (PlayerBase player) {
+
+    }
 	
 
 
@@ -103,8 +94,8 @@ class PluginPlayersTop extends PluginBase
 	// ***************************************************************************************************
 	void PlayerKilled(PlayerBase player, Object source) {
 
-		victimPlayerPrefix = this.GetAnnouncePlayerPrefix(player.GetIdentity());		
-		killerPlayerPrefix = "";
+		if (!player || !source) return;
+		if (player == source)   return;
 
 		if (player.GetIdentity()) {
 			readPlayerData(player);
@@ -113,50 +104,37 @@ class PluginPlayersTop extends PluginBase
 			updatePlayerData(player); //IWASDEAD
 		}
 
-		if (player && source) {
-			if (player == source) {
-				// player killed himself
+		if (source.IsWeapon() || source.IsMeleeWeapon()) {
+			// player killed player
+			m_Source = PlayerBase.Cast(EntityAI.Cast(source).GetHierarchyParent());
 
-			} else if (source.IsWeapon() || source.IsMeleeWeapon()) {
-				// player killed player
+			if (m_Source) {
 
-				m_Source = PlayerBase.Cast(EntityAI.Cast(source).GetHierarchyParent());
+				readPlayerData(m_Source);
+				_plData.kills = _plData.kills + 1;
+				_plData.killstreak = _plData.killstreak + 1;
+				checkKillstrike(m_Source);
 
-				if (m_Source) {
-					killerPlayerPrefix = this.GetAnnouncePlayerPrefix(m_Source.GetIdentity());
-					// Print(TOP_PREFIX + killerPlayerPrefix + " является убийцей");
-
-					readPlayerData(m_Source);
-					_plData.kills = _plData.kills + 1;
-					_plData.killstreak = _plData.killstreak + 1;
-
-					if (!source.IsMeleeWeapon()) {
-						distance = Math.Round(vector.Distance(player.GetPosition(), m_Source.GetPosition()));
-						if (_plData.maxRangeKill < distance) _plData.maxRangeKill = distance;
-					}
-					updatePlayerData(m_Source); //IAMAKILLER
+				if (!source.IsMeleeWeapon()) {
+					distance = Math.Round(vector.Distance(player.GetPosition(), m_Source.GetPosition()));
+					if (_plData.maxRangeKill < distance) _plData.maxRangeKill = distance;
 				}
-			} else if (source.IsInherited(SurvivorBase)) {
-
-				m_Source = PlayerBase.Cast(source);
-
-				if (!Class.CastTo(m_Source, source)) return;
-
-				if (m_Source.GetIdentity()) {
-					//that player killed someone with hands
-					readPlayerData(m_Source);
-					_plData.kills = _plData.kills + 1;
-					_plData.killstreak = _plData.killstreak + 1;
-					updatePlayerData(m_Source); //IAMAKILLER
-				}
+				updatePlayerData(m_Source); //IAMAKILLER
 			}
-		} else {
-			if (!source) Print(TOP_PREFIX + "NO SOURCE FOUND");
-			if (!player) Print(TOP_PREFIX + "NO PLAYER FOUND");
+		} else if (source.IsInherited(SurvivorBase)) {
+
+			m_Source = PlayerBase.Cast(source);
+
+			if (!Class.CastTo(m_Source, source)) return;
+
+			if (m_Source.GetIdentity()) {
+				//that player killed someone with hands
+				readPlayerData(m_Source);
+				_plData.kills = _plData.kills + 1;
+				_plData.killstreak = _plData.killstreak + 1;
+				updatePlayerData(m_Source); //IAMAKILLER
+			}
 		}
-
-
-
 	}
 
 	// ***************************************************************************************************
@@ -177,6 +155,7 @@ class PluginPlayersTop extends PluginBase
 
 			readPlayerData(m_Source);
 			_plData.deadth = _plData.deadth + 1;
+			_plData.killstreak = 0;
 			updatePlayerData(m_Source);
 		}
 	}

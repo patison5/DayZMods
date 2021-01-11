@@ -1,7 +1,7 @@
 class UIHudTop extends UIScriptedMenu
 {	
     Widget                              notification;
-    TextWidget                          mainTitle, subTitle, timerWidget, tableTitle, notifMessage;
+    TextWidget                          mainTitle, subTitle, timerWidget, tableTitle, notifMessage, zeleno, vybor, szAero;
 
     ButtonWidget                        btnMap1, btnMap2, btnMap3, selectedBtn;
 
@@ -37,6 +37,10 @@ class UIHudTop extends UIScriptedMenu
             mapTitle2     = TextWidget.Cast( layoutRoot.FindAnyWidget(  "map2title"  ) );
             mapTitle3     = TextWidget.Cast( layoutRoot.FindAnyWidget(  "map1title"  ) );
 
+            zeleno  =  TextWidget.Cast( layoutRoot.FindAnyWidget(  "map1Count"  ) );
+            vybor   =  TextWidget.Cast( layoutRoot.FindAnyWidget(  "map2Count"  ) );
+            szAero  =  TextWidget.Cast( layoutRoot.FindAnyWidget(  "map3Count"  ) );
+
             parent = WrapSpacerWidget.Cast( layoutRoot.FindAnyWidget("TopContainer") );
 
             this.setDefaults();
@@ -65,9 +69,6 @@ class UIHudTop extends UIScriptedMenu
 
     void UIHudTop() {}
 
-    /*
-        This is the destructor, called when this class is deleted / destroyed
-    */
     void ~UIHudTop() 
     {
         hideMainScreen();
@@ -79,8 +80,6 @@ class UIHudTop extends UIScriptedMenu
             layoutRoot.Unlink();
     }
 
-
-
     void setDefaults() {
         mainTitle.SetText("Матч завершен");
         subTitle.SetText("Следующий раунд");
@@ -90,6 +89,10 @@ class UIHudTop extends UIScriptedMenu
         mapTitle1.SetText("Северо-западный аэропорт");
         mapTitle2.SetText("Выбор");
         mapTitle3.SetText("Зелено");
+
+        zeleno.SetText("0");
+        vybor.SetText("0");
+        szAero.SetText("0");
 
         createTopElements();
     }
@@ -136,7 +139,6 @@ class UIHudTop extends UIScriptedMenu
         for (int i = 0; i < 10; i++) {
 
             if (!_players) { Print("2. NO FUCKING PLAYERS"); return; }
-            if (_players) Print("2. " + TOP_PREFIX + _players.Count() + "шт");
 
 
             Widget element = Widget.Cast( layoutRoot.FindAnyWidget( "element_" + i) );
@@ -190,6 +192,21 @@ class UIHudTop extends UIScriptedMenu
         // notification.Show(false);
     }
 
+    void updateVotesCount(ref map<string, int> voteData) {
+        zeleno.SetText("0");
+        vybor.SetText("0");
+        szAero.SetText("0");
+        
+        if (zeleno && voteData["Zeleno"])
+            zeleno.SetText(voteData["Zeleno"].ToString());
+        
+        if (vybor && voteData["vybor"])
+            vybor.SetText(voteData["vybor"].ToString());
+        
+        if (szAero && voteData["csAero"])
+            szAero.SetText(voteData["csAero"].ToString());
+    }
+
 
 
     void ClientRPCHandler(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
@@ -207,12 +224,6 @@ class UIHudTop extends UIScriptedMenu
 
                 if (!player)
                     player = PlayerBase.Cast(GetGame().GetPlayer());
-
-                if (player.IsAlive()) {
-                    Print("player is alive");
-                } else {
-                    Print("Player is not alive");
-                }
 
                 // DeadScreen ShowDeadScreen player.ShowDeadScreen
 
@@ -232,11 +243,18 @@ class UIHudTop extends UIScriptedMenu
             }
 
             case HHRPCEnum.RPC_CLIENT_UPDATE_MAIN_SCREEN_TIMER: { 
-                Param1<string> args3;
+                Param3<string, ref array<ref PlayerStatisticInfo>, ref map<string, int>> args3;
                 if (!ctx.Read(args3)) return;
 
-                timerWidget.SetText(args3.param1);
+                ref map<string, int> voteData = args3.param3
 
+                foreach (string mapName, int votes: args3.param3)
+                    Print("[" + mapName + "] : " + votes);
+
+                updateVotesCount(args3.param3);
+
+                timerWidget.SetText(args3.param1);
+                updateTopElements(args3.param2);
 
                 showMainScreen();
 
@@ -283,27 +301,31 @@ class UIHudTop extends UIScriptedMenu
     {
         super.OnClick(w, x, y, button);
 
-        Man player = GetGame().GetPlayer();
+        PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+        // string steamId = player.GetIdentity().GetPlainId();
+        string steamId = player.GetIdentity().GetName();
+
+        auto param1 = new Param1<string>(steamId);
 
         switch (w) {
             case btnMap1:
                 if (selectedBtn != btnMap1) {
-                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_1, NULL, true, player.GetIdentity());
+                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_1, param1, true, player.GetIdentity());
                     selectedBtn = btnMap1;
                 }
                 break;
 
              case btnMap2:
-                if (selectedBtn != btnMap1) {
-                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_2, NULL, true, player.GetIdentity());
-                    selectedBtn = btnMap1;
+                if (selectedBtn != btnMap2) {
+                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_2, param1, true, player.GetIdentity());
+                    selectedBtn = btnMap2;
                 }
                 break;
 
              case btnMap3:
-                if (selectedBtn != btnMap1) {
-                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_3, NULL, true, player.GetIdentity());
-                    selectedBtn = btnMap1;
+                if (selectedBtn != btnMap3) {
+                    GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_MAP_3, param1, true, player.GetIdentity());
+                    selectedBtn = btnMap3;
                 }
                 break;
         }

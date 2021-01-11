@@ -15,22 +15,19 @@ class HHDeadMatchPlugin extends PluginBase
 
     ref PluginSpawnSelection spawnPlugin;
 
-    // private ref map<string, int> mapVote = new map<string, int>();
-
     void HHDeadMatchPlugin () {
     	Print("HHDeadMatchPlugin был проинициализирован");
 
         // delete that function
-
     	roundTimer	= new ref Timer();
         roundTimer.Run(roundTime, this, "endRound", NULL, true);
-
 
         spawnPlugin = GetSpawnPlugin();
     }
 
 
     void endRound () {
+        Print("")
     	if (GetGame().IsServer()) {
             Print(TOP_PREFIX + "Раунд закончился");
 
@@ -135,41 +132,13 @@ class HHDeadMatchPlugin extends PluginBase
 
 
     void showPlayerEndedGUI () {
-
-
-        Print("Хочу показать экран смерти ебаны рот");
-
-        // ref array<ref CorpseData> ppp = GetGame().GetMission().getDeadPlayers();
-
-        // m_DeadPlayersArray
-
-        // UIHudTop myHudTop = UIHudTop.Cast(GetGame().GetUIManager().FindMenu(UI_TOP_LAYOUT));
-        // // myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
-        // if (myHudTop) {
-        //     if (!myHudTop.IsMenuOpen()) {
-        //         Print("ахуеть не встать! оно включается!")
-        //         myHudTop.SetMenuOpen(true);
-        //         myHudTop.hideMainScreen();
-        //     }
-        // } else {
-        //     Print("myHudTop : ДОЛЖЕН БЫЛ БЫТЬ СУКА ВКЛЮЧЕН, НО БЛЯТЬ Я ЕБАЛ ТОГО В РОТ");
-        // }
-
-
     	// отображаем игроку статистику топа и рисуем варианты выбора карты
     	ref array<Man> players = new array<Man>;
     	GetGame().GetPlayers( players );
     	foreach( auto player : players  )
         {
-            Print("Дебажим!!!! идем по игрокам");
-
             if (player.GetIdentity()) {
-
-                Print("дебажим" + player.GetIdentity());
-				// auto param4 = new Param1<string>("PIDOR");
                 auto param4 = new Param1<ref array<ref PlayerStatisticInfo>>(_players);
-                if (_players) Print(TOP_PREFIX + _players.Count() + "шт");
-
 				GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_SHOW_END_SCREEN, param4, true, player.GetIdentity());
 			}
         }
@@ -189,12 +158,15 @@ class HHDeadMatchPlugin extends PluginBase
     }
 
     void updateMainScreenTimer (string time) {
+        ref PluginSpawnSelection spawnPlugin = GetSpawnPlugin();
+        ref map<string, int> voteData = spawnPlugin.getVoteData();
     	ref array<Man> players = new array<Man>;
+
     	GetGame().GetPlayers( players );
     	foreach( auto player : players  )
         {
             if (player.GetIdentity()) {
-            	auto param5 = new Param1<string>(time);
+                auto param5 = new Param3<string, ref array<ref PlayerStatisticInfo>, ref map<string, int>>(time, _players, voteData);
 				GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_MAIN_SCREEN_TIMER, param5, true, player.GetIdentity());
 			}
         }
