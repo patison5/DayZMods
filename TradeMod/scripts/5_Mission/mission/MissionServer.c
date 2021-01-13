@@ -21,6 +21,9 @@ modded class MissionServer extends MissionBase
 		if (GetGame().IsServer()) {
 			// check folder existance
 			if (!FileExist(S_ROOTFOLDER)) MakeDirectory(S_ROOTFOLDER);
+			if (!FileExist(S_PLAYERS)) MakeDirectory(S_PLAYERS);
+			if (!FileExist(S_COMMON)) MakeDirectory(S_COMMON);
+
 
 			// check file existance and get setup options
 			if (!FileExist(S_ROOTFOLDER + "SetupPlayerOptions.json")) {
@@ -240,7 +243,10 @@ modded class MissionServer extends MissionBase
 		PluginPlayersTop m_PlStat = PluginPlayersTop.Cast(GetPlugin(PluginPlayersTop));
 
 		if (player.GetIdentity()) {
+
 			ref PlayerStatisticInfo _plData;
+			ref PlayerStatisticAllInfo _plAllInfo;
+
 			string steamId = player.GetIdentity().GetPlainId();
 
 			if (FileExist(S_PLAYERS) && FileExist(S_PLAYERS + steamId + ".json")) {
@@ -257,6 +263,19 @@ modded class MissionServer extends MissionBase
 			
 			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.killstreak.ToString());
 			GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_TOP, param4, true, player.GetIdentity());
+
+
+			if (!(FileExist(S_COMMON) && FileExist(S_COMMON + steamId + ".json"))) {
+				_plAllInfo = new PlayerStatisticAllInfo(); 
+				_plAllInfo.setSteamId(player.GetIdentity().GetPlainId());
+				_plAllInfo.setPlayerName(player.GetIdentity().GetName());
+				JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + steamId + ".json", _plAllInfo);
+			} else {
+				JsonFileLoader<ref PlayerStatisticAllInfo>.JsonLoadFile(S_COMMON + steamId + ".json", _plAllInfo);
+				_plAllInfo.setSteamId(player.GetIdentity().GetPlainId());
+				_plAllInfo.setPlayerName(player.GetIdentity().GetName());
+				JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + steamId + ".json", _plAllInfo);
+			}
 		}
 
 		super.InvokeOnConnect(player, identity);

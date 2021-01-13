@@ -7,7 +7,7 @@ class HHDeadMatchPlugin extends PluginBase
 
     bool isEnded = false;
     private int timeOut = 30;
-    private int roundTime = 3000;
+    private int roundTime = 550;
 
     private int timeOutCounter = timeOut;
 
@@ -27,7 +27,6 @@ class HHDeadMatchPlugin extends PluginBase
 
 
     void endRound () {
-        Print("")
     	if (GetGame().IsServer()) {
             Print(TOP_PREFIX + "Раунд закончился");
 

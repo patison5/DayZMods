@@ -52,11 +52,23 @@ modded class PlayerBase
     	string message = "Привет, " + GetAnnouncePlayerPrefix(this.GetIdentity()) + " (" + this.GetIdentity().GetPlainId() + ")";
 
 		SendMessage(this.GetPosition().ToString());
+
+		PlayerBase customPlayer = PlayerBase.Cast(GetGame().CreateObject( "SurvivorM_Boris", this.GetPosition(), false, true, true ));
+		customPlayer.GetInventory().CreateInInventory("HH_K63_Helmet_Green");
     }
 
     override void EEKilled(Object killer)
 	{
+
 		Print("PlayerBase.c EEKilled()");
+		if(!killer) return;
+
+        PlayerBase player = PlayerBase.Cast(EntityAI.Cast(killer).GetHierarchyParent());
+        if(!player || !player.IsPlayer()) return;
+
+		float distance = vector.Distance( player.GetPosition(), GetPosition() );
+		Print("Оружие " + killer.GetDisplayName());
+		Print("Дистанция : " + distance.ToString());
 
 		if (m_playerTop) {
 			m_playerTop.PlayerKilled(PlayerBase.Cast(this), killer);
@@ -85,9 +97,18 @@ modded class PlayerBase
 	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
 	{
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
-		
-		Print("[FUCK] : PlayerBase.c EEHitBy()" + dmgZone);
+
+		if(!this || !source || !damageResult) return;
+        if(this == source || !this.IsPlayer() || !this.IsAlive()) return;
+        if(damageType != DT_FIRE_ARM) return;
+
+        PlayerBase player = PlayerBase.Cast(source.GetHierarchyParent());
+
+        if(!player || !player.IsPlayer()) return;
+
 		//m_KillFeed.PlayerHitBy(damageType, PlayerBase.Cast(this), source, ammo);
+
+		m_playerTop.EEHitBy(player, this, damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 	}
 
 
