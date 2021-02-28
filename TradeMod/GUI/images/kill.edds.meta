@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{34532F61F0CB522F}MyMods/TradeMod/GUI/images/kill.edds"
+ Author "desktop-19ljvs9"
+ ChangeDate 1876224596
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "kill.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

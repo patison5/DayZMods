@@ -13,6 +13,7 @@ class CfgPatches
 		requiredVersion = 0.1;
 	};
 };
+
 class CfgMods
 {
 	class TradeMod
@@ -66,4 +67,15 @@ class CfgSoundSets
 	
 };
 
+class CfgSounds
+{
+    sounds[]    =    {};
+        
+    class Dominating
+    {
+        name        =    "Dominating";
+        sound[]        =    {"MyMods\TradeMod\sounds\Dominating.ogg", 20, 1, 3};
+        titles[]    =    {};
+    };
+};
 

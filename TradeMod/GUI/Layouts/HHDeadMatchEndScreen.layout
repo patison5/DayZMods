@@ -1,0 +1,1449 @@
+FrameWidgetClass rootFrame {
+ color 1 1 1 0.3412
+ position 0 0
+ size 1 1
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ {
+  FrameWidgetClass Header {
+   ignorepointer 1
+   position 0 0
+   size 1 240
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   {
+    TextWidgetClass MainTitleTextWidget {
+     ignorepointer 1
+     position 0 15
+     size 1 90
+     halign center_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     scaled 1
+     style Bold
+     text "ROUND ENDED"
+     font "gui/fonts/etelkatextpro"
+     "size to text h" 0
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+    }
+    PanelWidgetClass sepLineTop {
+     ignorepointer 1
+     color 1 1 1 0.3922
+     size 1 3
+     halign center_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     style rover_sim_colorable
+    }
+   }
+  }
+  FrameWidgetClass mainContainer {
+   ignorepointer 1
+   position 0 240
+   size 1500 690
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    FrameWidgetClass LeftPart {
+     ignorepointer 1
+     position 0 -1.168
+     size 0.38 690
+     hexactpos 0
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     {
+      TextWidgetClass LeftTitleTextWidget {
+       ignorepointer 1
+       position 0 20
+       size 0.95 40
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style Bold
+       text "Players statistic"
+       font "gui/fonts/etelkatextpro"
+       "text valign" center
+      }
+      PanelWidgetClass StatisticHeader {
+       ignorepointer 1
+       color 0 0 0 0.451
+       position 0 85
+       size 0.95 45
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style rover_sim_colorable
+       {
+        TextWidgetClass headerNumber {
+         ignorepointer 1
+         position 0 0
+         size 45 45
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "N"
+         font "gui/fonts/MetronLight"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass headerNickname {
+         ignorepointer 1
+         position 50 0
+         size 250 45
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "PlayerName"
+         font "gui/fonts/MetronLight"
+         text_proportion 0.55
+         "text valign" center
+        }
+        TextWidgetClass headerKillstrike {
+         ignorepointer 1
+         size 80 45
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass ImageWidget2 {
+           ignorepointer 1
+           size 37 25
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{B357675F1C3A3E75}MyMods/TradeMod/GUI/images/killstrike.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+          }
+         }
+        }
+        TextWidgetClass headerDeath {
+         ignorepointer 1
+         position 80 0
+         size 80 45
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass ImageWidget1 {
+           ignorepointer 1
+           size 25 25
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{DB34A7F5CF558102}MyMods/TradeMod/GUI/images/deaths.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+          }
+         }
+        }
+        TextWidgetClass killsDeath {
+         ignorepointer 1
+         position 160 0
+         size 80 45
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass ImageWidget0 {
+           ignorepointer 1
+           size 25 25
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{34532F61F0CB522F}MyMods/TradeMod/GUI/images/kill.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+          }
+         }
+        }
+       }
+      }
+      WrapSpacerWidgetClass TopContainer {
+       ignorepointer 1
+       color 0.6235 0.1569 0.1569 0
+       position 0 132
+       size 0.95 48
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style Empty
+       Margin 0
+       "Size To Content V" 1
+       {
+        PanelWidgetClass PanelWidget0 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget1 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget2 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget3 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget4 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget5 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget6 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget7 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget8 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass PanelWidget9 {
+         visible 0
+         ignorepointer 1
+         color 0 0 0 0.5882
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+       }
+      }
+     }
+    }
+    FrameWidgetClass CenterPart {
+     ignorepointer 1
+     position 0.4 0
+     size 0.42 1
+     hexactpos 0
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     {
+      FrameWidgetClass PrivateStatisticWrap {
+       ignorepointer 1
+       position 15 310
+       size 330 200
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        TextWidgetClass PrivatStatisticTitle {
+         ignorepointer 1
+         position 0 0
+         size 1 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "Private statistic"
+         font "gui/fonts/etelkatextpro"
+         "text valign" center
+        }
+        TextWidgetClass privateMatchFinishedTitle {
+         ignorepointer 1
+         position 0 50
+         size 0.55 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "Match ended"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateMatchFinishedValue {
+         ignorepointer 1
+         position 0 50
+         size 0.45 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "12"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass privateMatchesWonTitle {
+         ignorepointer 1
+         position 0 90
+         size 0.55 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "Match top1"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateMatchesWonValue {
+         ignorepointer 1
+         position 0 90
+         size 0.45 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "2"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass privateBestVesaponTitle {
+         ignorepointer 1
+         position 0 130
+         size 0.5 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "best weapon"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateBestVesaponValue {
+         ignorepointer 1
+         position 0 130
+         size 0.5 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "PKP \"Pecheneg\""
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget10 {
+       ignorepointer 1
+       position 0 75
+       size 300 500
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        ImageWidgetClass ImageWidget3 {
+         ignorepointer 1
+         color 1 1 1 0.9608
+         size 0.85 1
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         imageTexture "{91D9B3326EAD5949}MyMods/TradeMod/GUI/images/human.edds"
+         mode blend
+         "src alpha" 1
+         "no wrap" 1
+         stretch 1
+        }
+        PanelWidgetClass headPercentBackground {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 100 10
+         size 100 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass headPercentValue {
+           ignorepointer 1
+           color 1 1 1 0.902
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "30%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget11 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 0 180
+         size 100 40
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass torsoPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "55%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget12 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 47 94
+         size 80 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass leftArmPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "23%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget13 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 47 94
+         size 80 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass RightArmPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "12%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget14 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 55 322
+         size 80 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass leftLegPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "12%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget15 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 55 322
+         size 80 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass rightLegPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "34%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget19 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 0 212
+         size 80 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass leftHandPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "44%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget20 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 0 212
+         size 80 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass rightHandPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "45%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget21 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 55 0
+         size 80 40
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass leftFootPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           text "17%"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget22 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 55 0
+         size 80 40
+         halign right_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass rightFootPercentValue {
+           ignorepointer 1
+           position 0 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           text "55%"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+       }
+      }
+      TextWidgetClass CenterHeaderTitle {
+       ignorepointer 1
+       position 15 20
+       size 0.9 40
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style Bold
+       text "Private Match Statistic"
+       font "gui/fonts/etelkatextpro"
+       "text valign" center
+      }
+      FrameWidgetClass PrivateTopStatisticWrap {
+       ignorepointer 1
+       position 15 85
+       size 330 200
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        TextWidgetClass privateKillsTitle {
+         ignorepointer 1
+         position 0 0
+         size 0.692 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "Kills"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateKillsValue {
+         ignorepointer 1
+         size 0.308 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "34"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass privateDeathTitle {
+         ignorepointer 1
+         position 0 40
+         size 0.692 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "Death"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateDeathValue {
+         ignorepointer 1
+         position 0 40
+         size 0.308 40
+         halign right_ref
+         hexactpos 0
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "12"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass privateKDTitle {
+         ignorepointer 1
+         position 0 80
+         size 0.692 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "K/D"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateKDValue {
+         ignorepointer 1
+         position 0 80
+         size 0.308 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "1.47"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass privateLongestKillTitle {
+         ignorepointer 1
+         position 0 120
+         size 0.692 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "Longest kill"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateLongestKillValue {
+         ignorepointer 1
+         position 0 120
+         size 0.308 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "1241m"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextWidgetClass privateKillstrikeTitle {
+         ignorepointer 1
+         position 0 160
+         size 0.692 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "Killstrike"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text valign" center
+        }
+        TextWidgetClass privateKillstrikeValue {
+         ignorepointer 1
+         position 0 160
+         size 0.308 40
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style Bold
+         text "7"
+         font "gui/fonts/etelkatextpro"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+     }
+    }
+    FrameWidgetClass RightPart {
+     ignorepointer 1
+     size 0.16 1
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     {
+      TextWidgetClass SelectMapTitle {
+       ignorepointer 1
+       position 0 20
+       size 1 40
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style Bold
+       text "Select Map"
+       font "gui/fonts/etelkatextpro"
+       "text valign" center
+      }
+      WrapSpacerWidgetClass WrapSpacerWidget0 {
+       ignorepointer 1
+       position 0 100
+       size 1 48
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       Padding 30
+       "Size To Content V" 1
+       {
+        PanelWidgetClass map1 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 0 0
+         size 1 150
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style blank
+         {
+          ImageWidgetClass map1Image {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{03823DCAFAF2BDC2}MyMods/TradeMod/GUI/images/pic.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+           {
+            TextWidgetClass map1Title1 {
+             visible 0
+             ignorepointer 1
+             size 0.95 0.32
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "SERERO-ZAPADNIY<br/>AERODROM"
+             font "gui/fonts/sdf_MetronLight72"
+             "exact text" 1
+             "exact text size" 20
+             "text halign" center
+             "text valign" center
+            }
+            PanelWidgetClass map1_Border_left {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             position 0 0
+             size 8 1
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map1_Border_top {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             position 0 0
+             size 1 8
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 1
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map1_Border_bottom {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             size 1 8
+             valign bottom_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 1
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map1_Border_right {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             size 8 1
+             halign right_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            RichTextWidgetClass map1Title {
+             ignorepointer 1
+             size 0.95 0.32
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "SERERO-ZAPADNI AERODROM"
+             font "gui/fonts/sdf_MetronLight72"
+             "exact text" 1
+             "exact text size" 20
+             "text halign" center
+             "text valign" center
+             wrap 1
+            }
+           }
+          }
+          ButtonWidgetClass btnMap1 {
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           "no focus" 1
+          }
+          TextWidgetClass map1Count {
+           ignorepointer 1
+           position 16 16
+           size 50 25
+           halign right_ref
+           valign bottom_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           text "12"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.8
+           "text halign" right
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass map2 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 0 0
+         size 1 150
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style blank
+         {
+          ImageWidgetClass map2Image {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{03823DCAFAF2BDC2}MyMods/TradeMod/GUI/images/pic.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+           {
+            TextWidgetClass map2Title1 {
+             visible 0
+             ignorepointer 1
+             size 0.95 0.3
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "Zeleno"
+             font "gui/fonts/sdf_MetronLight72"
+             "exact text" 1
+             "exact text size" 20
+             "text halign" center
+             "text valign" center
+            }
+            PanelWidgetClass map2_Border_left {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             position 0 0
+             size 8 1
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map2_Border_top {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             position 0 0
+             size 1 8
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 1
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map2_Border_bottom {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             size 1 8
+             valign bottom_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 1
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map2_Border_right {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             size 8 1
+             halign right_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            RichTextWidgetClass map2Title {
+             ignorepointer 1
+             size 0.95 0.32
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "Vybor"
+             font "gui/fonts/sdf_MetronLight72"
+             "exact text" 1
+             "exact text size" 20
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          ButtonWidgetClass btnMap2 {
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           "no focus" 1
+          }
+          TextWidgetClass map2Count {
+           ignorepointer 1
+           position 16 16
+           size 50 25
+           halign right_ref
+           valign bottom_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           text "12"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.8
+           "text halign" right
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass map3 {
+         ignorepointer 1
+         color 0.4 0.6392 0.4588 0.8627
+         position 0 0
+         size 1 150
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style blank
+         {
+          ImageWidgetClass map3Image {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{03823DCAFAF2BDC2}MyMods/TradeMod/GUI/images/pic.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+           {
+            TextWidgetClass map3Title1 {
+             visible 0
+             ignorepointer 1
+             size 0.95 0.3
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "Zeleno"
+             font "gui/fonts/sdf_MetronLight72"
+             "exact text" 1
+             "exact text size" 20
+             "text halign" center
+             "text valign" center
+            }
+            PanelWidgetClass map3_Border_left {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             position 0 0
+             size 8 1
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map3_Border_top {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             position 0 0
+             size 1 8
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 1
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map3_Border_bottom {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             size 1 8
+             valign bottom_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 1
+             style rover_sim_colorable
+            }
+            PanelWidgetClass map3_Border_right {
+             ignorepointer 1
+             color 0.4 0.6392 0.4588 1
+             size 8 1
+             halign right_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            RichTextWidgetClass map3Title {
+             ignorepointer 1
+             size 0.95 0.32
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "Zeleno"
+             font "gui/fonts/sdf_MetronLight72"
+             "exact text" 1
+             "exact text size" 20
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          ButtonWidgetClass btnMap3 {
+           position 1.26404 0
+           size 1 1
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           "no focus" 1
+          }
+          TextWidgetClass map3Count {
+           ignorepointer 1
+           position 16 16
+           size 50 25
+           halign right_ref
+           valign bottom_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           text "12"
+           font "gui/fonts/etelkatextpro"
+           text_proportion 0.8
+           "text halign" right
+           "text valign" center
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  FrameWidgetClass Footer {
+   ignorepointer 1
+   position 0 0
+   size 1 150
+   halign center_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   {
+    TextWidgetClass NextRoundAfter {
+     ignorepointer 1
+     position 0 20
+     size 1 48
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "Next round after"
+     font "gui/fonts/etelkatextpro"
+     text_proportion 0.7
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass EndRoundTimer {
+     ignorepointer 1
+     position 0 70
+     size 1 48
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     style Bold
+     text "27"
+     font "gui/fonts/etelkatextpro48"
+     "text halign" center
+     "text valign" center
+    }
+    PanelWidgetClass SepLineBottom {
+     ignorepointer 1
+     color 1 1 1 0.3922
+     size 1 3
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     style rover_sim_colorable
+    }
+   }
+  }
+ }
+}

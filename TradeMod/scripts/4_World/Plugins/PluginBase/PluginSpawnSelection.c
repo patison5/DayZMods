@@ -1,12 +1,9 @@
 class PluginSpawnSelection extends PluginBase 
 {
 	ref map<string, ref array<vector>> spawnDots = new map<string, ref array<vector>>();
-
 	ref map<string, ref array<string>> spawnVotingData = new map<string, ref array<string>>();
 	
 	void PluginSpawnSelection () {		
-
-		Print("создаю PluginSpawnSelection");
 
 		array<vector> places1 = new array<vector>();
 		places1.Insert(Vector(2516.596680, 193.394867, 5140.407715));
@@ -49,7 +46,6 @@ class PluginSpawnSelection extends PluginBase
 
 		JsonFileLoader<ref map<string, ref array<vector>>>.JsonSaveFile(S_ROOTFOLDER + "spawnDots.json",  spawnDots);			
 
-
 		spawnVotingData["Zeleno"] = new array<string>();
 		spawnVotingData["vybor"]  = new array<string>();
 		spawnVotingData["csAero"] = new array<string>();
@@ -63,8 +59,6 @@ class PluginSpawnSelection extends PluginBase
 	}
 
 	vector getPosition() {
-		// player.SetPosition(Vector(x, y, z));
-
 		ref array<Man> players = new array<Man>;
 		GetGame().GetPlayers( players );
 		PlayerBase player;
@@ -123,8 +117,6 @@ class PluginSpawnSelection extends PluginBase
 			}
 		}
 
-
-
 		if (currentMap != "")
 			spawnLocation = currentMap;
 
@@ -134,10 +126,6 @@ class PluginSpawnSelection extends PluginBase
 	}
 
 	void updateVoteData (string selectedMap, string steamid) {
-		// Print("ОБНОВЛЯЕМ ДАТУ ГОЛОСОВАНИЯ!");
-		// Print("steamid : " + steamid);
-		// Print("selectedMap : " + selectedMap);
-
 		foreach (string mapName, ref array<string> votes: spawnVotingData) {
 			// insert
 			if (mapName == selectedMap) {
@@ -154,8 +142,6 @@ class PluginSpawnSelection extends PluginBase
 	}
 
 	ref map<string, int> getVoteData () {
-		// Print("Считаем кол-во голосов");
-
 		ref map<string, int> voteData = new map<string, int>();
 
 		voteData["Zeleno"] = 0;
@@ -163,7 +149,6 @@ class PluginSpawnSelection extends PluginBase
 		voteData["csAero"] = 0;
 
 		foreach (string mapName, ref array<string> votes: spawnVotingData) {
-			// Print("[" + mapName + "] : " + votes.Count());
 			voteData[mapName] = votes.Count();
 		}
 
@@ -171,12 +156,7 @@ class PluginSpawnSelection extends PluginBase
 	}
 
 	void ServerRPCHandler(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-
-		Param1<string> arg;
-        if (!ctx.Read(arg)) return;
-
-        string steamid = arg.param1;
-
+        
         if (GetGame().IsClient()) {
             delete this;
             return;
@@ -184,23 +164,30 @@ class PluginSpawnSelection extends PluginBase
 
         switch (rpc_type) {
             case HHRPCEnum.RPC_SELECT_MAP_1: { 
-                updateVoteData("Zeleno", steamid);
+            	Param1<string> farg1;
+        		if (!ctx.Read(farg1)) return;
+
+                updateVoteData("Zeleno", farg1.param1);
                 break;            
             }
 
             case HHRPCEnum.RPC_SELECT_MAP_2: { 
-                updateVoteData("vybor", steamid);
+            	Param1<string> farg2;
+        		if (!ctx.Read(farg2)) return;
+
+                updateVoteData("vybor", farg2.param1);
                 break;            
             }
 
             case HHRPCEnum.RPC_SELECT_MAP_3: { 
-                updateVoteData("csAero", steamid);
+            	Param1<string> farg3;
+        		if (!ctx.Read(farg3)) return;
+
+                updateVoteData("csAero", farg3.param1);
                 break;            
             }
         }
     }
-
-
 
 
 }

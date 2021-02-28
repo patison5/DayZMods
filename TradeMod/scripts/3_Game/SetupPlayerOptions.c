@@ -7,7 +7,7 @@ class SetupPlayerOptions
 		// HH_AR15Beowulf_Tan
 		PlayerSet set1 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Red", "TacticalGloves_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_AR15Beowulf_Tan",
@@ -25,8 +25,14 @@ class SetupPlayerOptions
 			{},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
-			{"HH_PlateCarrierHolster_back", "HH_PlateCarrierPouches_black"},
+			"HH_Vest_IOTV_Woods",
+			{
+				"HH_Vest_IOTV_Grenade_Pounch_Woods",
+				"HH_Vest_IOTV_Grenade_Pounch_Woods",
+				"HH_Vest_IOTV_Mag_pounch_Woods",
+				"HH_Vest_IOTV_Mag_pounch_Woods",
+				"HH_Vest_IOTV_BackPocketIFAK_Woods",
+			},
 
 			// Содержимое карманов
 			{
@@ -40,7 +46,7 @@ class SetupPlayerOptions
 		// HH_FalMod
 		PlayerSet set2 = new PlayerSet(
 			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"},  
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_White", "HH_BeltTactical_Black", "HH_Katana_Sneath", "HH_Katana"},  
 
 			// оружие, тип магазина и обвесы
 			"HH_FalMod",
@@ -57,8 +63,14 @@ class SetupPlayerOptions
 			{},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
-			{"HH_PlateCarrierHolster_back", "HH_PlateCarrierPouches_black"},
+			"HH_Vest_IOTV_Black",
+			{
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
+			},
 
 			// Содержимое карманов
 			{
@@ -72,7 +84,7 @@ class SetupPlayerOptions
 		// HH_M110_Tan
 		PlayerSet set3 = new PlayerSet(
 			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"},  
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_Red"},  
 
 			// оружие, тип магазина и обвесы
 			"HH_M110_Tan",
@@ -89,8 +101,14 @@ class SetupPlayerOptions
 			{},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
-			{"HH_PlateCarrierHolster_back", "HH_PlateCarrierPouches_black"},
+			"HH_Vest_IOTV_Black",
+			{
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
+			},
 
 			// Содержимое карманов
 			{
@@ -104,7 +122,7 @@ class SetupPlayerOptions
 		// HH_DVL10
 		PlayerSet set4 = new PlayerSet(
 			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_Red"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_DVL10",
@@ -149,7 +167,7 @@ class SetupPlayerOptions
 		// HH_PKP
 		PlayerSet set5 = new PlayerSet(
 			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_PKP",
@@ -160,8 +178,6 @@ class SetupPlayerOptions
 			"",
 			"",
 			{},
-
-
 
 			// Шлем и обвесы
 			"HH_K63_Helmet_Black", 
@@ -190,7 +206,7 @@ class SetupPlayerOptions
 		// HH_PKM
 		PlayerSet set6 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Red", "TacticalGloves_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_PKM",
@@ -213,7 +229,7 @@ class SetupPlayerOptions
 			// Содержимое карманов
 			{
 				"HH_Mag_PKM_250Rnd", "HH_Mag_PKM_250Rnd",
-				"Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer",
+				"Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer","Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer", "Ammo_762x54Tracer",
 				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
 				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
 				"PainKillerTablets", "Battery9V", "Battery9V", "Vodka",
@@ -221,42 +237,42 @@ class SetupPlayerOptions
 			});
 
 		// HH_ASVAL
-		PlayerSet set7 = new PlayerSet(
-			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+		// PlayerSet set7 = new PlayerSet(
+		// 	// одежда
+		// 	{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Red", "TacticalGloves_Green"}, 
 
-			// оружие, тип магазина и обвесы
-			"HH_ASVAL",
-			"HH_Mag_ASVAL_VSS_30Rnd_Spar",
-			{"KobraOptic"},
+		// 	// оружие, тип магазина и обвесы
+		// 	"HH_ASVAL",
+		// 	"HH_Mag_ASVAL_VSS_30Rnd_Spar",
+		// 	{"KobraOptic"},
 
-			// Второе оружие, тип магазина и обвесы
-			"",
-			"",
-			{""},
+		// 	// Второе оружие, тип магазина и обвесы
+		// 	"",
+		// 	"",
+		// 	{""},
 
-			// Шлем и обвесы
-			"HH_K63_Helmet_Green", 
-			{},
+		// 	// Шлем и обвесы
+		// 	"HH_K63_Helmet_Green", 
+		// 	{},
 
-			// Броник и обвесы
-			"HH_Vest_6b13_Frendly_Tan",
-			{},
+		// 	// Броник и обвесы
+		// 	"HH_Vest_6b13_Frendly_Tan",
+		// 	{},
 
-			// Содержимое карманов
-			{
-				"HH_Mag_ASVAL_VSS_30Rnd_Spar", "HH_Mag_ASVAL_VSS_30Rnd_Spar", "HH_Mag_ASVAL_VSS_30Rnd_Spar", "HH_Mag_ASVAL_VSS_30Rnd_Spar",
-				"Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP",
-				"PainKillerTablets", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka", 
-				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
-				"Battery9V", "Battery9V",
-				"RGD5Grenade", "M67Grenade"
-			});
+		// 	// Содержимое карманов
+		// 	{
+		// 		"HH_Mag_ASVAL_VSS_30Rnd_Spar", "HH_Mag_ASVAL_VSS_30Rnd_Spar", "HH_Mag_ASVAL_VSS_30Rnd_Spar", "HH_Mag_ASVAL_VSS_30Rnd_Spar",
+		// 		"Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP",
+		// 		"PainKillerTablets", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka", 
+		// 		"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
+		// 		"Battery9V", "Battery9V",
+		// 		"RGD5Grenade", "M67Grenade"
+		// 	});
 
 		// HH_PKP
 		PlayerSet set8 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Gray", "TacticalGloves_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_PKP",
@@ -295,7 +311,7 @@ class SetupPlayerOptions
 		// HH_AR15_Used
 		PlayerSet set9 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Red", "TacticalGloves_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_AR15_Used",
@@ -333,7 +349,7 @@ class SetupPlayerOptions
 		// HH_HKG36
 		PlayerSet set10 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Red", "TacticalGloves_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_HKG36",
@@ -350,10 +366,13 @@ class SetupPlayerOptions
 			{"HH_Maska1sch_Visor_Green"},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
+			"HH_Vest_IOTV_Black",
 			{
-				"HH_PlateCarrierHolster_back",
-                "HH_PlateCarrierPouches_black"
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
 			},
 
 			// Содержимое карманов
@@ -368,7 +387,7 @@ class SetupPlayerOptions
 		// HH_OSV96_Black
 		PlayerSet set11 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Red", "TacticalGloves_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_OSV96_Black",
@@ -391,17 +410,20 @@ class SetupPlayerOptions
 			},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
+			"HH_Vest_IOTV_Black",
 			{
-				"HH_PlateCarrierHolster_back",
-                "HH_PlateCarrierPouches_black"
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
 			},
 
 			// Содержимое карманов
 			{
 				"HH_Mag_OSV96_7Rnd", "HH_Mag_OSV96_7Rnd", "HH_Mag_OSV96_7Rnd", "HH_Mag_OSV96_7Rnd", "HH_Mag_OSV96_7Rnd", "HH_Mag_OSV96_7Rnd",
 				"Vodka", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
-				"Ammo_556x45", "Ammo_556x45", "Ammo_556x45", "Ammo_556x45",  "Ammo_556x45",  "Ammo_556x45",
+				"HH_Ammo_127x108", "HH_Ammo_127x108", "HH_Ammo_127x108", "HH_Ammo_127x108",  "HH_Ammo_127x108",  "HH_Ammo_127x108",
 				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
 				"Battery9V", "Battery9V", "PainKillerTablets",
 			});
@@ -409,7 +431,7 @@ class SetupPlayerOptions
 		// HH_M82_White
 		PlayerSet set12 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Red", "TacticalGloves_Green"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_M82_White",
@@ -422,36 +444,39 @@ class SetupPlayerOptions
 			{},
 
 			// Шлем и обвесы
-			"HH_K63_Helmet_Black", 
+			"HH_K63_Helmet_Green", 
 			{},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
+			"HH_Vest_IOTV_Green",
 			{
-				"HH_PlateCarrierHolster_back",
-                "HH_PlateCarrierPouches_black"
+				"HH_Vest_IOTV_Grenade_Pounch_Green",
+				"HH_Vest_IOTV_Grenade_Pounch_Green",
+				"HH_Vest_IOTV_Mag_pounch_Green",
+				"HH_Vest_IOTV_Mag_pounch_Green",
+				"HH_Vest_IOTV_BackPocketIFAK_Green",
 			},
 
 			// Содержимое карманов
 			{
 				"HH_Mag_M82_10Rnd", "HH_Mag_M82_10Rnd", "HH_Mag_M82_10Rnd", "HH_Mag_M82_10Rnd", "HH_Mag_M82_10Rnd", "HH_Mag_M82_10Rnd",
-				"Vodka", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
-				"HH_AmmoBox_127x99_10Rnd", "HH_AmmoBox_127x99_10Rnd", "HH_AmmoBox_127x99_10Rnd", "HH_AmmoBox_127x99_10Rnd",  "HH_AmmoBox_127x99_10Rnd",  "HH_AmmoBox_127x99_10Rnd",
+				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
+				"HH_Ammo_127x99", "HH_Ammo_127x99", "HH_Ammo_127x99", "HH_Ammo_127x99",  "HH_Ammo_127x99",  "HH_Ammo_127x99",
 				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
-				"Battery9V", "Battery9V", "PainKillerTablets",
+				"Battery9V", "Battery9V", "PainKillerTablets", "Vodka", "HH_LongRangeOptics_x24_Black"
 			});
 
 		// HH_VSSK
 		PlayerSet set13 = new PlayerSet(
 			// одежда
-			{"HH_TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "HH_Military_Boots_Black", "TacticalGloves_Green"}, 
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_Red"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_VSSK",
 			"HH_Mag_VSSK_5Rnd",
 			{"HuntingOptic"},
 
-			// Второе оружие, тип магазина и обвесы
+			// второе оружие, тип магазина и обвесы
 			"",
 			"",
 			{},
@@ -461,68 +486,74 @@ class SetupPlayerOptions
 			{},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
+			"HH_Vest_IOTV_Black",
 			{
-				"HH_PlateCarrierHolster_back",
-                "HH_PlateCarrierPouches_black"
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
 			},
 
 			// Содержимое карманов
 			{
 				"HH_Mag_VSSK_5Rnd", "HH_Mag_VSSK_5Rnd", "HH_Mag_VSSK_5Rnd", "HH_Mag_VSSK_5Rnd", "HH_Mag_VSSK_5Rnd", "HH_Mag_VSSK_5Rnd",
-				"Vodka", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
-				"HH_AmmoBox_127x99_10Rnd", "HH_AmmoBox_127x99_10Rnd", "HH_AmmoBox_127x99_10Rnd", "HH_AmmoBox_127x99_10Rnd",  "HH_AmmoBox_127x99_10Rnd",  "HH_AmmoBox_127x99_10Rnd",
+				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
+				"HH_Ammo_127x99", "HH_Ammo_127x99", "HH_Ammo_127x99", "HH_Ammo_127x99",  "HH_Ammo_127x99",  "HH_Ammo_127x99",
 				"Epinephrine", "Epinephrine", "Morphine", "Morphine", "Splint",
-				"Battery9V", "Battery9V", "PainKillerTablets",
+				"Battery9V", "Battery9V", "PainKillerTablets", "Vodka", "RGD5Grenade", "M67Grenade", "HH_LongRangeOptics_x24_Black"
 			});
 
 		// HH_Groza
-		PlayerSet set14 = new PlayerSet(
-			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
+		// PlayerSet set14 = new PlayerSet(
+		// 	// одежда
+		// 	{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_Red"}, 
 
-			// оружие, тип магазина и обвесы
-			"HH_Groza",
-			"HH_Mag_Groza_20Rnd",
-			{""},
+		// 	// оружие, тип магазина и обвесы
+		// 	"HH_Groza",
+		// 	"HH_Mag_Groza_20Rnd",
+		// 	{""},
 
-			// второе оружие, тип магазина и обвесы
-			"HH_Glock18c",
-			"HH_Mag_Glock18c_50Rnd",
-			{"HH_Glock18C_Hndgrd_Black", "FNP45_MRDSOptic", "ImprovisedSuppressor"},
+		// 	// второе оружие, тип магазина и обвесы
+		// 	"HH_Glock18c",
+		// 	"HH_Mag_Glock18c_50Rnd",
+		// 	{"HH_Glock18C_Hndgrd_Black", "FNP45_MRDSOptic", "ImprovisedSuppressor"},
 
 
-			// Шлем и обвесы
-			"HH_Ops_Core_F_Black", 
-			{
-				"HH_Ops_Core_F_Ear_Black",
-				"HH_Ops_Core_F_Visor_Black",
-				"HH_Ops_Core_F_Mandible_Black",
-				"HH_Ops_Core_F_SLAAP_Black"
-			},
+		// 	// Шлем и обвесы
+		// 	"HH_Ops_Core_F_Black", 
+		// 	{
+		// 		"HH_Ops_Core_F_Ear_Black",
+		// 		"HH_Ops_Core_F_Visor_Black",
+		// 		"HH_Ops_Core_F_Mandible_Black",
+		// 		"HH_Ops_Core_F_SLAAP_Black"
+		// 	},
 
-			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
-			{
-				"HH_PlateCarrierHolster_back",
-                "HH_PlateCarrierPouches_black"
-			},
+		// 	// Броник и обвесы
+		// 	"HH_Vest_IOTV_Black",
+		// 	{
+		// 		"HH_Vest_IOTV_Grenade_Pounch_Black",
+		// 		"HH_Vest_IOTV_Grenade_Pounch_Black",
+		// 		"HH_Vest_IOTV_Mag_pounch_Black",
+		// 		"HH_Vest_IOTV_Mag_pounch_Black",
+		// 		"HH_Vest_IOTV_BackPocketIFAK_Black",
+		// 	},
 
-			// Содержимое карманов
-			{
-				"HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd",
-				"Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP",  "Ammo_9x39AP",  "Ammo_9x39AP",
-				"HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd"
-				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
-				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HuntingOptic",
-				"Battery9V", "Battery9V",
-				"RGD5Grenade", "M67Grenade"
-			});
+		// 	// Содержимое карманов
+		// 	{
+		// 		"HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd", "HH_Mag_Groza_20Rnd",
+		// 		"Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP",  "Ammo_9x39AP",  "Ammo_9x39AP",
+		// 		"HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd"
+		// 		"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
+		// 		"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HuntingOptic",
+		// 		"Battery9V", "Battery9V",
+		// 		"RGD5Grenade", "M67Grenade"
+		// 	});
 
 		// HH_AugA1
 		PlayerSet set15 = new PlayerSet(
 			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_Black"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_AugA1",
@@ -545,10 +576,13 @@ class SetupPlayerOptions
 			},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
+			"HH_Vest_IOTV_Black",
 			{
-				"HH_PlateCarrierHolster_back",
-                "HH_PlateCarrierPouches_black"
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
 			},
 
 			// Содержимое карманов
@@ -556,16 +590,16 @@ class SetupPlayerOptions
 				"HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd", "HH_Mag_PMAG_D_60Rnd",
 				"Ammo_556x45", "Ammo_556x45", "Ammo_556x45", "Ammo_556x45",  "Ammo_556x45",  "Ammo_556x45",
 				"HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd"
-				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
-				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HuntingOptic",
+				"HH_Bandage", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", 
+				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint",
 				"Battery9V", "Battery9V",
-				"RGD5Grenade", "M67Grenade"
+				"RGD5Grenade", "M67Grenade", "Vodka"
 			});
 
 		// HH_Famas
 		PlayerSet set16 = new PlayerSet(
 			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
+			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "Sneakers_Red"}, 
 
 			// оружие, тип магазина и обвесы
 			"HH_Famas",
@@ -588,37 +622,40 @@ class SetupPlayerOptions
 			},
 
 			// Броник и обвесы
-			"HH_PlateCarrierVest_black",
+			"HH_Vest_IOTV_Black",
 			{
-				"HH_PlateCarrierHolster_back",
-                "HH_PlateCarrierPouches_black"
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
 			},
 
 			// Содержимое карманов
 			{
-				"Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd",
-				"Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP", "Ammo_9x39AP",  "Ammo_9x39AP",  "Ammo_9x39AP",
+				"Mag_STANAGCoupled_30Rnd", "Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd", "Mag_STANAG_30Rnd",
+				"Ammo_556x45", "Ammo_556x45", "Ammo_556x45", "Ammo_556x45",  "Ammo_556x45",  "Ammo_556x45",
 				"HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd", "HH_Mag_Glock18c_50Rnd"
-				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
+				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing",
 				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HuntingOptic",
 				"Battery9V", "Battery9V",
-				"RGD5Grenade", "M67Grenade"
+				"RGD5Grenade", "M67Grenade", "RGD5Grenade", "M67Grenade", "Vodka",
 			});
 
-		// HH_DVL10
+		// HH_AWM
 		PlayerSet set17 = new PlayerSet(
 			// одежда
-			{"TacticalGloves_Black", "TacticalShirt_Black", "HH_Pants_kneepads_black", "HH_Military_Boots_Black"}, 
+			{ "TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Black", "TacticalGloves_Green", "GhillieTop_Woodland"}, 
 
 			// оружие, тип магазина и обвесы
-			"HH_AVM",
+			"HH_AWM",
 			"HH_Mag_AWM_10Rnd",
-			{"HuntingOptic"},
+			{"HuntingOptic", "GhillieAtt_Woodland"},
 
 			// второе оружие, тип магазина и обвесы
-			"",
-			"",
-			{""},
+			"HH_Glock18c",
+			"HH_Mag_Glock18c_50Rnd",
+			{"HH_Glock18C_Hndgrd_Black", "FNP45_MRDSOptic", "PistolSuppressor"},
 
 
 			// Шлем и обвесы
@@ -643,13 +680,102 @@ class SetupPlayerOptions
 			// Содержимое карманов
 			{
 				"HH_Mag_AWM_10Rnd", "HH_Mag_AWM_10Rnd", "HH_Mag_AWM_10Rnd", "HH_Mag_AWM_10Rnd", "HH_Mag_AWM_10Rnd", "HH_Mag_AWM_10Rnd",
-				"HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338",  "HH_Ammo_338",  "HH_Ammo_338",
-				"BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
+				"HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338",  "HH_Ammo_338",  "HH_Ammo_338",
+				"HH_Bandage",  "HH_Bandage", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
 				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HH_LongRangeOptics_x24_Black",
 				"Battery9V", "Battery9V",
 				"RGD5Grenade", "M67Grenade"
 			});
 
+		// HH_SV98
+		PlayerSet set18 = new PlayerSet(
+			// одежда
+			{ "TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Black", "TacticalGloves_Green", "GhillieBushrag_Woodland"}, 
+
+			// оружие, тип магазина и обвесы
+			"HH_SV98",
+			"HH_Mag_SV98_10Rnd",
+			{"HuntingOptic", "GhillieAtt_Woodland"},
+
+			// второе оружие, тип магазина и обвесы
+			"HH_Glock18c",
+			"HH_Mag_Glock18c_50Rnd",
+			{"HH_Glock18C_Hndgrd_Black", "FNP45_MRDSOptic", "PistolSuppressor"},
+
+
+			// Шлем и обвесы
+			"HH_Ops_Core_F_Black", 
+			{
+				"HH_Ops_Core_F_Ear_Black",
+				"HH_Ops_Core_F_Visor_Black",
+				"HH_Ops_Core_F_Mandible_Black",
+				"HH_Ops_Core_F_SLAAP_Black"
+			},
+
+			// Броник и обвесы
+			"HH_Vest_IOTV_Black",
+			{
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
+			},
+
+			// Содержимое карманов
+			{
+				"HH_Mag_SV98_10Rnd", "HH_Mag_SV98_10Rnd", "HH_Mag_SV98_10Rnd", "HH_Mag_SV98_10Rnd", "HH_Mag_SV98_10Rnd", "HH_Mag_SV98_10Rnd",
+				"HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338", "HH_Ammo_338",  "HH_Ammo_338",  "HH_Ammo_338",
+				"HH_Bandage",  "HH_Bandage", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
+				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HH_LongRangeOptics_x24_Black",
+				"Battery9V", "Battery9V",
+				"RGD5Grenade", "M67Grenade"
+			});
+
+		// HH_M200_Black
+		PlayerSet set19 = new PlayerSet(
+			// одежда
+			{ "TTsKOJacket_Camo", "HH_Pants_kneepads_TTSKO", "Sneakers_Black", "TacticalGloves_Green", "GhillieBushrag_Woodland"}, 
+
+			// оружие, тип магазина и обвесы
+			"HH_M200_Black",
+			"HH_Mag_M200_7Rnd",
+			{"HuntingOptic", "GhillieAtt_Woodland"},
+
+			// второе оружие, тип магазина и обвесы
+			"HH_Glock18c",
+			"HH_Mag_Glock18c_50Rnd",
+			{"HH_Glock18C_Hndgrd_Black", "FNP45_MRDSOptic", "PistolSuppressor"},
+
+
+			// Шлем и обвесы
+			"HH_Ops_Core_F_Black", 
+			{
+				"HH_Ops_Core_F_Ear_Black",
+				"HH_Ops_Core_F_Visor_Black",
+				"HH_Ops_Core_F_Mandible_Black",
+				"HH_Ops_Core_F_SLAAP_Black"
+			},
+
+			// Броник и обвесы
+			"HH_Vest_IOTV_Black",
+			{
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Grenade_Pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_Mag_pounch_Black",
+				"HH_Vest_IOTV_BackPocketIFAK_Black",
+			},
+
+			// Содержимое карманов
+			{
+				"HH_Mag_M200_7Rnd", "HH_Mag_M200_7Rnd", "HH_Mag_M200_7Rnd", "HH_Mag_M200_7Rnd", "HH_Mag_M200_7Rnd", "HH_Mag_M200_7Rnd",
+				"HH_Ammo_408", "HH_Ammo_408", "HH_Ammo_408", "HH_Ammo_408", "HH_Ammo_408",  "HH_Ammo_408",  "HH_Ammo_408",
+				"HH_Bandage",  "HH_Bandage", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "BandageDressing", "Vodka",
+				"Epinephrine", "Epinephrine", "PainKillerTablets", "PainKillerTablets", "TetracyclineAntibiotics", "TetracyclineAntibiotics", "Morphine", "Morphine", "Splint", "HH_LongRangeOptics_x24_Black",
+				"Battery9V", "Battery9V",
+				"RGD5Grenade", "M67Grenade"
+			});
 
 		this.PlayerSetups.Insert(set1);
 		this.PlayerSetups.Insert(set2);
@@ -657,17 +783,19 @@ class SetupPlayerOptions
 		this.PlayerSetups.Insert(set4);
 		this.PlayerSetups.Insert(set5);
 		this.PlayerSetups.Insert(set6);
-		this.PlayerSetups.Insert(set7);
+		// this.PlayerSetups.Insert(set7);
 		this.PlayerSetups.Insert(set8);
 		this.PlayerSetups.Insert(set9);
 		this.PlayerSetups.Insert(set10);
 		this.PlayerSetups.Insert(set11);
 		this.PlayerSetups.Insert(set12);
 		this.PlayerSetups.Insert(set13);
-		this.PlayerSetups.Insert(set14);
+		// this.PlayerSetups.Insert(set14);
 		this.PlayerSetups.Insert(set15);
 		this.PlayerSetups.Insert(set16);
 		this.PlayerSetups.Insert(set17);
+		this.PlayerSetups.Insert(set18);
+		this.PlayerSetups.Insert(set19);
 	}
 }
 

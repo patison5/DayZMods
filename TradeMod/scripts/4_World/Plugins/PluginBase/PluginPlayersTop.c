@@ -41,7 +41,7 @@ class PluginPlayersTop extends PluginBase
 		JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_PLAYERS + steamId + ".json", _plData);
 
 		if (player.GetIdentity()) {
-			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.killstreak.ToString());
+			auto param4 = new Param4<string, string, string, string>(_plData.playerName, _plData.kills.ToString(), _plData.deadth.ToString(), _plData.maxRangeKill.ToString());
 			GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_TOP, param4, true, player.GetIdentity());
 		}
 		
@@ -106,6 +106,16 @@ class PluginPlayersTop extends PluginBase
 			_KillerAllInfo.weaponsData.Insert(wpName, wpStats);
 		}
 
+		// проверка килстрайка
+		if (_plData.killstreak % 5 == 0) {
+			Print("ДОМИНИРОВАНИЕ!");
+
+			if (killer && killer.IsAlive()) {
+				EntityAI v_SoundSource = killer;
+				v_SoundSource.PlaySound( "Dominating", 50 );
+			}
+		}
+
 		JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + KillerSteamId + ".json",   _KillerAllInfo);
 	}
 
@@ -122,6 +132,20 @@ class PluginPlayersTop extends PluginBase
 				JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + steamId + ".json",   _KillerAllInfo);
 			}
 		}
+	}
+
+	void updateFinishedMatches (PlayerBase player) {
+		string steamId = player.GetIdentity().GetPlainId();
+		JsonFileLoader<ref PlayerStatisticAllInfo>.JsonLoadFile(S_COMMON + steamId + ".json", _KillerAllInfo);
+		_KillerAllInfo.matchesPlayed = _KillerAllInfo.matchesPlayed + 1; 
+		JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + steamId + ".json", _KillerAllInfo);
+	}
+
+	void updateWonMatchesCount (PlayerBase player) {
+		string steamId = player.GetIdentity().GetPlainId();
+		JsonFileLoader<ref PlayerStatisticAllInfo>.JsonLoadFile(S_COMMON + steamId + ".json", _KillerAllInfo);
+		_KillerAllInfo.matchesWon = _KillerAllInfo.matchesWon + 1;
+		JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + steamId + ".json", _KillerAllInfo);
 	}
 
 	void updateDeaths (PlayerBase player, Object weapon) {
@@ -209,7 +233,7 @@ class PluginPlayersTop extends PluginBase
 
 		Print("Дата : [dmgZone] 		: " + dmgZone);
 		Print("Дата : [damageResult] 	: " + damageResult.GetDamage(dmgZone, "Health"));
-		Print("Дата : [damageType]  : " 	+ damageType.ToString());
+		Print("Дата : [damageType]      : " + damageType.ToString());
 		Print("Дата : [GetDisplayName]  : " + source.GetDisplayName());
 
 		//-----------------------------------------
@@ -224,6 +248,51 @@ class PluginPlayersTop extends PluginBase
 
 		JsonFileLoader<ref PlayerStatisticAllInfo>.JsonLoadFile(S_COMMON + killerSteamId + ".json", _KillerAllInfo);
 		JsonFileLoader<ref PlayerStatisticAllInfo>.JsonLoadFile(S_COMMON + victimSteamId + ".json", _VictimAllInfo);
+		JsonFileLoader<ref PlayerStatisticInfo>.JsonLoadFile(S_PLAYERS + killerSteamId + ".json", _plData);
+
+		switch (dmgZone) {
+			case "LeftFoot": { 
+				_plData.leftFoot = _plData.leftFoot + 1;
+				break;            
+			}
+			case "RightFoot": { 
+				_plData.rightFoot = _plData.rightFoot + 1;
+				break;            
+			}
+			case "LeftLeg": { 
+				_plData.leftLeg = _plData.leftLeg + 1;
+				break;            
+			}
+			case "RightLeg": { 
+				_plData.rightLeg = _plData.rightLeg + 1;
+				break;            
+			}
+			case "Torso": { 
+				_plData.torso = _plData.torso + 1;
+				break;            
+			}
+			case "Head": { 
+				_plData.head = _plData.head + 1;
+				break;            
+			}
+			case "LeftHand": { 
+				_plData.leftHand = _plData.leftHand + 1;
+				break;            
+			}
+			case "RightHand": { 
+				_plData.rightHand = _plData.rightHand + 1;
+				break;            
+			}
+			case "LeftArm": { 
+				_plData.leftArm = _plData.leftArm + 1;
+				break;            
+			}
+			case "RightArm": { 
+				_plData.rightArm = _plData.rightArm + 1;
+				break;            
+			}
+		}
+
 
 		// обновляем килы в долгосрочном файле
 		if (source.IsWeapon() || source.IsMeleeWeapon()) {
@@ -274,6 +343,7 @@ class PluginPlayersTop extends PluginBase
 
 			JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + killerSteamId + ".json",   _KillerAllInfo);
 			JsonFileLoader<ref PlayerStatisticAllInfo>.JsonSaveFile(S_COMMON + victimSteamId + ".json",   _VictimAllInfo);
+			JsonFileLoader<ref PlayerStatisticInfo>.JsonSaveFile(S_PLAYERS + killerSteamId + ".json", _plData);
 		}
 
 		// Print("Дата : [distance]  : " 		+ distance.ToString());
@@ -286,11 +356,6 @@ class PluginPlayersTop extends PluginBase
 	{
 		if (player && player.GetIdentity()) {
 			Print("Fuck, " + player.GetIdentity().GetName() +  " commited Suicided");
-
-			// readPlayerData(m_Source);
-			// _plData.deadth = _plData.deadth + 1;
-			// _plData.killstreak = 0;
-			// updatePlayerData(m_Source);
 		}
 	}
 

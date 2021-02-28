@@ -16,14 +16,18 @@ modded class PlayerBase
     override void OnPlayerLoaded()
 	{
 		super.OnPlayerLoaded();
-		//зачатки вызова анимации при создании магазина
+		
 		// Weapon_Base wpn = Weapon_Base.Cast(GetItemInHands());
 		// int mi = wpn.GetCurrentMuzzle();
 		// Magazine mag = wpn.GetMagazine(mi);
 		// GetWeaponManager().LoadBullet( mag );
 		// GetWeaponManager().RefreshAnimationState();
 
-		this.QuickReloadWeapon(this.GetHumanInventory().GetEntityInHands());
+
+		// this.QuickReloadWeapon(this.GetHumanInventory().GetEntityInHands());
+
+		//godmod
+		SetAllowDamage(true);
 	}
 
 
@@ -43,52 +47,30 @@ modded class PlayerBase
 
     override void OnJumpStart () {
     	super.OnJumpStart();
-		Print(GetInstanceType().ToString());
-
+  
     	JsonFileLoader<ref array <string>>.JsonLoadFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
     	spawnPoings.Insert(this.GetPosition().ToString());
-    	//JsonFileLoader<ref array <string>>.JsonSaveFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
+    	JsonFileLoader<ref array <string>>.JsonSaveFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
 
     	string message = "Привет, " + GetAnnouncePlayerPrefix(this.GetIdentity()) + " (" + this.GetIdentity().GetPlainId() + ")";
 
 		SendMessage(this.GetPosition().ToString());
-
-		PlayerBase customPlayer = PlayerBase.Cast(GetGame().CreateObject( "SurvivorM_Boris", this.GetPosition(), false, true, true ));
-		customPlayer.GetInventory().CreateInInventory("HH_K63_Helmet_Green");
     }
 
     override void EEKilled(Object killer)
 	{
+		// if(!killer) return;
 
-		Print("PlayerBase.c EEKilled()");
-		if(!killer) return;
+  //       PlayerBase pl = PlayerBase.Cast(EntityAI.Cast(killer).GetHierarchyParent());
+  //       if(!pl || !pl.IsPlayer()) return;
 
-        PlayerBase player = PlayerBase.Cast(EntityAI.Cast(killer).GetHierarchyParent());
-        if(!player || !player.IsPlayer()) return;
+  //       float distance = vector.Distance( player.GetPosition(), GetPosition() );
+		// Print("Оружие " + killer.GetDisplayName());
+		// Print("Дистанция : " + distance.ToString());
 
-		float distance = vector.Distance( player.GetPosition(), GetPosition() );
-		Print("Оружие " + killer.GetDisplayName());
-		Print("Дистанция : " + distance.ToString());
-
-		if (m_playerTop) {
+		if (m_playerTop)
 			m_playerTop.PlayerKilled(PlayerBase.Cast(this), killer);
-		}
 
-		// Remove entity in hands
-        // EntityAI inHandsItem = this.GetHumanInventory().GetEntityInHands();
-
-        // if (inHandsItem != null) {
-        //     // GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(removeItem, 1500, false, inHandsItem);
-        //     // Print("В руках есть оружие, ща удалим чувак");
-        // } else {
-        // 	Print(TOP_PREFIX + "NO WEAPON IN HANDS");
-        // }
-
-        // hh_weaponDeletion = GetWeaponDeletion();
-        // entities = hh_weaponDeletion.GetEntities();
-        // hh_weaponDeletion.checkAndRemove();
-
-        // Remove body
         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().ObjectDelete, 10000, false, this);
 		
 		super.EEKilled(killer);
@@ -97,16 +79,14 @@ modded class PlayerBase
 	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
 	{
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
-
-		if(!this || !source || !damageResult) return;
-        if(this == source || !this.IsPlayer() || !this.IsAlive()) return;
-        if(damageType != DT_FIRE_ARM) return;
+		
+		if ( !this || !source || !damageResult ) return;
+        if ( this == source || !this.IsPlayer() || !this.IsAlive() ) return;
+        if ( damageType != DT_FIRE_ARM ) return;
 
         PlayerBase player = PlayerBase.Cast(source.GetHierarchyParent());
 
-        if(!player || !player.IsPlayer()) return;
-
-		//m_KillFeed.PlayerHitBy(damageType, PlayerBase.Cast(this), source, ammo);
+        if ( !player || !player.IsPlayer() ) return;
 
 		m_playerTop.EEHitBy(player, this, damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 	}
@@ -123,9 +103,6 @@ modded class PlayerBase
 		
 		return a_PlayerName;
 	}
-
-
-
 
 	override void ReloadWeapon( EntityAI weapon, EntityAI magazine ) {
 		super.ReloadWeapon(weapon, magazine);

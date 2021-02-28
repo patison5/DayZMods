@@ -2,15 +2,26 @@ class PlayerStatisticAllInfo
 {
 	string steamID64 = "";
 	string playerName = "";
+
 	int kills = 0;
 	int deaths = 0;
 	int maxKillstreak = 0;
 	float maxRangeKill = 0;
 	float maxKD = 0;
 
+	int leftFoot = 0;
+	int rightFoot = 0;
+	int leftLeg = 0;
+	int rightLeg = 0;
+	int torso = 0;
+	int head = 0;
+
+	int matchesPlayed = 0;
+	int matchesWon = 0;
+
 	ref map<string, ref WeaponStatistic> weaponsData = new map<string, ref WeaponStatistic>();
 
-	void PlayerStatisticInfo() {}
+	void PlayerStatisticInfo() { }
 
 	void setSteamId (string steamID64) {
 		this.steamID64 = steamID64;
@@ -42,7 +53,6 @@ class WeaponStatistic
 	float longestHit = 0;
 
 	void WeaponStatistic() {
-		Print("создаю новый ствол");
 		this.kills  = 0;
 		this.deaths = 0;
 		this.damageDealt = 0;

@@ -16,23 +16,39 @@ modded class MissionGameplay
 {
     private ref UIHudTop myHudTop;
 
+    // override void MissionGameplay () {
+    //     super.MissionGameplay();
 
-    Widget Thirsty;
-    Widget Hungry;
-    Widget Temperature;
+    //     Print("MissionGameplay конструктор был вызван");
+    // }
+
+    // override void ~MissionGameplay() {
+    //     super.~MissionGameplay();
+
+    //     Print("~MissionGameplay деструктор был вызван");
+    // }
+
 
     override void OnInit()
     {
         super.OnInit();
 
-        Thirsty = Widget.Cast(m_HudRootWidget.FindAnyWidget("Thirsty"));
-        Thirsty.Show(false);
+        Print("MissionGameplay onInit был вызван!");
 
-        Hungry = Widget.Cast(m_HudRootWidget.FindAnyWidget("Hungry"));
-        Hungry.Show(false);
 
-        Temperature = Widget.Cast(m_HudRootWidget.FindAnyWidget("Temperature"));
-        Temperature.Show(false);
+
+        // if (!myHudTop) {
+        //     myHudTop = UIHudTop.Cast(GetUIManager().EnterScriptedMenu(UI_TOP_LAYOUT, null));
+
+        //     // if ((!myHudTop.IsMenuOpen()) && (GetGame().GetUIManager().GetMenu() == NULL)) {
+        //     //     //Show Menu
+        //     //     GetGame().GetUIManager().ShowScriptedMenu(myHudTop, NULL);
+        //     //     myHudTop.SetMenuOpen(false);
+        //     // }
+
+        //     // myHudTop.SetMenuOpen(true);
+        //     // GetGame().GetUIManager().HideScriptedMenu(myHudTop);
+        // }
     }
 
     override void OnMissionStart()
@@ -133,6 +149,7 @@ modded class MissionGameplay
 
     override void OnKeyPress(int key) {
         super.OnKeyPress(key);
+        ref EarPlugs ears = EarPlugs.Cast(GetPlugin(EarPlugs));
         
         if (key == KeyCode.KC_ESCAPE) {
 
@@ -147,5 +164,17 @@ modded class MissionGameplay
             //     myHudTop = NULL;            
             // }           
         }
+
+        if (key == KeyCode.KC_MINUS) {
+            ears.decreaseVolume();
+            Print("Убавляем звук");
+        } else if (key == KeyCode.KC_EQUALS) {
+            ears.riseVolume();
+            Print("Прибавляем звук");
+        }
+
+        // switch (key) {
+        //     case KeyCode.KC_MINUS: 
+        // }
     }
 };

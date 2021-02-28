@@ -7,290 +7,278 @@ FrameWidgetClass rootFrame {
  hexactsize 0
  vexactsize 0
  {
-  FrameWidgetClass FrameWidget0 {
+  WrapSpacerWidgetClass wrapper {
    ignorepointer 1
-   size 1 1
-   halign center_ref
-   valign center_ref
+   size 240 40
    hexactpos 1
    vexactpos 1
-   hexactsize 0
-   vexactsize 0
+   hexactsize 1
+   vexactsize 1
+   priority 100
+   Padding 4
+   Margin 0
    {
-    WrapSpacerWidgetClass wrapper {
+    PanelWidgetClass kills {
      ignorepointer 1
-     size 240 40
+     color 0 0 0 0.5882
+     position 10 5
+     size 70 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 0
+     style rover_sim_colorable
+     {
+      PanelWidgetClass separator1 {
+       ignorepointer 1
+       color 0.2941 0.1137 0.1137 1
+       size 1 5
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style rover_sim_colorable
+      }
+      GridSpacerWidgetClass grid1 {
+       ignorepointer 1
+       position 0 4
+       size 30 30
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       Padding 5
+       Margin 0
+       "Size To Content H" 1
+       Columns 2
+       Rows 1
+       {
+        FrameWidgetClass img_wrap1 {
+         ignorepointer 1
+         position 10 10
+         size 30 25
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass img1 {
+           ignorepointer 1
+           size 20 25
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{0F2BB3B42DB53B1B}MyMods/TradeMod/GUI/images/kils.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
+          }
+         }
+        }
+        TextWidgetClass kills_value {
+         ignorepointer 1
+         position 10 10
+         size 30 40
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "123"
+         font "gui/fonts/etelkatextpro"
+         "text offset" 0 1
+         text_proportion 0.5
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+     }
+    }
+    PanelWidgetClass deaths {
+     ignorepointer 1
+     color 0 0 0 0.5882
+     position 10 5
+     size 70 40
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
-     priority 100
-     Padding 4
-     Margin 0
+     style rover_sim_colorable
      {
-      PanelWidgetClass kills {
+      PanelWidgetClass separaro2 {
        ignorepointer 1
-       color 0 0 0 0.5882
-       position 10 5
-       size 70 1
+       color 0.2941 0.1137 0.1137 1
+       size 1 5
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style rover_sim_colorable
+      }
+      GridSpacerWidgetClass grid2 {
+       ignorepointer 1
+       position 0 4
+       size 48 30
+       halign center_ref
+       valign bottom_ref
        hexactpos 1
        vexactpos 1
        hexactsize 1
-       vexactsize 0
-       style rover_sim_colorable
+       vexactsize 1
+       Margin 0
+       "Size To Content H" 1
+       Columns 2
+       Rows 1
        {
-        PanelWidgetClass separator1 {
+        FrameWidgetClass img_wrap2 {
          ignorepointer 1
-         color 0.2941 0.1137 0.1137 1
-         size 1 5
-         halign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 0
-         vexactsize 1
-         style rover_sim_colorable
-        }
-        GridSpacerWidgetClass grid1 {
-         ignorepointer 1
-         position 0 4
+         position 10 10
          size 30 30
-         halign center_ref
-         valign bottom_ref
          hexactpos 1
          vexactpos 1
          hexactsize 1
          vexactsize 1
-         Padding 5
-         Margin 0
-         "Size To Content H" 1
-         Columns 2
-         Rows 1
          {
-          FrameWidgetClass img_wrap1 {
+          ImageWidgetClass img2 {
            ignorepointer 1
-           position 10 10
-           size 30 25
+           size 22 24.75
+           halign center_ref
+           valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           {
-            ImageWidgetClass img1 {
-             ignorepointer 1
-             size 20 25
-             halign center_ref
-             valign center_ref
-             hexactpos 1
-             vexactpos 1
-             hexactsize 1
-             vexactsize 1
-             imageTexture "{0F2BB3B42DB53B1B}MyMods/TradeMod/GUI/images/kils.edds"
-             mode blend
-             "src alpha" 1
-             "no wrap" 1
-             stretch 1
-            }
-           }
-          }
-          TextWidgetClass kills_value {
-           ignorepointer 1
-           position 10 10
-           size 30 40
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           text "123"
-           font "gui/fonts/etelkatextpro"
-           "text offset" 0 1
-           text_proportion 0.5
-           "text halign" center
-           "text valign" center
+           imageTexture "{DB34A7F5CF558102}MyMods/TradeMod/GUI/images/deaths.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
           }
          }
         }
+        TextWidgetClass deaths_value {
+         ignorepointer 1
+         position 10 10
+         size 30 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "123"
+         font "gui/fonts/etelkatextpro"
+         "text offset" 0 1
+         text_proportion 0.5
+         "text halign" center
+         "text valign" center
+        }
        }
       }
-      PanelWidgetClass deaths {
+     }
+    }
+    PanelWidgetClass distance {
+     ignorepointer 1
+     color 0 0 0 0.5882
+     position 10 5
+     size 90 40
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style rover_sim_colorable
+     {
+      PanelWidgetClass separator3 {
        ignorepointer 1
-       color 0 0 0 0.5882
-       position 10 5
-       size 70 40
+       color 0.2941 0.1137 0.1137 1
+       size 1 5
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style rover_sim_colorable
+      }
+      GridSpacerWidgetClass grid3 {
+       ignorepointer 1
+       position 0 4
+       size 48 30
+       halign center_ref
+       valign bottom_ref
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       style rover_sim_colorable
+       Margin 0
+       "Size To Content H" 1
+       content_halign center
+       content_valign center
+       Columns 2
+       Rows 1
        {
-        PanelWidgetClass separaro2 {
+        FrameWidgetClass img_wrap3 {
+         visible 1
          ignorepointer 1
-         color 0.2941 0.1137 0.1137 1
-         size 1 5
-         halign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 0
-         vexactsize 1
-         style rover_sim_colorable
-        }
-        GridSpacerWidgetClass grid2 {
-         ignorepointer 1
-         position 0 4
-         size 48 30
-         halign center_ref
-         valign bottom_ref
+         position 10 10
+         size 30 30
          hexactpos 1
          vexactpos 1
          hexactsize 1
          vexactsize 1
-         Margin 0
-         "Size To Content H" 1
-         Columns 2
-         Rows 1
          {
-          FrameWidgetClass img_wrap2 {
+          ImageWidgetClass img3 {
            ignorepointer 1
-           position 10 10
-           size 30 30
+           size 24 24
+           halign center_ref
+           valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           {
-            ImageWidgetClass img2 {
-             ignorepointer 1
-             size 22 24.75
-             halign center_ref
-             valign center_ref
-             hexactpos 1
-             vexactpos 1
-             hexactsize 1
-             vexactsize 1
-             imageTexture "{DB34A7F5CF558102}MyMods/TradeMod/GUI/images/deaths.edds"
-             mode blend
-             "src alpha" 1
-             "no wrap" 1
-             stretch 1
-            }
-           }
-          }
-          TextWidgetClass deaths_value {
-           ignorepointer 1
-           position 10 10
-           size 30 48
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           text "123"
-           font "gui/fonts/etelkatextpro"
-           "text offset" 0 1
-           text_proportion 0.5
-           "text halign" center
-           "text valign" center
+           imageTexture "{D8264FB211B885E4}MyMods/TradeMod/GUI/images/distance.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 1
+           stretch 1
           }
          }
         }
-       }
-      }
-      PanelWidgetClass distance {
-       ignorepointer 1
-       color 0 0 0 0.5882
-       position 10 5
-       size 90 40
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style rover_sim_colorable
-       {
-        PanelWidgetClass separator3 {
+        WrapSpacerWidgetClass WrapSpacerWidget0 {
          ignorepointer 1
-         color 0.2941 0.1137 0.1137 1
-         size 1 5
-         halign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 0
-         vexactsize 1
-         style rover_sim_colorable
-        }
-        GridSpacerWidgetClass grid3 {
-         ignorepointer 1
-         position 0 4
-         size 48 30
-         halign center_ref
-         valign bottom_ref
+         position 10 10
+         size 50 30
          hexactpos 1
          vexactpos 1
          hexactsize 1
          vexactsize 1
+         Padding 0
          Margin 0
-         "Size To Content H" 1
          content_halign center
          content_valign center
-         Columns 2
-         Rows 1
          {
-          FrameWidgetClass img_wrap3 {
-           visible 1
+          TextWidgetClass distance_value {
            ignorepointer 1
-           position 10 10
-           size 30 30
+           size 48 20
+           halign center_ref
+           valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           {
-            ImageWidgetClass img3 {
-             ignorepointer 1
-             size 24 24
-             halign center_ref
-             valign center_ref
-             hexactpos 1
-             vexactpos 1
-             hexactsize 1
-             vexactsize 1
-             imageTexture "{D8264FB211B885E4}MyMods/TradeMod/GUI/images/distance.edds"
-             mode blend
-             "src alpha" 1
-             "no wrap" 1
-             stretch 1
-            }
-           }
-          }
-          WrapSpacerWidgetClass WrapSpacerWidget0 {
-           ignorepointer 1
-           position 10 10
-           size 50 30
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           Padding 0
-           Margin 0
-           content_halign center
-           content_valign center
-           {
-            TextWidgetClass distance_value {
-             ignorepointer 1
-             size 48 20
-             halign center_ref
-             valign center_ref
-             hexactpos 1
-             vexactpos 1
-             hexactsize 1
-             vexactsize 1
-             text "1000m"
-             font "gui/fonts/etelkatextpro"
-             "text offset" 0 1
-             text_proportion 0.7
-             "size to text h" 1
-             "size to text v" 0
-             "text halign" center
-             "text valign" center
-            }
-           }
+           text "1000m"
+           font "gui/fonts/etelkatextpro"
+           "text offset" 0 1
+           text_proportion 0.7
+           "size to text h" 1
+           "size to text v" 0
+           "text halign" center
+           "text valign" center
           }
          }
         }

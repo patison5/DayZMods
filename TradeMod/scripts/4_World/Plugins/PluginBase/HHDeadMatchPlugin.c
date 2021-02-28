@@ -7,7 +7,7 @@ class HHDeadMatchPlugin extends PluginBase
 
     bool isEnded = false;
     private int timeOut = 30;
-    private int roundTime = 550;
+    private int roundTime = 90;
 
     private int timeOutCounter = timeOut;
 
@@ -15,10 +15,11 @@ class HHDeadMatchPlugin extends PluginBase
 
     ref PluginSpawnSelection spawnPlugin;
 
+    // private ref map<string, int> mapVote = new map<string, int>();
+
     void HHDeadMatchPlugin () {
     	Print("HHDeadMatchPlugin был проинициализирован");
 
-        // delete that function
     	roundTimer	= new ref Timer();
         roundTimer.Run(roundTime, this, "endRound", NULL, true);
 
@@ -34,11 +35,23 @@ class HHDeadMatchPlugin extends PluginBase
 
             summurizePlayersStatistic();
             getBestTenPlayers();
+            updateFinishedPlayers();
     		showPlayerEndedGUI();
+            addGodModToAll();
 
     		delayTimeout.Run(timeOut, this, "startRound", new Param1<string>(" новый раунд начался"), false);
     		changeTimer(); //обратный отсчет на клиенте
 	    }
+    }
+
+    void addGodModToAll () {
+        ref array<Man> players = new array<Man>;
+        
+        GetGame().GetPlayers( players );
+        foreach( auto player : players  )
+        {
+            player.SetAllowDamage(false)
+        }
     }
 
     void summurizePlayersStatistic () {
@@ -83,7 +96,23 @@ class HHDeadMatchPlugin extends PluginBase
         }
     }
 
-  
+    // этот метод собирает инфу по всем игрокам и сохраняет статистику победителей и участников
+    void updateFinishedPlayers () {
+
+        ref PluginPlayersTop m_playerTop = PluginPlayersTop.Cast(GetPlugin(PluginPlayersTop));
+        
+        ref array<Man> players = new array<Man>;
+        GetGame().GetPlayers( players );
+        foreach( auto player : players  )
+        {
+            m_playerTop.updateFinishedMatches(player);
+
+            if ((_players[0].steamID64 == player.GetIdentity().GetPlainId()) && (_players[0].kills != 0)) {
+                Print(" THE WINNER IS : " + _players[0].playerName + " [ " + _players[0].steamID64 + " ]" )
+                m_playerTop.updateWonMatchesCount(player);
+            }
+        }
+    }
 
     void resetPlayersStatistic () {
     	// сбрасываем статистику
@@ -96,23 +125,8 @@ class HHDeadMatchPlugin extends PluginBase
     }
 
     void startRound (string msg) {
-    	// SendMessageToAll(msg);
-
-        // ref array<Man> players = new array<Man>;
-        // GetGame().GetPlayers( players );
-        // foreach( auto player : players  )
-        // {
-        //     if (player.GetIdentity()) {
-        //         GetGame().RPCSingleParam(player, HHRPCEnum.RPC_SELECT_CURRENT_MAP, NULL, true, player.GetIdentity());
-        //         Print("отправляю данные с выбором карты");
-        //     }
-        // }
-
         spawnPlugin = GetSpawnPlugin();
         spawnPlugin.selectCurrentMap();
-
-        // if (spawnPlugin)
-        // else Print("spawnPlugin БЛЯТЬ НУ ПОЧЕМУ ЕГО НЕТ?")
 
     	closePlayerEndedGUI();
    		killAllPlayers();
@@ -129,7 +143,6 @@ class HHDeadMatchPlugin extends PluginBase
     }
 
 
-
     void showPlayerEndedGUI () {
     	// отображаем игроку статистику топа и рисуем варианты выбора карты
     	ref array<Man> players = new array<Man>;
@@ -138,6 +151,8 @@ class HHDeadMatchPlugin extends PluginBase
         {
             if (player.GetIdentity()) {
                 auto param4 = new Param1<ref array<ref PlayerStatisticInfo>>(_players);
+                if (_players) Print(TOP_PREFIX + _players.Count() + "шт");
+
 				GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_SHOW_END_SCREEN, param4, true, player.GetIdentity());
 			}
         }
@@ -157,16 +172,20 @@ class HHDeadMatchPlugin extends PluginBase
     }
 
     void updateMainScreenTimer (string time) {
+    	ref array<Man> players = new array<Man>;
+
         ref PluginSpawnSelection spawnPlugin = GetSpawnPlugin();
         ref map<string, int> voteData = spawnPlugin.getVoteData();
-    	ref array<Man> players = new array<Man>;
 
     	GetGame().GetPlayers( players );
     	foreach( auto player : players  )
         {
             if (player.GetIdentity()) {
-                auto param5 = new Param3<string, ref array<ref PlayerStatisticInfo>, ref map<string, int>>(time, _players, voteData);
-				GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_MAIN_SCREEN_TIMER, param5, true, player.GetIdentity());
+
+                ref PlayerStatisticAllInfo plLongData = findCurrentPlayerAllStatistic(player.GetIdentity().GetPlainId());
+
+                auto param5 = new Param4<string, ref array<ref PlayerStatisticInfo>, ref map<string, int>,  ref PlayerStatisticAllInfo>(time, _players, voteData, plLongData);
+                GetGame().RPCSingleParam(player, HHRPCEnum.RPC_CLIENT_UPDATE_MAIN_SCREEN_TIMER, param5, true, player.GetIdentity());
 			}
         }
     }
@@ -176,10 +195,18 @@ class HHDeadMatchPlugin extends PluginBase
     	GetGame().GetPlayers( players );
     	foreach( auto player : players  )
         {
+            player.SetAllowDamage(true);
             player.SetHealth("","",-100);
         }
     }
 
+
+
+    ref PlayerStatisticAllInfo findCurrentPlayerAllStatistic (string steamId) {
+        ref PlayerStatisticAllInfo _plLongData;
+        JsonFileLoader<ref PlayerStatisticAllInfo>.JsonLoadFile(S_COMMON + steamId + ".json", _plLongData);
+        return _plLongData;
+    }
 
     void sendMessage (PlayerBase player, string message) {
     	Param1<string> m_MessageParam = new Param1<string>(TOP_PREFIX + message);

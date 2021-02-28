@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{91D9B3326EAD5949}MyMods/TradeMod/GUI/images/human.edds"
+ Author "desktop-19ljvs9"
+ ChangeDate 413493844
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "human.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}
