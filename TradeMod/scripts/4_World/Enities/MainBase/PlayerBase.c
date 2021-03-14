@@ -47,14 +47,23 @@ modded class PlayerBase
 
     override void OnJumpStart () {
     	super.OnJumpStart();
-  
-    	JsonFileLoader<ref array <string>>.JsonLoadFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
-    	spawnPoings.Insert(this.GetPosition().ToString());
-    	JsonFileLoader<ref array <string>>.JsonSaveFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
+  	
 
-    	string message = "Привет, " + GetAnnouncePlayerPrefix(this.GetIdentity()) + " (" + this.GetIdentity().GetPlainId() + ")";
+    	PlayerIdentity identity = this.GetIdentity()
 
-		SendMessage(this.GetPosition().ToString());
+		if (identity) {
+			if (identity.GetPlainId() == "76561198077282054") {
+				JsonFileLoader<ref array <string>>.JsonLoadFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
+		    	spawnPoings.Insert(this.GetPosition().ToString());
+		    	JsonFileLoader<ref array <string>>.JsonSaveFile(S_ROOTFOLDER + "spawnPoings.json",  spawnPoings);
+
+		    	SendMessage(this.GetPosition().ToString());
+			}
+		}
+
+    	
+
+    	// string message = "Привет, " + GetAnnouncePlayerPrefix(this.GetIdentity()) + " (" + this.GetIdentity().GetPlainId() + ")";
     }
 
     override void EEKilled(Object killer)
@@ -106,5 +115,16 @@ modded class PlayerBase
 
 	override void ReloadWeapon( EntityAI weapon, EntityAI magazine ) {
 		super.ReloadWeapon(weapon, magazine);
+	}
+
+
+	override void OnStanceChange(int previousStance, int newStance)
+	{	
+		Print("--------------------------------");
+		Print("Положиние")
+		Print(previousStance);
+		Print(newStance);
+		Print("--------------------------------");
+		super.OnStanceChange(previousStance, newStance);
 	}
 }

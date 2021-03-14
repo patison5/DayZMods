@@ -7,13 +7,15 @@ class HHDeadMatchPlugin extends PluginBase
 
     bool isEnded = false;
     private int timeOut = 30;
-    private int roundTime = 90;
+    private int roundTime = 1800;
 
     private int timeOutCounter = timeOut;
 
     private ref array<ref PlayerStatisticInfo> _players = new array<ref PlayerStatisticInfo>;
 
     ref PluginSpawnSelection spawnPlugin;
+    // ref WeeklyKing weeklyKing;
+    ref HeadHunterDMInfo hhdmInfo;
 
     // private ref map<string, int> mapVote = new map<string, int>();
 
@@ -25,7 +27,6 @@ class HHDeadMatchPlugin extends PluginBase
 
         spawnPlugin = GetSpawnPlugin();
     }
-
 
     void endRound () {
     	if (GetGame().IsServer()) {
@@ -39,6 +40,21 @@ class HHDeadMatchPlugin extends PluginBase
     		showPlayerEndedGUI();
             addGodModToAll();
 
+            // if (!weeklyKing)
+            //     weeklyKing = WeeklyKing();
+            // weeklyKing.getKing()
+
+            
+            if (!FileExist(S_ROOTFOLDER + "HeadHunterDMInfo.json")) {
+                hhdmInfo = new HeadHunterDMInfo();
+                JsonFileLoader<ref HeadHunterDMInfo>.JsonSaveFile(S_ROOTFOLDER + "HeadHunterDMInfo.json",  hhdmInfo);       
+            } else {
+                JsonFileLoader<ref HeadHunterDMInfo>.JsonLoadFile(S_ROOTFOLDER + "HeadHunterDMInfo.json", hhdmInfo );   
+            }
+
+            hhdmInfo.updateRoundType();
+            JsonFileLoader<ref HeadHunterDMInfo>.JsonSaveFile(S_ROOTFOLDER + "HeadHunterDMInfo.json",  hhdmInfo);
+
     		delayTimeout.Run(timeOut, this, "startRound", new Param1<string>(" новый раунд начался"), false);
     		changeTimer(); //обратный отсчет на клиенте
 	    }
@@ -46,7 +62,7 @@ class HHDeadMatchPlugin extends PluginBase
 
     void addGodModToAll () {
         ref array<Man> players = new array<Man>;
-        
+
         GetGame().GetPlayers( players );
         foreach( auto player : players  )
         {

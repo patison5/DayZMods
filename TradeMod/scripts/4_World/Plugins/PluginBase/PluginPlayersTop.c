@@ -108,11 +108,15 @@ class PluginPlayersTop extends PluginBase
 
 		// проверка килстрайка
 		if (_plData.killstreak % 5 == 0) {
-			Print("ДОМИНИРОВАНИЕ!");
 
 			if (killer && killer.IsAlive()) {
 				EntityAI v_SoundSource = killer;
-				v_SoundSource.PlaySound( "Dominating", 50 );
+
+				if (_plData.killstreak == 10) {
+					v_SoundSource.PlaySound( "Yatebyasamtrahny", 100 );
+				} else {
+					v_SoundSource.PlaySound( "Dominating", 50 );
+				}
 			}
 		}
 

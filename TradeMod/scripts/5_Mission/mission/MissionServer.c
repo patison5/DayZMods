@@ -1,34 +1,11 @@
 modded class MissionServer extends MissionBase
 {
-	protected PluginDeveloper m_Developer;
-
 	static const string PREFIX = "[MY_MISSION_SERVER]: ";
 
 	ref SetupPlayerOptions SPOptions;
-	ref HeadHunterDMInfo HHDMInfo;
+	ref PlayerClothesVip vipClient;
+	// ref WeeklyKing weeklyKing;
 	
-	void SetRandomHealth(EntityAI itemEnt)
-	{
-		if ( itemEnt )
-		{
-			float rndHlt = Math.RandomFloat( 0.45, 0.65 );
-			itemEnt.SetHealth01( "", "", rndHlt );
-		}
-	}
-
-	int DateHH( int D, int M, int Y )
-    {
-
-        int a, y, m, R;
-        a = ( 14 - M ) / 12;
-        y = Y - a;
-        m = M + 12 * a - 2;
-        R = 7000 + ( D + y + y / 4 - y / 100 + y / 400 + (31 * m) / 12 );
-        int l  = R % 7;
-        int s = l;
-        return s;
-    }
-
 	void MissionServer () {
 		if (GetGame().IsServer()) {
 			// check folder existance
@@ -44,103 +21,22 @@ modded class MissionServer extends MissionBase
 				JsonFileLoader<ref SetupPlayerOptions>.JsonLoadFile(S_ROOTFOLDER + "SetupPlayerOptions.json", SPOptions );	
 			}
 			JsonFileLoader<ref SetupPlayerOptions>.JsonSaveFile(S_ROOTFOLDER + "SetupPlayerOptions.json",  SPOptions);	
-
-
-			if (!FileExist(S_ROOTFOLDER + "HeadHunterDMInfo.json")) {
-				HHDMInfo = new HeadHunterDMInfo();
-				JsonFileLoader<ref HeadHunterDMInfo>.JsonSaveFile(S_ROOTFOLDER + "HeadHunterDMInfo.json",  HHDMInfo);		
-			} else {
-				JsonFileLoader<ref HeadHunterDMInfo>.JsonLoadFile(S_ROOTFOLDER + "HeadHunterDMInfo.json", HHDMInfo );	
-			}	
 		}
 
-		m_Developer	= PluginDeveloper.Cast( GetPlugin(PluginDeveloper) );
+		// if (!weeklyKing) {
+			// weeklyKing = WeeklyKing();
+		// }
 
-		int f_hour;
-        int f_minute;
-        int f_second;
-        int f_year;
-        int f_month;
-        int f_day;    
-        GetYearMonthDay(f_year, f_month, f_day);
-        GetHourMinuteSecond(f_hour, f_minute, f_second);
-
-        Print("Дата запуска: " + f_year.ToString() + ":" + f_month.ToString() + ":" + f_day.ToString());
-        Print("Время запуска: " + f_hour.ToString() + ":" + f_minute.ToString() + ":" + f_second.ToString());
-
-        string f_date = f_month.ToStringLen(2) + "-" + f_day.ToStringLen(2) + " " + f_hour.ToStringLen(2) + ":" + f_minute.ToStringLen(2) + ":" + f_second.ToStringLen(2);
-        Print("Date: " + f_date);
-
-        Print("номер дня недели равен: " + DateHH(f_day, f_month, f_year));
-
-        // если воскресение
-        if (DateHH(f_day, f_month, f_year) == 6) {
-        	string checkDate = f_month.ToStringLen(2) + "-" + f_day.ToStringLen(2) + "-" + f_year;
-
-        	Print("День недели сейчас вроде суббота");
-
-        	if (checkDate != HHDMInfo.kingUpdateDate) {
-        		HHDMInfo.kingUpdateDate = checkDate;
-
-        		Print("Вроде как не совпадает - обновим!");
-        		JsonFileLoader<ref HeadHunterDMInfo>.JsonSaveFile(S_ROOTFOLDER + "HeadHunterDMInfo.json",  HHDMInfo);
-        	} else {
-	        	Print("А все уже все, дата совпадает, новый лидер уже выбран!");
-        	}
-        }
+		// weeklyKing.test();
 	}
 
-	//  вот тут блэт могут быть косяки!
-	void summurizePlayersStatistic () {
-    	// собираем всю информацию по игрокам
-        TStringArray fileNamesList = this.getAllPlayersList();
-        PlayerStatisticAllInfo _bestPlayerData = new PlayerStatisticAllInfo();
-        
-        for ( int k = 0; k < fileNamesList.Count(); ++k ) {
-            string fileName = fileNamesList.Get(k);
-
-            if (!FileExist(S_COMMON + fileName + ".json"))
-                continue; 
-
-            PlayerStatisticAllInfo _tmpBestPlayerData = new PlayerStatisticAllInfo();
-            JsonFileLoader<ref PlayerStatisticAllInfo>.JsonLoadFile(S_COMMON + fileName + ".json", _tmpBestPlayerData);
-
-            if (_bestPlayerData.matchesWon <= _tmpBestPlayerData.matchesWon) {
-            	if (_bestPlayerData.matchesWon == _tmpBestPlayerData.matchesWon) {
-            		// посмотреть по килам
-            	} else {
-            		_bestPlayerData = _tmpBestPlayerData;
-            	}
-            }
-        }
-    }
-
-	TStringArray getAllPlayersList()
-    {
-        if ( !FileExist( S_COMMON ) )
-            MakeDirectory( S_COMMON );
-
-        string  file_name;
-        int     file_attr;
-        int     flags;
-        TStringArray list = new TStringArray;
-        
-        string path_find_pattern = S_COMMON + "/*.json";
-        FindFileHandle file_handler = FindFile(path_find_pattern, file_name, file_attr, flags);
-        
-        bool found = true;
-        while ( found )
-        {
-            int pos = file_name.IndexOf(".");
-            
-            if ( pos > -1 )
-                list.Insert( file_name.Substring(0, pos) );
-            
-            found = FindNextFile(file_handler, file_name, file_attr);
-        }
-
-        return list;
-    }
+	ref PlayerClothesVip findVip (string steamId) {
+		for (int v = 0; v < SPOptions.clothesVip.Count(); v++) {
+			if (SPOptions.clothesVip[v].steamId64 == steamId)
+				return SPOptions.clothesVip[v];
+		}
+		return NULL;
+	}
 
 	override void StartingEquipSetup(PlayerBase player, bool clothesChosen)
 	{
@@ -163,25 +59,52 @@ modded class MissionServer extends MissionBase
 			JsonFileLoader<ref SetupPlayerOptions>.JsonSaveFile(S_ROOTFOLDER + "SetupPlayerOptions.json",  SPOptions);	
 		} else {
 			JsonFileLoader<ref SetupPlayerOptions>.JsonLoadFile(S_ROOTFOLDER + "SetupPlayerOptions.json", SPOptions );	
-		}		
+		}
 
-		PlayerSet playerSet = SPOptions.PlayerSetups.GetRandomElement();
+
+		PlayerClothes playerClothes = SPOptions.heavyClothes.GetRandomElement();;
+		PlayerWeapon playerWeapons = SPOptions.heavyWeapons.GetRandomElement();
+
+		if (roundNumber == 0) {
+			playerClothes = SPOptions.heavyClothes.GetRandomElement();
+			playerWeapons = SPOptions.heavyWeapons.GetRandomElement();
+		} else if (roundNumber == 1) {
+			playerClothes = SPOptions.lightClothes.GetRandomElement();
+			playerWeapons = SPOptions.lightWeapons.GetRandomElement();
+		} else if (roundNumber == 2) {
+			playerClothes = SPOptions.lightClothes.GetRandomElement();
+			playerWeapons = SPOptions.snipingWeapons.GetRandomElement();
+		}
+
+		
 
 		// создание шлема и его обвесов
-		helmet = player.GetInventory().CreateInInventory(playerSet.Helmet);
-		for (int j = 0; j < playerSet.HelmetAttachments.Count(); j++)
-			helmet.GetInventory().CreateAttachment(playerSet.HelmetAttachments[j]);
+		helmet = player.GetInventory().CreateInInventory(playerClothes.Helmet);
+		for (int j = 0; j < playerClothes.HelmetAttachments.Count(); j++)
+			helmet.GetInventory().CreateAttachment(playerClothes.HelmetAttachments[j]);
 
 		// оздание броника и его обвесов
-		vest = player.GetInventory().CreateInInventory(playerSet.Vest);
-		for (int m = 0; m < playerSet.VestAttachments.Count(); m++)
-			vest.GetInventory().CreateAttachment(playerSet.VestAttachments[m]);
+		vest = player.GetInventory().CreateInInventory(playerClothes.Vest);
+		for (int m = 0; m < playerClothes.VestAttachments.Count(); m++)
+			vest.GetInventory().CreateAttachment(playerClothes.VestAttachments[m]);
 
-		// создание одежды
-		for (int i = 0; i < playerSet.Clothes.Count(); i++)
-			player.GetInventory().CreateInInventory(playerSet.Clothes[i]);
+
+
+		vipClient = findVip( player.GetIdentity().GetPlainId() );
+
+		if (vipClient) {
+			// создание vip одежды
+			for (int i = 0; i < vipClient.Clothes.Count(); i++)
+				player.GetInventory().CreateInInventory(vipClient.Clothes[i]);
+		} else {
+			// создание одежды
+			for (int b = 0; b < playerClothes.Clothes.Count(); b++)
+				player.GetInventory().CreateInInventory(playerClothes.Clothes[b]);
+		}
 
 		itemClothing = player.FindAttachmentBySlotName( "Body" );
+
+
 
 		// создание внутренней экипировки
 		if ( itemClothing )
@@ -189,22 +112,22 @@ modded class MissionServer extends MissionBase
 			// itemEnt = itemClothing.GetInventory().CreateInInventory( "Rag" );
 			// if (Class.CastTo( itemBs, itemEnt )) itemBs.SetQuantity( 6 );
 			
-			for (int k = 0; k < playerSet.Equipment.Count(); k++) {
-				player.GetInventory().CreateInInventory(playerSet.Equipment[k]);
+			for (int k = 0; k < playerWeapons.Equipment.Count(); k++) {
+				player.GetInventory().CreateInInventory(playerWeapons.Equipment[k]);
 			}
 		}
 
 		// создание оружия и его обвесов
-		weapon = player.GetHumanInventory().CreateInHands(playerSet.Weapon);
-		// spawnMagazineInWeapon(player, weapon, playerSet.MagType);
+		weapon = player.GetHumanInventory().CreateInHands(playerWeapons.Weapon);
+		// spawnMagazineInWeapon(player, weapon, playerWeapons.MagType);
 		
 
-		for (int z = 0; z < playerSet.WeaponAttachments.Count(); z++) {
-			itemEnt = weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments[z]);
+		for (int z = 0; z < playerWeapons.WeaponAttachments.Count(); z++) {
+			itemEnt = weapon.GetInventory().CreateAttachment(playerWeapons.WeaponAttachments[z]);
 
-			switch (playerSet.WeaponAttachments[z]) {
+			switch (playerWeapons.WeaponAttachments[z]) {
 				case "KobraOptic":
-				case "M680Optic":
+				case "M68Optic":
 				case "M4_T3NRDSOptic":
 				case "HH_OKP7Optic":
 				case "FN45_MRDSOptic":
@@ -214,17 +137,17 @@ modded class MissionServer extends MissionBase
 		}
 		player.SetQuickBarEntityShortcut(weapon, 0);
 
-		if (playerSet.Weapon2 != "") {
+		if (playerWeapons.Weapon2 != "") {
 			// создание оружия и его обвесов
-			weapon = player.GetHumanInventory().CreateInInventory(playerSet.Weapon2);
-			// spawnMagazineInWeapon(player, weapon, playerSet.MagType2);
+			weapon = player.GetHumanInventory().CreateInInventory(playerWeapons.Weapon2);
+			// spawnMagazineInWeapon(player, weapon, playerWeapons.MagType2);
 
-			for (int q = 0; q < playerSet.WeaponAttachments2.Count(); q++) {
-				itemEnt = weapon.GetInventory().CreateAttachment(playerSet.WeaponAttachments2[q]);
+			for (int q = 0; q < playerWeapons.WeaponAttachments2.Count(); q++) {
+				itemEnt = weapon.GetInventory().CreateAttachment(playerWeapons.WeaponAttachments2[q]);
 
-				switch (playerSet.WeaponAttachments2[q]) {
+				switch (playerWeapons.WeaponAttachments2[q]) {
 					case "KobraOptic":
-					case "M680Optic":
+					case "M68Optic":
 					case "M4_T3NRDSOptic":
 					case "HH_OKP7Optic":
 					case "FN45_MRDSOptic":
@@ -237,13 +160,13 @@ modded class MissionServer extends MissionBase
 		}
 
 
-		EntityAI belt = player.GetInventory().CreateInInventory("HH_BeltMilitary_Havvy_Black");
-		belt.GetInventory().CreateInInventory("HH_BeltMilitary_Bag_Black");
-		belt.GetInventory().CreateInInventory("HH_BeltMilitary_Holster_Black");
-		belt.GetInventory().CreateInInventory("HH_BeltTactical_Bag_black");
+		// EntityAI belt = player.GetInventory().CreateInInventory("HH_BeltMilitary_Havvy_Black");
+		// belt.GetInventory().CreateInInventory("HH_BeltMilitary_Bag_Black");
+		// belt.GetInventory().CreateInInventory("HH_BeltMilitary_Holster_Black");
+		// belt.GetInventory().CreateInInventory("HH_BeltTactical_Bag_black");
 
-		EntityAI knifeHolster = belt.GetInventory().CreateInInventory("NylonKnifeSheath");
-		knifeHolster.GetInventory().CreateInInventory("CombatKnife");
+		// EntityAI knifeHolster = belt.GetInventory().CreateInInventory("NylonKnifeSheath");
+		// knifeHolster.GetInventory().CreateInInventory("CombatKnife");
 
 		// float dmg;
 		// string ammoType;
@@ -251,8 +174,6 @@ modded class MissionServer extends MissionBase
 		// 	return;
 		// DayZPlayerUtils.HandleStoreCartridge(action_data.m_Player, NULL, -1, dmg, ammoType, magazineTypeName, false)
 	}
-
-
 
 	void spawnMagazineInWeapon (PlayerBase player, EntityAI wpEAI, string item_name)
 	{
@@ -382,3 +303,9 @@ modded class MissionServer extends MissionBase
 	    GetGame().RPCSingleParam(player, ERPCs.RPC_USER_ACTION_MESSAGE, m_MessageParam, true, player.GetIdentity());
     }
 }
+
+
+// M/iMwr9LPDyXE0NEjIq+2m5ZtcbF0U2VBu3A0IASb68=
+
+// ApplicationID: 603e67eef3448ec620a18e09
+// Client-ID: O0TWD731GNP6BVZHEL5RM8IQ

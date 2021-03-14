@@ -153,9 +153,10 @@ class UIHudTop extends UIScriptedMenu
         timerWidget.SetText("15");
         tableTitle.SetText("Ник игрока");
 
-        mapTitle1.SetText("Северо-западный <br/>аэропорт");
+        // mapTitle1.SetText("Северо-западный <br/>аэропорт");
+        mapTitle1.SetText("Зелено");
         mapTitle2.SetText("Выбор");
-        mapTitle3.SetText("Зелено");
+        mapTitle3.SetText("Красностав");
 
         zeleno.SetText("0");
         vybor.SetText("0");
@@ -195,6 +196,8 @@ class UIHudTop extends UIScriptedMenu
         layoutRoot.Show(false);
         PPEffects.SetBlurMenu( 0 );
         UnlockControlsModded();
+        
+        selectedBtn = NULL;
     }
 
     void showMainScreen () {

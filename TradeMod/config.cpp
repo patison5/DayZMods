@@ -77,5 +77,12 @@ class CfgSounds
         sound[]        =    {"MyMods\TradeMod\sounds\Dominating.ogg", 20, 1, 3};
         titles[]    =    {};
     };
+
+    class Yatebyasamtrahny
+    {
+        name        =    "Yatebyasamtrahny";
+        sound[]        =    {"MyMods\TradeMod\sounds\Yatebyasamtrahny.ogg", 20, 1, 3};
+        titles[]    =    {};
+    };
 };
 

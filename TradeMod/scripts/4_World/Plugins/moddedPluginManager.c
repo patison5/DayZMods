@@ -8,6 +8,7 @@ modded class PluginManager {
 			RegisterPlugin( "HHDeadMatchPlugin", false, true);
 			RegisterPlugin( "PluginAdminNotification", false, true);
 			RegisterPlugin( "PluginSpawnSelection", false, true);
+			// RegisterPlugin( "WeeklyKing", false, true);
 		}
 
 
